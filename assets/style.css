@@ -1,0 +1,22 @@
+:root {
+    /* declare a variable with `--` syntax */
+    --dark: #404041;
+    --light: #F6EDE3;
+    --green: #7C8363;
+    --darkgreen: #31473A;
+  }
+
+body {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 14px;
+    width: 99%;
+}
+
+header {
+    background-color: var(--darkgreen);
+    color: var(--light);
+    padding: 2%;
+    display: flex;
+    justify-content: center;
+}
+

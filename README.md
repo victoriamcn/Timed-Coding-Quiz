@@ -3,7 +3,8 @@ Simple overview of use/purpose.
 
 ## Description
 
-An in-depth paragraph about your project and overview of use.
+This application is a timed coding quiz with multiple-choice questions.
+This app will runs in the browser, and features dynamically updated HTML and CSS powered by JavaScript code with a clean, polished, and responsive user interface.
 
 ## Table of Contents
 

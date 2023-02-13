@@ -1,9 +1,11 @@
 :root {
     /* declare a variable with `--` syntax */
     --dark: #404041;
-    --light: #F6EDE3;
-    --green: #7C8363;
-    --darkgreen: #31473A;
+    --light: #F4F7F7;
+    --header: #E3856B;
+    --button: #e6f2ce;
+    --form: #CEE6F2;
+    --border: #404041;
 }
 
 body {
@@ -13,51 +15,79 @@ body {
     color: var(--dark);
     width: 99%;
     font-size: 80%;
-
+    border: 5px solid var(--dark);
 }
 
 header {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px;
-    background-color: var(--darkgreen);
-    color: var(--light);
+    background-color: var(--header);
+    border-bottom: 5px solid var(--dark);
 }
 
-div.quiz {
-    background-color: var(--light);
+div.sidebyside {
+    display: flex;
+    flex-direction: row;
+    align-items: ;
 }
+
+h1, h2 {
+    margin-left: 20px;
+    margin-right: 20px;
+    padding: 5px;
+    color: var(--dark);
+    background-color: var(--light);
+    border: 3px solid var(--dark);
+    border-radius: 10px;
+    box-shadow: 3px 3px var(--dark);
+}
+
+/* FORM */
 
 form {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: var(--green);
-    padding: 20px;
-    height: 100%;
+    padding: 50px;
+    padding-bottom: 300px;
+    background-color: var(--form);
+    /*visibility: hidden; using this to keep in DOM,adding an event listener to the button, will reveal when button clicked*/
 }
 
 fieldset {
     background-color: var(--light);
-    height: auto;
+    border: 3px solid var(--border);
+    border-radius: 10px;
+    box-shadow: 10px 10px var(--border);
 }
 
-input, label {
-    font-size: 14px;
+/* Aligning the input and label on the same line */
+
+div.choices {
+    display: flex;
+    flex-direction: column;
 }
+
+div.answer {
+display: inline-block;
+margin: 10px;
+}
+
+/* BUTTON */
 
 button {
-    border: 1px solid #777;
-    font-size: 21px;
     padding: 5px;
     margin: 20px;
+    border: 2px solid var(--dark);
+    border-radius: 10px;
+    box-shadow: 5px 5px var(--dark)
+
 }
 
-footer {
-    display: flex;
-    justify-content: center;
-    background-color: var(--darkgreen);
-    color: var(--light);
-    font-size: 50%;
+button:hover {
+    background-color: var(--button);
+    box-shadow: 10px 10px var(--dark);
 }
+
+/* MEDIA QUERY */

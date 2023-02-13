@@ -43,6 +43,17 @@ h1, h2 {
     box-shadow: 3px 3px var(--dark);
 }
 
+/* START WINDOW */
+
+div.startwindow {
+    display: flex;
+    justify-content: center;
+    background-color: var(--form);
+}
+
+button#begin{
+    width: 75%;
+}
 /* FORM */
 
 form {
@@ -74,7 +85,7 @@ display: inline-block;
 margin: 10px;
 }
 
-/* BUTTON */
+/* ALL BUTTONS */
 
 button {
     padding: 5px;

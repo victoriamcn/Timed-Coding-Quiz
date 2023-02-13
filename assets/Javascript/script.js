@@ -9,11 +9,35 @@ beginBtn.addEventListener("click", function startQuiz() {
   
 });
 
+//Time Variables
+
+
+
 //Function for the Quiz
 function startQuiz () {
-    //add 10 minute timer
 
-    //div.startWindow will change into <h3>Question 1/5, Question 2/5, etc.
+    //div.startWindow will change into the timer
+    //10min Time Variables
+    let minutesLeft = 10;
+    let timerTen = document.querySelector(".timer");
+    let timeLeft = new Date(timerTen*60*1000);
+
+    //Begin Timer Function
+    function setTimer() {
+        // Sets interval in variable
+        let timerInterval = setInterval(function() {
+            minutesLeft--;
+            timerTen.textContent = minutesLeft;
+
+            if(secondsLeft === 0) {
+                // Stops execution of action at set interval
+                clearInterval(timerInterval);
+                // Calls function to create and append the score with option to save
+                sendMessage();
+          }
+            
+        });
+
 
     //hidden div.quiz will appear
 
@@ -21,7 +45,8 @@ function startQuiz () {
 
     //when a question is incorrect, then 10 sec is subtracted from the clock
 
-    // WHEN all questions are answered or the timer reaches THEN the game is over
+    //when all questions are answered or the timer reaches THEN the game is over
 
-    //WHEN the game is over THEN I can save my initials and my score
+    //when the game is over, score is displayed and user saves initials and score
+        //create this form in HTML or DOM?
 }   

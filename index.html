@@ -1,36 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Coding Quiz</title>
-        <link rel="stylesheet" href="./assets/style.css" />
-    </head>
-    <body>
-        <div class = "wrapper">
-            <!--HEADER-->
-            <header>
-                <h1>Coding Quiz</h1>
-            </header>
 
-            <!--MAIN CONTENT-->
-            <div class = "quizcard">
-                <h2>What are meta tags in HTML?</h2>
-                <form>
-                    <input type="radio" name="choice" >Meta tags are the parent company for Facebook and Instagram.</input>
-                    <input type="radio" name="choice" >Meta tags help make the web page interactive. </input>
-                    <input type="radio" name="choice" >Meta tags are HTML tags used to provide additional information about a page to search engines and other clients. </input>
-                    <input type="radio" name="choice" >Meta tags provide structure to the webpage.</input>
-                </form>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coding Quiz</title>
+    <link rel="stylesheet" href="./assets/style.css" />
+</head>
 
-            </div>
+<body>
+    <div class="wrapper">
+        <!--HEADER-->
+        <header>
+            <h1>Coding Quiz</h1>
+            <h2>Please chose one answer from the options below. You have ten minutes.</h2>
+        </header>
 
-            <!--FOOTER-->
-            <footer>
-                <p>Made by Victoria McNorrill</p>
-            </footer>
+        <!--MAIN CONTENT-->
+        <div class="quiz">
+            <form class="multichoice">
+                <fieldset>
+                    <h3 class="question">What are meta tags in HTML?</h3>
+                    <input type="radio" name="choice">
+                        <label>
+                            Meta tags are the parent company for Facebook and
+                            Instagram.
+                        </label>
+                    </input>
+                    <input type="radio" name="choice">
+                        <label>
+                            Meta tags help make the web page interactive.
+                        </label>
+                    </input>
+                    <input type="radio" name="choice">
+                        <label>
+                            Meta tags are HTML tags used to provide additional information
+                            about a page to search engines and other clients.
+                        </label>
+                    </input>
+                    <input type="radio" name="choice">
+                        <label>
+                            Meta tags provide structure to the webpage.
+                        </label>
+                    </input>
+                </fieldset>
+                <button>Click to Begin</button>
+            </form>
         </div>
-        <script src="script.js"></script>
-    </body>
+
+        <!--FOOTER-->
+        <footer>
+            <p>Made by Victoria McNorrill</p>
+        </footer>
+    </div>
+    <script src="script.js"></script>
+</body>
+
 </html>

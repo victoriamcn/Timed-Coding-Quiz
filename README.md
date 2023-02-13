@@ -16,7 +16,7 @@ This app will runs in the browser, and features dynamically updated HTML and CSS
 - [Acknowledgments](#acknowledgments)
 
 ## Preview
-![alt]()
+![screenshot of a webpage for a coding quiz](/Timed-Coding-Quiz/assets/images/Coding%20Quiz%20Preview.png)
 
 ##Usage
 
@@ -38,7 +38,7 @@ command to run if program contains helper info
 This project is licensed under the MIT License - see the LICENSE.md file for details.
 
 All icon used in this project are from Google Fonts. 
-- [Apache License](Apache License Version 2.0.)
+- [Apache License Version 2.0.](https://www.apache.org/licenses/LICENSE-2.0.txt)
 
 ## Acknowledgments
 

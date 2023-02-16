@@ -5,32 +5,34 @@ let winAboveQuiz = document.querySelector(".startwindow");
 let beginBtn = document.querySelector("#begin");
 
 // Begin button event listener for the mouse click
-beginBtn.addEventListener("click", function startQuiz() {
-});
+beginBtn.addEventListener("click", startQuiz());
 
 //Function for the Quiz
 function startQuiz () {
-    //Timer Starts
-    let timeDiv = document.getElementByClass("div.timer"); // Inserts timer <div> by class
-    let secondsLeft = 90;// 90 seconds to start
-    function setTimer() { //Begin Timer Function
-        let timerInterval = setInterval(function() {
-          secondsLeft--;
-          timeDiv.textContent = "You have " + secondsLeft + "seconds left.";
+  //Part 1) Timer Starts
+  let timeDiv = document.querySelector("div.timer"); // Inserts timer <div> by class
+  let secondsLeft = 90; // 90 seconds
+  //Begin Timer Function
+  let timerInterval = setInterval(function() {
+        secondsLeft--;
+        timeDiv.innerHTML = "You have " + secondsLeft + " seconds left.";
 
-          if(secondsLeft === 0) {
-              // Stops execution of action at set interval
-              clearInterval(timerInterval);
-              // Calls function to create and append the score with option to save
-              sendMessage();
-          }
+        if(secondsLeft === 0) {
+            // Stops execution of action at set interval
+            clearInterval(timerInterval);
+            // Calls function to create and append the score with option to save
+            document.querySelector("div.timer").innerHTML = "Time's up!"
+        }
+    }, 1000);
 
-        }, 1000);
-  //Question Appears
-  let questions;
-  let answerTrue;
-  let answerFalse;
-
+  //PArt 2) Question Appears
+    
+    let questionEl = document.querySelector(".question");
+    let answerEl = document.querySelector(".answer"); //let answerFalseEl; and let answerTrueEl
+    
+    function visibility() {
+      let quizEl = document.querySelector("form").style.visibility = "visible"
+    }
 
     //hidden div.quiz will appear
 
@@ -60,7 +62,7 @@ function startQuiz () {
        //  }
       // }
 
-    //when a question is incorrect, then 10 sec is subtracted from the clock
+    //Part 3) when a question is incorrect, then 10 sec is subtracted from the clock
 
     //when all questions are answered or the timer reaches THEN the game is over
 
@@ -68,7 +70,7 @@ function startQuiz () {
         //create this form in HTML or DOM?
 }
 
-init();
+//init();
 
 // 04-26 lesson: function init() {
     // TODO: What is the purpose of the following line of code?

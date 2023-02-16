@@ -4,6 +4,8 @@
 let winAboveQuiz = document.querySelector(".startwindow");
 let beginBtn = document.querySelector("#begin");
 
+//if statement so user can't read quiz until they click the button
+
 // Begin button event listener for the mouse click
 beginBtn.addEventListener("click", startQuiz());
 
@@ -18,7 +20,7 @@ function startQuiz() {
     secondsLeft--;
     timeDiv.innerHTML = "You have " + secondsLeft + " seconds left.";
 
-    if (secondsLeft <= 15) {
+    if (secondsLeft <= 30 {
       //When 15 secs or less on timer, color turns red
       document.querySelector("div.timer").style.backgroundColor = "#F47174";
     }
@@ -28,7 +30,7 @@ function startQuiz() {
       clearInterval(timerInterval);
       // Calls function to create and append the score with option to save
       document.querySelector("div.timer").innerHTML = "Time's up!"
-
+      document.querySelector("div.timer").style.backgroundColor = "#CEE6F2";
     }
   }, 1000);
 
@@ -56,7 +58,7 @@ function startQuiz() {
       correctAnswer: "Defines all styles for the web page"
     }, {
       question: "What is the output for this function?: let x = myFunct(4,3); function myFunct(a,b) { return a + b;}",
-      choices: [4, 5, 6, 7],
+      choices: [12, 18, 1, 7],
       correctAnswer: 7
     }, {
       question: "Which is NOT true about JSON's (JavaScript Object Notation) syntax?",
@@ -64,13 +66,25 @@ function startQuiz() {
       correctAnswer: "Angled brackets < > hold objects"
   }];
 
-  let userAnswer =[]; //Array containing user choices
-  let quiz = document.querySelector("form") //Quiz form object
+  //let userAnswer =[]; //Array containing user choices
+  //let quiz = document.form.children //Quiz form object
 
-  // show initinal questions
+  // show initial questions
   displayNext();
+  //#next variable and handler
+  let nextBtn = document.querySelector.querySelector("#next")
+  nextBtn.addEventListener("click", function() {
+    preventDefault();
+    if (isNaN(choices)) {
+      alert('Please answer the question,')
+    } else{
+      displayNext();
+    }
+  });
 
-  
+  //incorrect and correct answers
+  // if/else {correct = false;secondsLeft-=5document.getElementById("div.timer").innerHTML='00:'+sec;
+
 }
 
 

@@ -77,8 +77,6 @@ form {
     padding: 50px;
     padding-bottom: 300px;
     background-color: var(--form);
-    visibility: hidden;
-    /*using this to keep in DOM,adding an event listener to the button, will reveal when button clicked*/
 }
 
 fieldset {
@@ -158,6 +156,10 @@ button#next {
     div.sidebyside {
         display: flex;
         flex-direction: column;
+    }
+
+    div.timer {
+        box-shadow: 1px 1px var(--dark);
     }
 
     button {

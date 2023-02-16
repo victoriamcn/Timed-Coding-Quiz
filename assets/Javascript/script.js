@@ -8,79 +8,73 @@ let beginBtn = document.querySelector("#begin");
 beginBtn.addEventListener("click", startQuiz());
 
 //Function for the Quiz
-function startQuiz () {
-  //Part 1) Timer Starts
+function startQuiz() {
+
+  //Part A) Timer Starts
   let timeDiv = document.querySelector("div.timer"); // Inserts timer <div> by class
   let secondsLeft = 90; // 90 seconds
   //Begin Timer Function
-  let timerInterval = setInterval(function() {
-        secondsLeft--;
-        timeDiv.innerHTML = "You have " + secondsLeft + " seconds left.";
+  let timerInterval = setInterval(function () {
+    secondsLeft--;
+    timeDiv.innerHTML = "You have " + secondsLeft + " seconds left.";
 
-        if(secondsLeft === 0) {
-            // Stops execution of action at set interval
-            clearInterval(timerInterval);
-            // Calls function to create and append the score with option to save
-            document.querySelector("div.timer").innerHTML = "Time's up!"
-        }
-    }, 1000);
-
-  //PArt 2) Question Appears
-    
-    let questionEl = document.querySelector(".question");
-    let answerEl = document.querySelector(".answer"); //let answerFalseEl; and let answerTrueEl
-    
-    function visibility() {
-      let quizEl = document.querySelector("form").style.visibility = "visible"
+    if (secondsLeft <= 15) {
+      //When 15 secs or less on timer, color turns red
+      document.querySelector("div.timer").style.backgroundColor = "#F47174";
     }
 
-    //hidden div.quiz will appear
+    if (secondsLeft === 0) {
+      // Stops execution of action at set interval
+      clearInterval(timerInterval);
+      // Calls function to create and append the score with option to save
+      document.querySelector("div.timer").innerHTML = "Time's up!"
 
-    //when next question is clicked, div.quiz will change to the next question
-   //  function renderTodos() {
-        // TODO: Describe the functionality of the following two lines of code.
-        //clearing out text boxes
-        // todoList.innerHTML = "";
-        //updating todo list by the amount of items added to the array
-        // todoCountSpan.textContent = todos.length;
-        
-        // TODO: Describe the functionality of the following `for` loop.
-       //  for (var i = 0; i < todos.length; i++) {
-       //    var todo = todos[i];
-      
-          //creating a li element and a button element to mark as complete
-        //   var li = document.createElement("li");
-        //   li.textContent = todo;
-        //   li.setAttribute("data-index", i);
-      
-        //   var button = document.createElement("button");
-        //   button.textContent = "Complete ✔️";
-      
-          //appending those li and button elements to the webpage
-        //   li.appendChild(button);
-         //  todoList.appendChild(li);
-       //  }
-      // }
+    }
+  }, 1000);
 
-    //Part 3) when a question is incorrect, then 10 sec is subtracted from the clock
+  //Part B) Hide beginBtn
+  let hidden = false;
+  function hideBegin() {
+    hidden = !hidden;
+    if (hidden) {
+      document.getElementById("#begin").style.visibility = "hidden";
+    }
+  }
+  //Part C) Questions
+    //JSON Array
+  var quizQuestions = [{
+      question: "What does NOT belong in the <head> HTML element?",
+      choices: ["<meta></meta>", "<title></title>", "<main></main>", "<link></link>"],
+      correctAnswer: "<main></main>"
+    }, {
+      question: "The <a> taf defines a hyperlink What does the href attribute do?",
+      choices: ["Specifies alternate text for an image", "Styles an element", "Specifies the URL of the page the link goes to", "Embeds an image"],
+      correctAnswer: "Specifies the URL for the hyperlink"
+    }, {
+      question: "Which of the following is true about CSS?",
+      choices: ["Adds functionality to the website", "Provides the structure for the web page", "It's a JavaScript library", "Defines all styles for the web page"],
+      correctAnswer: "Defines all styles for the web page"
+    }, {
+      question: "What is the output for this function?: let x = myFunct(4,3); function myFunct(a,b) { return a + b;}",
+      choices: [4, 5, 6, 7],
+      correctAnswer: 7
+    }, {
+      question: "Which is NOT true about JSON's (JavaScript Object Notation) syntax?",
+      choices: ["Data is in name/value pairs", "Angled brackets < > hold objects", "Data is separated by commas", "Square brackets [ ]hold arrays"],
+      correctAnswer: "Angled brackets < > hold objects"
+  }];
 
-    //when all questions are answered or the timer reaches THEN the game is over
+  let userAnswer =[]; //Array containing user choices
+  let quiz = document.querySelector("form") //Quiz form object
 
-    //when the game is over, score is displayed and user saves initials and score
-        //create this form in HTML or DOM?
+  // show initinal questions
+  displayNext();
+
+  
 }
 
-//init();
 
-// 04-26 lesson: function init() {
-    // TODO: What is the purpose of the following line of code?
-    // var storedTodos = JSON.parse(localStorage.getItem("todos")); //grabbing time from LocStor to update the empyt arry on line 1
-              //can parse into a JS array as well as a JS object from a JSON string
-    
-    // TODO: Describe the functionality of the following `if` statement.
-    // if (storedTodos !== null) { //if not null, then todos being stored on browser
-     //  todos = storedTodos;
-    // }
-    // TODO: Describe the purpose of the following line of code.
-   //  renderTodos(); 
-  // }
+
+
+
+  //when next question is clicked, div.quiz will change to the next question

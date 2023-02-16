@@ -8,6 +8,7 @@
     --border: #404041;
 }
 
+/* BODY */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 80%;
@@ -17,6 +18,7 @@ body {
     border: 5px solid var(--dark);
 }
 
+/* HEADER */
 header {
     display: flex;
     flex-direction: column;
@@ -28,10 +30,10 @@ header {
 div.sidebyside {
     display: flex;
     flex-direction: row;
-    align-items: ;
 }
 
-h1, h2 {
+h1,
+h2 {
     margin-left: 20px;
     margin-right: 20px;
     padding: 5px;
@@ -40,6 +42,17 @@ h1, h2 {
     border: 3px solid var(--dark);
     border-radius: 10px;
     box-shadow: 3px 3px var(--dark);
+}
+
+/*TIMER*/
+div.timer {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: var(--dark);
+    background-color: var(--light);
+    border: 3px solid var(--dark);
+    border-radius: 10px;
+    font-size: 80%;
 }
 
 /* START WINDOW with BUTTON */
@@ -51,9 +64,10 @@ div.startwindow {
     padding: 30px;
 }
 
-button#begin{
+button#begin {
     width: 50%;
 }
+
 /* FORM /QUIZ QUESTIONS*/
 
 form {
@@ -63,7 +77,8 @@ form {
     padding: 50px;
     padding-bottom: 300px;
     background-color: var(--form);
-    visibility: hidden; /*using this to keep in DOM,adding an event listener to the button, will reveal when button clicked*/
+    visibility: hidden;
+    /*using this to keep in DOM,adding an event listener to the button, will reveal when button clicked*/
 }
 
 fieldset {
@@ -90,6 +105,7 @@ div.answer {
 button {
     padding: 5px;
     margin: 20px;
+    color: var(--dark);
     font-weight: bold;
     border: 2px solid var(--dark);
     border-radius: 10px;
@@ -112,7 +128,45 @@ button#next {
     margin: 2px;
 }
 
-/* MEDIA QUERY */
-@media screen(max-width 780) {
-    
+/* TABLET MEDIA QUERY */
+@media screen and (min-width: 768px) and (max-width: 820px) {
+    body {
+        font-size: 60%;
+    }
+}
+
+/* CELLPHONE MEDIA QUERY*/
+@media screen and (min-width: 200px) and (max-width: 767px) {
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-size: 50%;
+        border: 3px solid var(--dark);
+        font-weight: normal;
+    }
+    header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: var(--header);
+        border-bottom: 3px solid var(--dark);
+    }
+
+    h1, h2{
+        border: 1px solid var(--dark);
+    }
+
+    div.sidebyside {
+        display: flex;
+        flex-direction: column;
+    }
+
+    button {
+        padding: 5px;
+        margin: 20px;
+        border: 1px solid var(--dark);
+        border-radius: 10px;
+        box-shadow: 5px 5px var(--dark);
+        cursor: pointer;
+    }
+
 }

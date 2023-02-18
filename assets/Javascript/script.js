@@ -1,18 +1,13 @@
 // Start working code
-let question = document.getElementById("question");
-let choices = document.getElementById("")
 
-
-// Start Window Variable
+// Start  Variable
 let beginBtn = document.querySelector("#begin");
-
 //if statement so user can't read quiz until they click the button
-
 // Begin button event listener for the mouse click
 beginBtn.addEventListener("click", startQuiz());
 
 //Function for the Quiz
-function startQuiz(question, QuizContainer, results) {
+function startQuiz() {
 
   //Part A) Timer Starts
   let timeDiv = document.querySelector("div.timer"); // Inserts timer <div> by class
@@ -37,27 +32,51 @@ function startQuiz(question, QuizContainer, results) {
   }, 1000);
 
   //Part B) Questions
+
+  let question = document.getElementById("question");
+  let choices = Array.from(document.getElementsByClassName("choice-text"));
+
+  let currentQuestion = [];
+  let acceptingAnswers = true;
+  let score = 0;
+  let questionCounter = 0;
+  let availableQuestions = [];
   //JSON Array
-  let myQuizQuestions = [{
+  let myQuestions = [{
     question: "What does NOT belong in the <head> HTML element?",
-    choices: ["<meta></meta>", "<title></title>", "<main></main>", "<link></link>"],
-    correctAnswer: myQuizQuestions.choices[2] //"<main></main>"
+    choice1: "<meta></meta>",
+    choice2: "<title></title>",
+    choice3: "<main></main>",
+    choice4: "<link></link>",
+    correctAnswer: 3 //"<main></main>"
   }, {
     question: "The <a> taf defines a hyperlink What does the href attribute do?",
-    choices: ["Specifies alternate text for an image", "Styles an element", "Specifies the URL of the page the link goes to", "Embeds an image"],
-    correctAnswer: myQuizQuestions.choices[2]//"Specifies the URL for the hyperlink"
+    choice1: "Specifies alternate text for an image",
+    choice2: "Styles an element",
+    choice3: "Specifies the URL of the page the link goes to",
+    choice4: "Embeds an image",
+    correctAnswer: 3 //"Specifies the URL for the hyperlink"
   }, {
     question: "Which of the following is true about CSS?",
-    choices: ["Adds functionality to the website", "Provides the structure for the web page", "It's a JavaScript library", "Defines all styles for the web page"],
-    correctAnswer: myQuizQuestions.choices[3] //"Defines all styles for the web page"
+    choice1: "Adds functionality to the website",
+    choice2: "Provides the structure for the web page",
+    choice3: "It's a JavaScript library",
+    choice4: "Defines all styles for the web page",
+    correctAnswer: 4 //"Defines all styles for the web page"
   }, {
     question: "What is the output for this function?: let x = myFunct(4,3); function myFunct(a,b) { return a + b;}",
-    choices: [12, 18, 1, 7],
-    correctAnswer: myQuizQuestions.choices[3] //7
+    choice1: "7",
+    choice2: "18",
+    choice3: "49",
+    choice4: "12",
+    correctAnswer: 1 //7
   }, {
     question: "Which is NOT true about JSON's (JavaScript Object Notation) syntax?",
-    choices: ["Data is in name/value pairs", "Angled brackets < > hold objects", "Data is separated by commas", "Square brackets [ ]hold arrays"],
-    correctAnswer: myQuizQuestions.choices[1]//"Angled brackets < > hold objects"
+    choice1: "Data is in name/value pairs",
+    choice2: "Angled brackets < > hold objects",
+    choice3: "Data is separated by commas",
+    choice4: "Square brackets [ ]hold arrays",
+    correctAnswer: 2 //"Angled brackets < > hold objects"
   }];
   const quiz = JSON.parse(myQuizQuestions);
 

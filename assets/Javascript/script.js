@@ -34,15 +34,8 @@ function startQuiz(question, QuizContainer, results) {
     }
   }, 1000);
 
-  //Part B) Hide beginBtn
-  //let hidden = false;
-  //function hideBegin() {
-  // hidden = !hidden;
-  // if (hidden) {
-  //  document.getElementById("#begin").style.visibility = "hidden";
-  // }}
-
-  //Part C) Questions //JSON Array
+  //Part B) Questions
+  //JSON Array
   let myQuizQuestions = [{
     question: "What does NOT belong in the <head> HTML element?",
     choices: ["<meta></meta>", "<title></title>", "<main></main>", "<link></link>"],

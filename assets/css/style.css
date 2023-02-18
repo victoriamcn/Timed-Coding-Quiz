@@ -45,8 +45,7 @@ h2 {
 }
 
 /*TIMER*/
-div.timer {
-    margin-bottom: 20px;
+.timer {
     padding: 5px;
     color: var(--dark);
     background-color: var(--button);
@@ -116,9 +115,13 @@ button#next {
     justify-content: baseline;
 }
 
-.material-icons {
-    margin: 2px;
+button#scores {
+    font-size: 12px;
 }
+
+/* .material-icons {
+    margin: 2px;
+} */
 
 
 /* QUIZ CONTENT*/
@@ -164,6 +167,7 @@ h3 {
 }
 
 .choice-text {
+    width: 100%;
     padding: 3px;
 }
 

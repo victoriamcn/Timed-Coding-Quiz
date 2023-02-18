@@ -1,31 +1,30 @@
 // Start working code
 
-//DOM
-let beginBtn = document.querySelector("#begin");
-
-beginBtn.addEventListener("click", generateQuiz());
+//DOM + How to Begin Timer + Quiz
+let beginBtn = document.getElementById("begin");
+beginBtn.addEventListener('click', generateQuiz());
 
 //Function for the Quiz
 function generateQuiz() {
   //(Part A) Timer Starts
-    let timeDiv = document.querySelector("div.timer"); // Inserts timer <div> by class
+    let timeEl = document.querySelector("#timer"); // Inserts timer <div> by class
     let secondsLeft = 90; // 90 seconds
-    //Begin Timer Function
+    //Timer Function
     let timerInterval = setInterval(function () {
       secondsLeft--;
-      timeDiv.innerHTML = "You have " + secondsLeft + " seconds left.";
+      timeEl.innerHTML = "Time Left: " + secondsLeft + " seconds";
 
       if (secondsLeft <= 30) {
-        //When 15 secs or less on timer, color turns red
-        document.querySelector("div.timer").style.backgroundColor = "#F47174";
+        //When 30 secs or less on timer, color turns red
+        document.querySelector("#timer").style.backgroundColor = "#F47174";
       }
 
       if (secondsLeft === 0) {
         // Stops execution of action at set interval
         clearInterval(timerInterval);
         // Calls function to create and append the score with option to save
-        document.querySelector("div.timer").innerHTML = "Time's up!"
-        document.querySelector("div.timer").style.backgroundColor = "#CEE6F2";
+        document.querySelector("#timer").innerHTML = "Time's up!"
+        document.querySelector("#timer").style.backgroundColor = "#E3856B";
       }
     }, 1000);
 
@@ -35,7 +34,7 @@ function generateQuiz() {
     let choices = Array.from(document.getElementsByClassName("choice-text"));
     //Variables for Questions
     let currentQuestion = [];
-    let acceptingAnswers = true;
+    let acceptingAnswers = false; //user cannot answer before everything is loaded
     let score = 0;
     let questionCounter = 0;
     let availableQuestions = [];
@@ -49,7 +48,7 @@ function generateQuiz() {
       choice4: "<link></link>",
       correctAnswer: 3 //"<main></main>"
     }, {
-      question: "The <a> taf defines a hyperlink What does the href attribute do?",
+      question: "The <a> tag defines a hyperlink What does the href attribute do?",
       choice1: "Specifies alternate text for an image",
       choice2: "Styles an element",
       choice3: "Specifies the URL of the page the link goes to",
@@ -83,9 +82,9 @@ function generateQuiz() {
     startQuiz  = () => {
       questionCounter = 0;
       score = 0;
-      availableQuestions = [...myQuizQuestions] //spread array to get full copy from the myQuizQuestions array
+      availableQuestions = [ ... myQuizQuestions] //spread array to get full copy from the myQuizQuestions array
       //console.log(availableQuestions)
-      getNewQuestions();
+      getNewQuestion();
     };
     //populate question/choices
     getNewQuestion = () => {
@@ -93,19 +92,31 @@ function generateQuiz() {
       
       let questionIndex = Math.floor(Math.random() * availableQuestions.length); //picks a random question from list based on array
       currentQuestion = availableQuestions[questionIndex];
-      question.innerText = currentQuestion.myQuizQuestions;
+      question.innerText = currentQuestion.question;
 
       choices.forEach(choice => {
         let number = choice.dataset['number']; //access to data-number attr
         choice.innerText = currentQuestion['choice' + number]; //out of current question we want to get the choice property and assign a number the the choices
       });
+
+      availableQuestions.splice(questionIndex, 1); //get rid of the used question
+      acceptingQuestions = true; //allow user to answer
     };
+    choices.forEach(choice => {
+      choice.addEventListener('click', e => {
+         //console.log(e.target); 
+         if(!acceptingAnswers) return; //if we're not accepting answers, user cannot answer
+         acceptingAnswers = false;
+         let selectedChoice = e.target;
+         let selectedAnswer = selectedChoice.dataset["number"];
+
+         getNewQuestion()
+      })
+    })
   //(FINAL) Calling the Functions
-  setInterval();
-  startQuiz();
-  getNewQuestions();
+  startQuiz()
 }
-  
+generateQuiz();
   //adds question and answers to the empty form
   //function showQuestions(question, quizContainer) {
     //store output and the answer choices

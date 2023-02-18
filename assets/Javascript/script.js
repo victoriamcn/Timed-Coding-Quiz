@@ -1,7 +1,9 @@
 // Start working code
+let question = document.getElementById("question");
+let choices = document.getElementById("")
+
 
 // Start Window Variable
-let divAboveQuiz = document.querySelector(".startwindow");
 let beginBtn = document.querySelector("#begin");
 
 //if statement so user can't read quiz until they click the button

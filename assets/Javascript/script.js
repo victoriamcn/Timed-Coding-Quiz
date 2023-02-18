@@ -39,24 +39,25 @@ function startQuiz(question, QuizContainer, results) {
   let myQuizQuestions = [{
     question: "What does NOT belong in the <head> HTML element?",
     choices: ["<meta></meta>", "<title></title>", "<main></main>", "<link></link>"],
-    correctAnswer: "<main></main>"
+    correctAnswer: myQuizQuestions.choices[2] //"<main></main>"
   }, {
     question: "The <a> taf defines a hyperlink What does the href attribute do?",
     choices: ["Specifies alternate text for an image", "Styles an element", "Specifies the URL of the page the link goes to", "Embeds an image"],
-    correctAnswer: "Specifies the URL for the hyperlink"
+    correctAnswer: myQuizQuestions.choices[2]//"Specifies the URL for the hyperlink"
   }, {
     question: "Which of the following is true about CSS?",
     choices: ["Adds functionality to the website", "Provides the structure for the web page", "It's a JavaScript library", "Defines all styles for the web page"],
-    correctAnswer: "Defines all styles for the web page"
+    correctAnswer: myQuizQuestions.choices[3] //"Defines all styles for the web page"
   }, {
     question: "What is the output for this function?: let x = myFunct(4,3); function myFunct(a,b) { return a + b;}",
     choices: [12, 18, 1, 7],
-    correctAnswer: 7
+    correctAnswer: myQuizQuestions.choices[3] //7
   }, {
     question: "Which is NOT true about JSON's (JavaScript Object Notation) syntax?",
     choices: ["Data is in name/value pairs", "Angled brackets < > hold objects", "Data is separated by commas", "Square brackets [ ]hold arrays"],
-    correctAnswer: "Angled brackets < > hold objects"
+    correctAnswer: myQuizQuestions.choices[1]//"Angled brackets < > hold objects"
   }];
+  const quiz = JSON.parse(myQuizQuestions);
 
   // show initial questions
   displayNext();
@@ -86,7 +87,7 @@ function startQuiz(question, QuizContainer, results) {
         choices.push(
           '<label>'
           + '<input type="radio" name="question' + i + '"' //value="'+letter+'" '
-          + question[i].choices[]
+          + question[i].choices[ ]
           + '</label>'
         );
       }
@@ -113,7 +114,7 @@ function startQuiz(question, QuizContainer, results) {
 
     //for each question
     for (var i = 0; i < question.length; i++) {
-      //find selcted answer
+      //find selected answer
       userAnswer = (answerContainers[i]).querySelector(('input[name=question' + i + ']:checked')).value;
 
       //if correctAnswer
@@ -123,6 +124,8 @@ function startQuiz(question, QuizContainer, results) {
         // add text that says "correct!" under it
       } else if {
         //if answer is wrong
+        //subtract 10 seconds from the timer
+        secondsLeft-=10
         //add text that says "incorrect!" under it
       }
     }
@@ -130,19 +133,12 @@ function startQuiz(question, QuizContainer, results) {
     resultsContainer.innerHTML = "You got " + amtCorrect + " out of " + question.length + " correct!";
   }
 
+  //when submitted, user to save initials + amtCorrect to local storage
+  localStorage.setItem("amtCorrect", JSON.stringify(amtCorrect))
   // when submitted, show results
   submitBtn.onclick = function(){
     showResults(resultsContainer)
+
+  //when submitted, show high scores
   }
-
-
-
-  //for each question, find the selected answer
-  //if correct, add
-
-  //if wrong, subtract
-
-  //show the number of correct answers of the total
-  // if/else {correct = false;secondsLeft-=5document.getElementById("div.timer").innerHTML='00:'+sec;
-
-}
+};

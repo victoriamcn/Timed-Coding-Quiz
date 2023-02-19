@@ -32,6 +32,9 @@ startBtn.addEventListener("click", function generateQuiz() {
     // DOM
     let question = document.getElementById("question");
     let choices = Array.from(document.getElementsByClassName("choice-text"));
+        //Update Question Counter and Score
+        let questionCounterText = document.getElementById("questioncounter");
+        let scoreText = document.getElementById("scoretracker");
     //Variables for Questions
     let currentQuestion = [];
     let acceptingAnswers = false; //user cannot answer before everything is loaded
@@ -41,6 +44,7 @@ startBtn.addEventListener("click", function generateQuiz() {
 
     //CONSTANTS
     const CORRECT_BONUS = 100;
+    const MAX_QUESTIONS = 5;
 
     // Array for questions/answers
     let myQuizQuestions = [
@@ -101,7 +105,8 @@ startBtn.addEventListener("click", function generateQuiz() {
       }
 
       questionCounter++; //adds to question counter with each question
-      
+      questionCounterText.innerHTML = "Question: " + questionCounter " / " + MAX_QUESTIONS;
+
       //Question Populated
       let questionIndex = Math.floor(Math.random() * availableQuestions.length); //picks a random question from list based on array
       currentQuestion = availableQuestions[questionIndex];
@@ -133,11 +138,17 @@ startBtn.addEventListener("click", function generateQuiz() {
           }
         //Display if Answer was Incorrect or Correct
         selectedChoice.parentElement.classList.add("classToApply");
+        
         if classToApply == "incorrect"
           document.getElementsByClassName(".incorrect").innerHTML = "Incorrect answer!"
         } else (classToApply == "correct") {
           document.getElementsByClassName(".correct").innerHTML = "Correct answer!"
         }
+
+        if (classToApply === "correct") {
+          addScore(CORRECT_BONUS);
+        }
+      
         //Clear the classes before new question populated
         function setTimeout(){
           selectedChoice.parentElement.classList.remove(classToApply);
@@ -148,9 +159,33 @@ startBtn.addEventListener("click", function generateQuiz() {
           getNewQuestion(); //Call to Populate New Question
       });
     });
+
+    //(Part C) Add Up the Score
+    function addScore(num) {
+      score += num;
+      scoreText.innerText = score;
+    }
+
   //Calling the Functions
   startQuiz();
-});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //generateQuiz();
   //adds question and answers to the empty form
   //function showQuestions(question, quizContainer) {

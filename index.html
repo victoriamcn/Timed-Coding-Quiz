@@ -18,7 +18,7 @@
             <h1>Coding Quiz</h1>
             <div class="sidebyside">
                 <h2>Once you begin, you will have ninety seconds to complete the quiz.</h2>
-                <h2>Please choose one answer from the options below. Good luck!</h2>
+                <h2>All incorrect answers will subtract your quiz time by ten seconds! Good luck!</h2>
             </div>
         </header>
         <main>
@@ -26,8 +26,14 @@
             <div class="container">
                 <div id="home" class="flex-center flex-col">
                     <button id="begin" class="btn">Click to Begin</button>
-                    <div id="timer" class="timer">Time Left: 90 seconds</div>
-                    <button id="scores" class="btn">See High Scores</button>
+                    <div class="stats">
+                        <div id="timer" class="timer">Time Left: 90 seconds</div>
+                        <div id="hud">
+                            <div id="questioncounter"><!--Question: 1/5--></div>
+                            <div id="scoretracker"><!--Score: 0--></div>
+                        </div>
+                    </div>
+                    <button id="highscores" class="btn">See High Scores</button>
                 </div>
                 <div id="quiz" class="justify-center flex-col">
                     <h3 id="question">What is the answer to this question?</h3>

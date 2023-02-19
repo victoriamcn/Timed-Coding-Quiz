@@ -37,6 +37,7 @@ h2 {
     margin-left: 20px;
     margin-right: 20px;
     padding: 5px;
+    font-size: 90%;
     color: var(--dark);
     background-color: var(--light);
     border: 3px solid var(--dark);
@@ -44,14 +45,28 @@ h2 {
     box-shadow: 3px 3px var(--dark);
 }
 
-/*TIMER*/
-.timer {
+/*STATS: TIMER, QUESTION COUNTER, SCORE*/
+.stats {
     padding: 5px;
     color: var(--dark);
-    background-color: var(--button);
-    border: 1px solid var(--dark);
-    border-radius: 4px;
+    background-color: var(--light);
+    border: 2px solid var(--dark);
+    border-radius: 10px;
     box-shadow: 3px 3px var(--dark);
+}
+.timer {
+    border: 1px solid var(--dark);
+    border-radius: 10px;
+    background-color: var(--button);
+    padding: 5px;
+}
+
+#hud {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 5px;
+    font-size: 75%;
+    width: 95%;
 }
 
 /* HOME CONTAINER + FLEX FOR CHILDREN */
@@ -115,7 +130,7 @@ button#next {
     justify-content: baseline;
 }
 
-button#scores {
+button#highscores {
     font-size: 12px;
 }
 

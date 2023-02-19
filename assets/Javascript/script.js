@@ -184,15 +184,30 @@ function quizOver() {
 
   function viewHighScores(e) {
     e.preventDefault();
-    let userName = document.querySelector("#initinput").value;
-    savedInit(userName);
+    let userName = document.querySelector("#initialsinput").value;
+    savedInitials(userName);
     
     userScorePageEl.replaceWith(highScoreEl)
-    loadSaveScores();
+    loadSavedScores();
   }
 
-  //Save to Local Storage
+  //Set Score and Username to Local Storage
   let savedScore =function() {
-    localStorage.setItem("score", JSON.stringify(score))
-
+    localStorage.setItem("score", JSON.stringify("score"))
   }
+  let savedInitials = function(userName){
+    localStorage.setItem("initials", JSON.stringify(userName))
+  }
+
+  //Get Score and Username from Local Storage
+  function loadSavedScores() {
+    var savedScore = localStorage.getItem("score");
+    var savedInitials = localStorage.getItem("userName");
+
+    savedScore  = JSON.parse(savedScore);
+    savedInitials = JSON.parse(savedInitials);
+
+    document.getElementById("highScores").innerHTML = savedInitials + " - " + savedScore;
+  }
+
+  //Event Listener to Show Saved Scores is in HTML onClick="viewHighScores(e)"

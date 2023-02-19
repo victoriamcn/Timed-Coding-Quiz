@@ -45,6 +45,11 @@ h2 {
     box-shadow: 3px 3px var(--dark);
 }
 
+h3 {
+    margin: 5px;
+    margin-top: 10px;
+}
+
 /* HOME CONTAINER + FLEX FOR CHILDREN */
 .container {
     width: 100%;
@@ -74,12 +79,10 @@ h2 {
     text-align: center;
 }
 
-.hidden {
-    display: none;
-}
-
 /* BUTTONS */
 button {
+    display: flex;
+    justify-content: center ;
     padding: 5px;
     margin: 20px;
     color: var(--dark);
@@ -94,15 +97,6 @@ button {
 button:hover {
     background-color: var(--button);
     box-shadow: 10px 10px var(--dark);
-}
-
-button#highscores:hover {
-    /* when the button hovers, you can see the saved high scores*/
-}
-
-.btn[disabled]:hover {
-    cursor: not-allowed;
-    box-shadow: none;
 }
 
 /* .material-icons {
@@ -127,18 +121,10 @@ button#highscores:hover {
     padding: 5px;
 }
 
-#hud {
-    display: flex;
-    justify-content: space-evenly;
-    margin-top: 5px;
-    font-size: 60%;
-    width: 95%;
-}
-
 
 /* QUIZ CONTENT*/
 
-#quiz {
+.quizcontainer {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -150,10 +136,7 @@ button#highscores:hover {
     font-size: 80%;
 }
 
-h3 {
-    margin: 5px;
-    margin-top: 10px;
-}
+
 
 .choice-container {
     display: flex;

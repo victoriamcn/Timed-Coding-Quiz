@@ -25,6 +25,8 @@ let questionIndex = 0;
 let currentQuestion = 0;
 let score = 0;
 
+//Event Listener to Show Saved Scores is in HTML onClick="viewHighScores(e)"
+
 // Array for questions/answers
 let myQuizQuestions = [
   {
@@ -56,10 +58,8 @@ let myQuizQuestions = [
 
 //Start Quiz on Click
 beginButtonEl.addEventListener("click", function generateQuiz() {
-  startPageEl.replaceWith(quizEl)
   startTimer();
-  showQuestions()
-}); //End beginning addEvent Listener click function
+  showQuestions();
 
 //Show Questions Function
 function showQuestions() {
@@ -68,12 +68,12 @@ function showQuestions() {
   for (let i = 0; i < myQuizQuestions[currentQuestion].choices.length; i++) {
     choiceButton = (myQuizQuestions[currentQuestion].choices[i]);
   }
-} //End  showQuestions Function
+} //End showQuestions Function
 
 // choiceButton Function
 function choiceButton(choice) {
   let buttonEl = document.createElement('button');
-  buttonEl.setAttribute("choice", choices.answer)
+  buttonEl.setAttribute("choice", choice.answer)
   buttonEl.id = choice.text;
   buttonEl.innerText = choice.text;
 
@@ -117,7 +117,7 @@ function correctInc(answer) {
 }
 
 //Text to say if user choice was correct
-createText(answer) {
+function createText(answer) {
   if (choice == answer) {
     ifCorrectEl.innerHTML = "Awesome job; that was correct!"
   } else {
@@ -149,7 +149,7 @@ function startTimer() {
     }
   }, 1000)
 }
-
+}); //End addEvent Listener click to generate the quiz
 //Quiz Over Function
 function quizOver() {
   //Functions to Display and Save Score
@@ -157,57 +157,57 @@ function quizOver() {
   saveUserScore();
 }
 
-  // Show Final Score Function (after All Questions Answered)
-  function displayUserScore() {
-    quizEl.replaceWith(userScorePageEl);
-    scoreAreaEl.innerText = "Final Score:" + addScore;
-    //Input Element for Initials Created
-    initialsInput = document.createElement("input");
-    initialsInput.setAttribute("id", "initialsinput");
-    initialsInput.setAttribute("type", "text");
-    initialsInput.setAttribute("name", "initials");
-    initialsInput.setAttribute("placeholder", "Please write your initials here...");
-    //Append Input Element
-    saveIntEl.appendChild(initials);
+// Show Final Score Function (after All Questions Answered)
+function displayUserScore() {
+  quizEl.replaceWith(userScorePageEl);
+  scoreAreaEl.innerText = "Final Score:" + addScore;
+  //Input Element for Initials Created
+  initialsInput = document.createElement("input");
+  initialsInput.setAttribute("id", "initialsinput");
+  initialsInput.setAttribute("type", "text");
+  initialsInput.setAttribute("name", "initials");
+  initialsInput.setAttribute("placeholder", "Please write your initials here...");
+  //Append Input Element
+  saveIntEl.appendChild(initials);
 
-    //Save Button Element Created
-    saveButtonEl = document.createElement("button");
-    saveButtonEl.setAttribute("id", "save-btn");
-    saveButtonEl.setAttribute("class", "btn");
-    saveButtonEl.setAttribute("type", "submit");
-    saveButtonEl.textContent = "Click to Submit Score";
+  //Save Button Element Created
+  saveButtonEl = document.createElement("button");
+  saveButtonEl.setAttribute("id", "save-btn");
+  saveButtonEl.setAttribute("class", "btn");
+  saveButtonEl.setAttribute("type", "submit");
+  saveButtonEl.textContent = "Click to Submit Score";
 
-    saveIntEl.appendChild(saveButtonEl);
+  saveIntEl.appendChild(saveButtonEl);
 
-    saveIntEl.addEventListener("submit", viewHighScores);
-  }
+  saveIntEl.addEventListener("submit", viewHighScores);
+}
 
-  function viewHighScores(e) {
-    e.preventDefault();
-    let userName = document.querySelector("#initialsinput").value;
-    savedInitials(userName);
-    
-    userScorePageEl.replaceWith(highScoreEl)
-    loadSavedScores();
-  }
+function viewHighScores(e) {
+  e.preventDefault();
+  let userName = document.querySelector("#initialsinput").value;
+  savedInitials(userName);
 
-  //Set Score and Username to Local Storage
-  let savedScore =function() {
-    localStorage.setItem("score", JSON.stringify("score"))
-  }
-  let savedInitials = function(userName){
-    localStorage.setItem("initials", JSON.stringify(userName))
-  }
+  userScorePageEl.replaceWith(highScoreEl)
+  loadSavedScores();
+}
 
-  //Get Score and Username from Local Storage
-  function loadSavedScores() {
-    var savedScore = localStorage.getItem("score");
-    var savedInitials = localStorage.getItem("userName");
+//Set Score and Username to Local Storage
+let savedScore = function () {
+  localStorage.setItem("score", JSON.stringify("score"))
+}
+let savedInitials = function (userName) {
+  localStorage.setItem("initials", JSON.stringify(userName))
+}
 
-    savedScore  = JSON.parse(savedScore);
-    savedInitials = JSON.parse(savedInitials);
+//Get Score and Username from Local Storage
+function loadSavedScores() {
+  var savedScore = localStorage.getItem("score");
+  var savedInitials = localStorage.getItem("userName");
 
-    document.getElementById("highScores").innerHTML = savedInitials + " - " + savedScore;
-  }
+  savedScore = JSON.parse(savedScore);
+  savedInitials = JSON.parse(savedInitials);
+
+  document.getElementById("highScores").innerHTML = savedInitials + " - " + savedScore;
+}
 
   //Event Listener to Show Saved Scores is in HTML onClick="viewHighScores(e)"

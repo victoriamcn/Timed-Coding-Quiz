@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Coding Quiz</title>
     <link rel="stylesheet" href="./assets/css/reset.css" />
-    <link rel="stylesheet" href="./assets/css/style.css" />
+    <!--- <link rel="stylesheet" href="./assets/css/style.css" />-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
 </head>
 
@@ -18,47 +18,32 @@
             <h1>Coding Quiz</h1>
             <div class="sidebyside">
                 <h2>Once you begin, you will have ninety seconds to complete the quiz.</h2>
-                <h2>All incorrect answers will subtract your quiz time by ten seconds! Good luck!</h2>
+                <h2>All incorrect answers will subtract your quiz time by ten seconds. Good luck!</h2>
             </div>
         </header>
         <main>
             <!--MAIN CONTENT/QUIZ FORM PLACEHOLDER FOR CREATING STRUCTURE/STYLING-->
             <div class="container">
-                <div id="home" class="flex-center flex-col">
-                    <button id="begin" class="btn">Click to Begin</button>
-                    <div class="stats">
-                        <div id="timer" class="timer">Time Left: 90 seconds</div>
-                        <div id="hud">
-                            <div id="scoretracker"><!--Score: 0--></div>
-                        </div>
-                    </div>
-                    <button id="highscores" class="btn" onclick="viewHighScores(e)">See High Scores</button>
-                    <section class="highscorelist">
-                        <h3>High Scores:</h3>
-                        <ul id="list"></ul>
-                    </section>
+                <div id="beginpage" class="flex-center flex-col">
+                    <div id="begin" class="btn"></div>
                 </div>
-                <div id="quiz" class="justify-center flex-col">
-                    <h3 id="question">What is the answer to this question?</h3>
-                    <div class="choice-container">
-                        <p class="choice-prefix">(A)</p>
-                        <p class="choice-text" data-number="1">Choice 1</p>
-                    </div>
-                    <div class="choice-container">
-                        <p class="choice-prefix">(B)</p>
-                        <p class="choice-text" data-number="2">Choice 2</p>
-                    </div>
-                    <div class="choice-container">
-                        <p class="choice-prefix">(C)</p>
-                        <p class="choice-text" data-number="3">Choice 3</p>
-                    </div>
-                    <div class="choice-container">
-                        <p class="choice-prefix">(D)</p>
-                        <p class="choice-text" data-number="4">Choice 4</p>
-                    </div>
+                <div id="quizcontainer" class="justify-center flex-col quizcontainer">
+                    <div id="question" class="question"></div>
+                    <div id="choices" class="choices"></div>
+                    <div id="prompt" class="prompt"></div>
+                </div>
+                <div class="stats">
+                    <div id="timer" class="timer">Time Left: 90 seconds</div>
+                </div>
+                <div id="userscore" class="userscore">
+                    <div id="scorearea" class="scorearea"></div>
+                    <form id="intials" class="intials"></form>
+                    <div id="savebtn" class="savebtn"></div>
+                </div>
+                <div id="highscores" class="btn" onclick="viewHighScores(e)">See High Scores
+                    <div id="highscorelist"></div>
                 </div>
             </div>
-            <!--<button id="next" class="">Next Question<i class="material-icons">east</i></button>-->
         </main>
     </div>
     <script src="./assets/Javascript/script.js"></script>

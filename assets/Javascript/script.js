@@ -1,6 +1,29 @@
+//DOM Start Elements
+let beginPageEl = document.querySelector('#beginpage')
+let beginButtonEl = document.querySelector('#begin')
+
+//DOM Quiz Elements
+let quizEl = document.getElementById("quizcontainer")
+let questionEl = document.getElementById("question");
+let choicesEl = document.getElementById("choices");
+let ifCorrectEl = document.getElementById("prompt");
+
+//DOM Timer Elements
+let timerEl = document.getElementById("timer");
+
+//DOM User Save Initials and Score Elements
+let userScorePageEl = document.getElementById("userscore");
+let scoreAreaEl = document.querySelector('#scorearea');
+let saveIntEl = document.querySelector('#initials');
+let saveButtonEl = document.querySelector('#savebtn');
+
+//DOM High Score Element
+let highScoreEl = document.getElementById("highscores");
+
+//Variables
+let questionIndex = 0;
 let currentQuestion = 0;
 let score = 0;
-let scoreText = document.getElementById("scoretracker");
 
 // Array for questions/answers
 let myQuizQuestions = [
@@ -32,87 +55,144 @@ let myQuizQuestions = [
 ];
 
 //Start Quiz on Click
-document.querySelector("#begin").addEventListener("click", function(){
-  let question = document.getElementById("question");
-  let choices = Array.from(document.getElementsByClassName("choice-text"));
-  
-  function showQuestions() {
-    choices.innerHTML = "";
-    for (let i=0; i < question[currentQuestion].choices.length; i++){
-      let choice = question[currentQuestion].choices[i];
-      choices.addEventListener("click", function(){
-        console.log("clicked", choice);
-        handleAnswer(choice);
-      });
+beginButtonEl.addEventListener("click", function generateQuiz() {
+  startPageEl.replaceWith(quizEl)
+  startTimer();
+  showQuestions()
+}); //End beginning addEvent Listener click function
+
+//Show Questions Function
+function showQuestions() {
+  questionEl.innerHTML = myQuizQuestions[currentQuestion].question
+  //Loop Answers
+  for (let i = 0; i < myQuizQuestions[currentQuestion].choices.length; i++) {
+    choiceButton = (myQuizQuestions[currentQuestion].choices[i]);
+  }
+} //End  showQuestions Function
+
+// choiceButton Function
+function choiceButton(choice) {
+  let buttonEl = document.createElement('button');
+  buttonEl.setAttribute("choice", choices.answer)
+  buttonEl.id = choice.text;
+  buttonEl.innerText = choice.text;
+
+  //once choice clicked, go to next question
+  buttonEl.addEventListener("click", nextQuestion);
+
+  answerEl.appendChild(buttonEl);
+}
+
+//loop through all available questions
+function nextQuestion(event) {
+  var targetEl = event.target;
+
+  correctInc(targetEl.getAttribute("answer"))
+
+  deleteButton();
+  questionIndex++;
+  if (questionIndex < myQuizQuestions.length) {
+    showQuestions();
+  } else {
+    quizOver();
+  }
+}
+
+//Remove Created Buttons so New Ones can Populate
+function deleteButton() {
+  //for loop through choices array
+  for (var i = 0; i < myQuizQuestions[questionIndex].choices.length; i++) {
+    let buttonId = document.getElementById(myQuizQuestions[questionIndex].choices[i].text);
+    buttonId.remove();
+  }
+}
+
+function correctInc(answer) {
+  createText(answer);
+  if (choice == answer) {
+    score += 100;
+  } else {
+    timerEl -= 10;
+  }
+}
+
+//Text to say if user choice was correct
+createText(answer) {
+  if (choice == answer) {
+    ifCorrectEl.innerHTML = "Awesome job; that was correct!"
+  } else {
+    ifCorrectEl.innerHTML = "That was incorrect!"
+  }
+}
+
+function startTimer() {
+  let secondsLeft = 90; // 90 seconds
+
+  let timerInterval = setInterval(function () {
+    secondsLeft--;
+    timerEl.innerHTML = "Time Left: " + secondsLeft + " seconds";
+
+    //30 secs or less on timer, background turns red
+    if (secondsLeft <= 30) {
+      document.querySelector("#timer").style.backgroundColor = "#F47174";
     }
-  } //End  showQuestions Function
 
-}); //End beginning addEvent Listener function
-
+    //Time's Up or All Questions Answered
+    if (secondsLeft === 0) {
+      // Stops execution of action at set interval
+      clearInterval(timerInterval);
+      document.querySelector("#timer").innerHTML = "Time's up!"
+      document.querySelector("#timer").style.backgroundColor = "#E3856B";
+      document.querySelector("#timer").style.fontColor = "#F4F7F7";
+      //Quiz Over Function
+      quizOver();
+    }
+  }, 1000)
+}
 
 //Quiz Over Function
 function quizOver() {
-
-  // Calls function to create and append the score with option to save
-  document.querySelector("#timer").innerHTML = "Time's up!"
-  document.querySelector("#timer").style.backgroundColor = "#E3856B";
-  document.querySelector("#timer").style.fontColor = "#F4F7F7";
-
   //Functions to Display and Save Score
-  displayScore();
-  saveScore();
+  displayUserScore();
+  saveUserScore();
+}
 
-  let quizContainer = document.getElementById("quiz")
+  // Show Final Score Function (after All Questions Answered)
+  function displayUserScore() {
+    quizEl.replaceWith(userScorePageEl);
+    scoreAreaEl.innerText = "Final Score:" + addScore;
+    //Input Element for Initials Created
+    initialsInput = document.createElement("input");
+    initialsInput.setAttribute("id", "initialsinput");
+    initialsInput.setAttribute("type", "text");
+    initialsInput.setAttribute("name", "initials");
+    initialsInput.setAttribute("placeholder", "Please write your initials here...");
+    //Append Input Element
+    saveIntEl.appendChild(initials);
 
-  // once all questions have been answered give me a final score 
-  function displayScore() {
-    quizContainer.replaceWith(scoreEl);
-    scoreEl.innerText = "Final Score:" + addScore;
-    // Create an input element for initials 
-    initialsEl = document.createElement("input");
-    initialsEl.setAttribute("id", "initials-input");
-    initialsEl.setAttribute("type", "text");
-    initialsEl.setAttribute("name", "initials");
-    initialsEl.setAttribute("placeholder", "Write Initials here");
-
-    inNameEl.appendChild(initTextEl);
-
-
-    // create save button element
+    //Save Button Element Created
     saveButtonEl = document.createElement("button");
     saveButtonEl.setAttribute("id", "save-btn");
     saveButtonEl.setAttribute("class", "btn");
     saveButtonEl.setAttribute("type", "submit");
-    saveButtonEl.textContent = "Submit to Save Score";
+    saveButtonEl.textContent = "Click to Submit Score";
 
-    inNameEl.appendChild(saveButtonEl);
+    saveIntEl.appendChild(saveButtonEl);
 
-    inNameEl.addEventListener("submit", viewHighScores);
+    saveIntEl.addEventListener("submit", viewHighScores);
   }
-}
 
-//Timer Function
-//function startTimer() {
-  //Grabs Timer and Counts Down
-  //let timeEl = document.querySelector("#timer");
-  // 90 seconds
-  //let secondsLeft = 90; 
+  function viewHighScores(e) {
+    e.preventDefault();
+    let userName = document.querySelector("#initinput").value;
+    savedInit(userName);
+    
+    userScorePageEl.replaceWith(highScoreEl)
+    loadSaveScores();
+  }
 
-  //let timerInterval = setInterval(function () {
-   // secondsLeft--;
- //   timeEl.innerHTML = "Time Left: " + secondsLeft + " seconds";
+  //Save to Local Storage
+  let savedScore =function() {
+    localStorage.setItem("score", JSON.stringify(score))
 
-    //30 secs or less on timer, background turns red
-   // if (secondsLeft <= 30) {
-  //    document.querySelector("#timer").style.backgroundColor = "#F47174";
-  //  }
-
-    //Time's Up or All Questions Answered
- //   if (secondsLeft === 0) {
-  //    // Stops execution of action at set interval
-  //    clearInterval(timerInterval);
-      //Quiz Over Function
- //     quizOver();
-  //  }
-  //}, 1000)
-//}
+  }

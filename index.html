@@ -15,7 +15,7 @@
     <div class="wrapper">
         <!--HEADER-->
         <header>
-            <h1>Coding Quiz</h1>
+            <h1>Front-End Coding Assessment</h1>
             <div class="sidebyside">
                 <h2>Once you begin, you will have ninety seconds to complete the quiz.</h2>
                 <h2>All incorrect answers will subtract your quiz time by ten seconds. Good luck!</h2>
@@ -31,9 +31,9 @@
                 <div class="stats">
                     <div id="timer" class="timer">Time Left: 90 seconds</div>
                 </div>
-                <div id="highscores" class="btn" onclick=viewHighScores() >
-                    <button>See High Scores</button>
-                    <div id="highscorelist"></div>
+                <div id="highscores" class="flex-center flex-col">
+                    <button onclick=viewHighScores()>See High Scores</button>
+                    <div id="highscorelist" class="flex-col"></div>
                 </div>
             </div>
             <div id="quizcontainer" class="justify-center flex-col quizcontainer">

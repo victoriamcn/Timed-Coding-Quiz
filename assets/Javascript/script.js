@@ -66,7 +66,7 @@ function showQuestions() {
   questionEl.innerHTML = myQuizQuestions[currentQuestion].question
   //Loop Answers
   for (let i = 0; i < myQuizQuestions[currentQuestion].choices.length; i++) {
-    choiceButton = (myQuizQuestions[currentQuestion].choices[i]);
+    choiceButton(choice) = (myQuizQuestions[currentQuestion].choices[i]);
   }
 } //End showQuestions Function
 

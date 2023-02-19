@@ -19,12 +19,8 @@ startBtn.addEventListener("click", function generateQuiz() {
       }
 
       if (secondsLeft === 0) {
-        // Stops execution of action at set interval
-        clearInterval(timerInterval);
-        // Calls function to create and append the score with option to save
-        document.querySelector("#timer").innerHTML = "Time's up!"
-        document.querySelector("#timer").style.backgroundColor = "#E3856B";
-        document.querySelector("#timer").style.fontColor = "#F4F7F7";
+        //Calling Game Over Function to Save
+        quizOver();
       }
     }, 1000);
 
@@ -160,22 +156,93 @@ startBtn.addEventListener("click", function generateQuiz() {
       });
     });
 
+  //Calling the Functions
+  startQuiz();
+
+
     //(Part C) Add Up the Score
     function addScore(num) {
       score += num;
       scoreText.innerText = score;
     }
 
-  //Calling the Functions
-  startQuiz();
+
+//(Part D) Save Score with Initials
+     function quizOver() {
+      // Stops execution of action at set interval
+      clearInterval(timerInterval);
+      // Calls function to create and append the score with option to save
+      document.querySelector("#timer").innerHTML = "Time's up!"
+      document.querySelector("#timer").style.backgroundColor = "#E3856B";
+      document.querySelector("#timer").style.fontColor = "#F4F7F7";
+
+      //Functions to Display and Save Score
+      displayScore();
+      saveScore();
+    }
+
+let quizContainer = document.getElementById("quiz")
+
+    // once all questions have been answered give me a final score 
+function displayScore () {
+  quizContainer.replaceWith(scoreEl);
+  scoreEl.innerText = "Final Score:" + addScore;
+   // Create an input element for initials 
+  initialsEl = document.createElement("input"); 
+  initialsEl.setAttribute("id", "initials-input"); 
+  initialsEl.setAttribute("type", "text"); 
+  initialsEl.setAttribute("name", "initials"); 
+  initialsEl.setAttribute("placeholder", "Write Initials here"); 
+    
+  inNameEl.appendChild(initTextEl);
+
+
+  // create save button element
+  saveButtonEl = document.createElement("button");
+  saveButtonEl.setAttribute("id" , "save-btn");
+  saveButtonEl.setAttribute("class" ,"btn");
+  saveButtonEl.setAttribute("type" , "submit");
+  saveButtonEl.textContent = "Submit to Save Score";
+
+  inNameEl.appendChild(saveButtonEl);
+
+  inNameEl.addEventListener("submit", viewHighScores);
+}
+
+//High Score Button
+function viewHighScores(e) {
+  e.preventDefault();
+  let userName = document.querySelector("#initials");
+  savedInitials(userName);
+  let highScoreListEl = document.querySelector("ul#list")
+  highScoreListEl.document.createElement("li");
+  highScoreListEl.setAttribute("class" , "liscore")
+  loadSaveScores();
+}
+
+
+//Function to Save in Local Storage
+let saveScore() = function() {
+  localStorage.setItem("score", JSON.stringify(score))
+}
+
+let savedInitials = function(userName) {
+  localStorage.setItem("initials", JSON.stringify(userName))
+}
+//Function to Get from Local Storage and Load to the viewHighScores
+function loadSaveScores() {
+  let savedScore = localStorage.getItem("score")
+  let savedInitials = localStorage.getItem("initials")
+
+  savedScore = JSON.parse(savedScore);
+  savedInitials = JSON.parse(savedInitials);
+
+  document.querySelector(".liscore").innerText = savedInitials  + " - " + savedScore;
+}
 
 
 
-
-
-
-
-
+quizOver()
 
 
 

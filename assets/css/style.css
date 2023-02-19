@@ -96,6 +96,10 @@ button:hover {
     box-shadow: 10px 10px var(--dark);
 }
 
+button#highscores:hover {
+    /* when the button hovers, you can see the saved high scores*/
+}
+
 .btn[disabled]:hover {
     cursor: not-allowed;
     box-shadow: none;

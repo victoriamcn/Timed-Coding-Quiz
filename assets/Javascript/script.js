@@ -1,159 +1,54 @@
-// Start working code
-//CONSTANT for Questions
-const questionAmt = 5;
+let currentQuestion = 0;
+let score = 0;
+let scoreText = document.getElementById("scoretracker");
 
 // Array for questions/answers
 let myQuizQuestions = [
   {
     question: "What does NOT belong in the <head> HTML element?",
-    choice1: "<meta></meta>",
-    choice2: "<title></title>",
-    choice3: "<main></main>",
-    choice4: "<link></link>",
-    answer: 3 //"<main></main>"
-  }, {
+    choices: ["<meta></meta>", "<title></title>", "<main></main>", "<link></link>"],
+    answer: "<main></main>"
+  },
+  {
     question: "The <a> tag defines a hyperlink What does the href attribute do?",
-    choice1: "Specifies alternate text for an image",
-    choice2: "Styles an element",
-    choice3: "Specifies the URL of the page the link goes to",
-    choice4: "Embeds an image",
-    answer: 3 //"Specifies the URL for the hyperlink"
-  }, {
+    choices: ["Specifies alternate text for an image", "Styles an element", "Specifies the URL of the page the link goes to", "Embeds an image"],
+    answer: "Specifies the URL for the hyperlink"
+  },
+  {
     question: "Which of the following is true about CSS?",
-    choice1: "Adds functionality to the website",
-    choice2: "Provides the structure for the web page",
-    choice3: "It's a JavaScript library",
-    choice4: "Defines all styles for the web page",
-    answer: 4 //"Defines all styles for the web page"
-  }, {
+    choices: ["Adds functionality to the website", "Provides the structure for the web page", "It's a JavaScript library", "Defines all styles for the web page"],
+    answer: "Defines all styles for the web page"
+  },
+  {
     question: "What is the output for this function?: let x = myFunct(4,3); function myFunct(a,b) { return a + b;}",
-    choice1: "7",
-    choice2: "18",
-    choice3: "49",
-    choice4: "12",
-    answer: 1 //7
-  }, {
+    choices: ["7", "18", "49", "12"],
+    answer: "7"
+  },
+  {
     question: "Which is NOT true about JSON's (JavaScript Object Notation) syntax?",
-    choice1: "Data is in name/value pairs",
-    choice2: "Angled brackets < > hold objects",
-    choice3: "Data is separated by commas",
-    choice4: "Square brackets [ ]hold arrays",
-    answer: 2 //"Angled brackets < > hold objects"
+    choices: ["Data is in name/value pairs", "Angled brackets < > hold objects", "Data is separated by commas", "Square brackets [ ] hold arrays"],
+    answer: "Angled brackets < > hold objects"
   }
 ];
-//DOM + How to Begin Timer + Quiz
-let startBtn = document.querySelector("button#begin");
 
-startBtn.addEventListener("click", generateQuiz());
-
-//Quiz Generated on Click
-function generateQuiz() {
-  showQuestions();
-  //startTimer();
-};
-//Timer Function
-//function startTimer() {
-  //Grabs Timer and Counts Down
-  //let timeEl = document.querySelector("#timer");
-  // 90 seconds
-  //let secondsLeft = 90; 
-
-  //let timerInterval = setInterval(function () {
-   // secondsLeft--;
- //   timeEl.innerHTML = "Time Left: " + secondsLeft + " seconds";
-
-    //30 secs or less on timer, background turns red
-   // if (secondsLeft <= 30) {
-  //    document.querySelector("#timer").style.backgroundColor = "#F47174";
-  //  }
-
-    //Time's Up or All Questions Answered
- //   if (secondsLeft === 0) {
-  //    // Stops execution of action at set interval
-  //    clearInterval(timerInterval);
-      //Quiz Over Function
- //     quizOver();
-  //  }
-  //}, 1000)
-//}
-
-//Questions Function
-function showQuestions() {
+//Start Quiz on Click
+document.querySelector("#begin").addEventListener("click", function(){
   let question = document.getElementById("question");
   let choices = Array.from(document.getElementsByClassName("choice-text"));
-  //Variables for Questions
-  let currentQuestion = [];
-  let acceptingAnswers = false; //user cannot answer before everything is loaded
-  let availableQuestions = [];
-
-  //Update Score
-  let score = 0;
-  let scoreText = document.getElementById("scoretracker");
-  //Score Adder
-  const CORRECT_BONUS = 100;
-
-  //Quiz Content Function
-  function startQuiz() {
-    score = 0;
-    availableQuestions = [...myQuizQuestions] //spread array to get full copy from the myQuizQuestions array
-    //console.log(availableQuestions);
-    getNewQuestion();
-  }
-
-  //Populate Quiz Function
-  function getNewQuestion() {
-    //if we're through quiz, then user can save initials and score into the localStorage
-    if (availableQuestions.length === 0) {
-      // Quiz Over Function
-      quizOver();
+  
+  function showQuestions() {
+    choices.innerHTML = "";
+    for (let i=0; i < question[currentQuestion].choices.length; i++){
+      let choice = question[currentQuestion].choices[i];
+      choices.addEventListener("click", function(){
+        console.log("clicked", choice);
+        handleAnswer(choice);
+      });
     }
+  } //End  showQuestions Function
 
-    //Question Populated
-    let questionIndex = Math.floor(Math.random() * availableQuestions.length); //picks a random question from list based on array
-    currentQuestion = availableQuestions[questionIndex];
-    question.innerText = currentQuestion.question;
+}); //End beginning addEvent Listener function
 
-    //Answer Populated
-    choices.forEach(choice => {
-      let number = choice.dataset["number"]; //access to data-number attr
-      choice.innerText = currentQuestion["choice" + number]; //out of current question we want to get the choice property and assign a number the the choices
-    })
-
-    availableQuestions.splice(questionIndex, 1); //get rid of the used question array to make room for new
-
-    acceptingQuestions = true; //allows user to answer
-  } // End getNewQuestion Function
-
-  //Populate New Question/Answer Once User Selects Answer
-  choices.forEach(choice => {
-    choice.addEventListener("click", e => {
-      //console.log(e.target); 
-      if (!acceptingAnswers) return; //if we're not accepting answers, user cannot answer
-      acceptingAnswers = false;
-      let selectedChoice = e.target;
-      let selectedAnswer = selectedChoice.dataset["number"];
-
-      let classToApply = "incorrect";
-      if (selectedAnswer == currentQuestion.answer) {
-         classToApply = "correct"
-      }
-
-      selectedChoice.parentElement.classList.add(classToApply)
-      setTimeout ( () => {
-        selectedChoice.parentElement.classList.remove(classToApply)
-        getNewQuestion() //Populate New Question after remove the 
-      }, 1000)
-    });
-  });
-
-  startQuiz;
-
-  //Add Score Function
-  function addScore(num) {
-    score += num;
-    scoreText.innerText = score;
-  }
-} //End Generate Quiz Function
 
 //Quiz Over Function
 function quizOver() {
@@ -196,33 +91,28 @@ function quizOver() {
   }
 }
 
-//High Score Button
-function viewHighScores(e) {
-  e.preventDefault();
-  let userName = document.querySelector("#initials");
-  savedInitials(userName);
-  let highScoreListEl = document.querySelector("ul#list")
-  highScoreListEl.document.createElement("li");
-  highScoreListEl.setAttribute("class", "liscore")
-  loadSaveScores();
-}
+//Timer Function
+//function startTimer() {
+  //Grabs Timer and Counts Down
+  //let timeEl = document.querySelector("#timer");
+  // 90 seconds
+  //let secondsLeft = 90; 
 
+  //let timerInterval = setInterval(function () {
+   // secondsLeft--;
+ //   timeEl.innerHTML = "Time Left: " + secondsLeft + " seconds";
 
-//Function to Save in Local Storage
-let saveScore = function () {
-  localStorage.setItem("score", JSON.stringify(score))
-}
+    //30 secs or less on timer, background turns red
+   // if (secondsLeft <= 30) {
+  //    document.querySelector("#timer").style.backgroundColor = "#F47174";
+  //  }
 
-let savedInitials = function (userName) {
-  localStorage.setItem("initials", JSON.stringify(userName))
-}
-//Function to Get from Local Storage and Load to the viewHighScores
-function loadSaveScores() {
-  let savedScore = localStorage.getItem("score")
-  let savedInitials = localStorage.getItem("initials")
-
-  savedScore = JSON.parse(savedScore);
-  savedInitials = JSON.parse(savedInitials);
-
-  document.querySelector(".liscore").innerText = savedInitials + " - " + savedScore;
-}
+    //Time's Up or All Questions Answered
+ //   if (secondsLeft === 0) {
+  //    // Stops execution of action at set interval
+  //    clearInterval(timerInterval);
+      //Quiz Over Function
+ //     quizOver();
+  //  }
+  //}, 1000)
+//}

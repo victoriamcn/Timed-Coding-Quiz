@@ -30,7 +30,7 @@ let score = 0;
 // Array for questions/answers
 let myQuizQuestions = [
   {
-    question: "What does NOT belong in the <head> HTML element?",
+    question: "What does NOT belong in the 'head' HTML element?",
     choices: ["<meta></meta>", "<title></title>", "<main></main>", "<link></link>"],
     answer: "<main></main>"
   },
@@ -58,9 +58,6 @@ let myQuizQuestions = [
 
 //Start Quiz on Click
 beginButtonEl.addEventListener("click", function generateQuiz() {
-
-  //Generate Questions. When answered from choices, goes to next question until through them all.
-
   //Show Questions Function
   function showQuestions() {
     questionEl.innerHTML = myQuizQuestions[questionIndex].question
@@ -70,31 +67,33 @@ beginButtonEl.addEventListener("click", function generateQuiz() {
       buttonChoiceEl.textContent = myQuizQuestions[questionIndex].choices[i];
       //Append Button Element to Empty div.choicesEl
       choicesEl.appendChild(buttonChoiceEl);
-    }
-
       //once choice clicked, go to next question
       //loop through all available questions
-      buttonChoiceEl.addEventListener("click", function(event){
+      buttonChoiceEl.addEventListener("click", function (event) {
         if (event.target.textContent === myQuizQuestions[questionIndex].answer) {
           console.log("Correct!");
-          ifCorrectEl.textContent = "Awesome job; that was correct!"
+          ifCorrectEl.innerHTML = "Awesome job; that was correct!"
+
           score += 100;
 
           questionIndex++;
           showQuestions();
         } else {
           console.log("Incorrect.")
+          ifCorrectEl.innerHTML = "That was incorrect!"
+
           timerEl -= 10;
-          ifCorrectEl.textContent = "That was incorrect!"
+
           questionIndex++;
           showQuestions();
         }
-      if (questionIndex === 5 ) {
-        clearInterval(timerInterval)
-        localStorage.setItem("userscore", score)
-        quizOver();
-      }
-    });
+        if (questionIndex === 5) {
+          clearInterval(timerInterval)
+          localStorage.setItem("userscored", score)
+          quizOver();
+        }
+      });
+    }
   }
 
   function startTimer() {
@@ -121,6 +120,8 @@ beginButtonEl.addEventListener("click", function generateQuiz() {
       }
     }, 1000)
   }
+  showQuestions()
+  startTimer()
 }); //End addEvent Listener click to generate the quiz
 
 

@@ -45,30 +45,6 @@ h2 {
     box-shadow: 3px 3px var(--dark);
 }
 
-/*STATS: TIMER, QUESTION COUNTER, SCORE*/
-.stats {
-    padding: 5px;
-    color: var(--dark);
-    background-color: var(--light);
-    border: 2px solid var(--dark);
-    border-radius: 10px;
-    box-shadow: 3px 3px var(--dark);
-}
-.timer {
-    border: 1px solid var(--dark);
-    border-radius: 10px;
-    background-color: var(--button);
-    padding: 5px;
-}
-
-#hud {
-    display: flex;
-    justify-content: space-evenly;
-    margin-top: 5px;
-    font-size: 75%;
-    width: 95%;
-}
-
 /* HOME CONTAINER + FLEX FOR CHILDREN */
 .container {
     width: 100%;
@@ -107,6 +83,7 @@ button {
     padding: 5px;
     margin: 20px;
     color: var(--dark);
+    font-size: 75%;
     font-weight: bold;
     border: 2px solid var(--dark);
     border-radius: 10px;
@@ -131,12 +108,37 @@ button#next {
 }
 
 button#highscores {
-    font-size: 12px;
+    font-size: 60%;
 }
 
 /* .material-icons {
     margin: 2px;
 } */
+
+/*STATS: TIMER, QUESTION COUNTER, SCORE*/
+.stats {
+    padding: 5px;
+    font-size: 75%;
+    color: var(--dark);
+    background-color: var(--light);
+    border: 2px solid var(--dark);
+    border-radius: 10px;
+    box-shadow: 3px 3px var(--dark);
+}
+.timer {
+    border: 1px solid var(--dark);
+    border-radius: 5px;
+    background-color: var(--button);
+    padding: 5px;
+}
+
+#hud {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 5px;
+    font-size: 60%;
+    width: 95%;
+}
 
 
 /* QUIZ CONTENT*/
@@ -146,23 +148,22 @@ button#highscores {
     flex-direction: column;
     align-items: center;
     margin: 15px;
-    margin-right: 1rem;
     background-color: var(--light);
     border: 3px solid var(--border);
     border-radius: 10px;
     box-shadow: 10px 10px var(--border);
+    font-size: 80%;
 }
 
 h3 {
-    padding: 5px;
+    margin: 5px;
 }
 
 .choice-container {
     display: flex;
     align-items: baseline;
     margin-bottom: 5px;
-    width: 95%;
-    font-size: 14px;
+    width: 90%;
 }
 
 .choice-container:hover {

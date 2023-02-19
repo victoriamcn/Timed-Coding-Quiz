@@ -1,13 +1,12 @@
 // Start working code
 
 //DOM + How to Begin Timer + Quiz
-let beginBtn = document.getElementById("begin");
-beginBtn.addEventListener('click', generateQuiz());
+let startBtn = document.getElementById("begin");
 
+startBtn.addEventListener("click", function generateQuiz() {
 //Function for the Quiz
-function generateQuiz() {
   //(Part A) Timer Starts
-    let timeEl = document.querySelector("#timer"); // Inserts timer <div> by class
+    let timeEl = document.querySelector("#timer"); //grabs timer and starts counting down
     let secondsLeft = 90; // 90 seconds
     //Timer Function
     let timerInterval = setInterval(function () {
@@ -25,6 +24,7 @@ function generateQuiz() {
         // Calls function to create and append the score with option to save
         document.querySelector("#timer").innerHTML = "Time's up!"
         document.querySelector("#timer").style.backgroundColor = "#E3856B";
+        document.querySelector("#timer").style.fontColor = "#F4F7F7";
       }
     }, 1000);
 
@@ -38,6 +38,10 @@ function generateQuiz() {
     let score = 0;
     let questionCounter = 0;
     let availableQuestions = [];
+
+    //CONSTANTS
+    const CORRECT_BONUS = 100;
+
     // Array for questions/answers
     let myQuizQuestions = [
       {
@@ -46,77 +50,94 @@ function generateQuiz() {
       choice2: "<title></title>",
       choice3: "<main></main>",
       choice4: "<link></link>",
-      correctAnswer: 3 //"<main></main>"
+      answer: 3 //"<main></main>"
     }, {
       question: "The <a> tag defines a hyperlink What does the href attribute do?",
       choice1: "Specifies alternate text for an image",
       choice2: "Styles an element",
       choice3: "Specifies the URL of the page the link goes to",
       choice4: "Embeds an image",
-      correctAnswer: 3 //"Specifies the URL for the hyperlink"
+      answer: 3 //"Specifies the URL for the hyperlink"
     }, {
       question: "Which of the following is true about CSS?",
       choice1: "Adds functionality to the website",
       choice2: "Provides the structure for the web page",
       choice3: "It's a JavaScript library",
       choice4: "Defines all styles for the web page",
-      correctAnswer: 4 //"Defines all styles for the web page"
+      answer: 4 //"Defines all styles for the web page"
     }, {
       question: "What is the output for this function?: let x = myFunct(4,3); function myFunct(a,b) { return a + b;}",
       choice1: "7",
       choice2: "18",
       choice3: "49",
       choice4: "12",
-      correctAnswer: 1 //7
+      answer: 1 //7
     }, {
       question: "Which is NOT true about JSON's (JavaScript Object Notation) syntax?",
       choice1: "Data is in name/value pairs",
       choice2: "Angled brackets < > hold objects",
       choice3: "Data is separated by commas",
       choice4: "Square brackets [ ]hold arrays",
-      correctAnswer: 2 //"Angled brackets < > hold objects"
+      answer: 2 //"Angled brackets < > hold objects"
     }
     ];
 
     //Function for Quiz Content
-    startQuiz  = () => {
+    function startQuiz() {
       questionCounter = 0;
       score = 0;
       availableQuestions = [ ... myQuizQuestions] //spread array to get full copy from the myQuizQuestions array
-      //console.log(availableQuestions)
+      //console.log(availableQuestions);
       getNewQuestion();
-    };
-    //populate question/choices
-    getNewQuestion = () => {
+    }
+
+    //Populate Quiz
+    function getNewQuestion() {
+      debugger
+      //if we're through quiz, then user can save initials and score into the localStorage
+      if(availableQuestions.length === 0) {
+        //input initials and save score
+        return document.getElementsByClassName(".container").innerHtml = "Save your score by entering your initials below."
+          //return high score div?
+      }
+
       questionCounter++; //adds to question counter with each question
       
+      //Question Populated
       let questionIndex = Math.floor(Math.random() * availableQuestions.length); //picks a random question from list based on array
       currentQuestion = availableQuestions[questionIndex];
       question.innerText = currentQuestion.question;
 
+      //Answer Populated
       choices.forEach(choice => {
-        let number = choice.dataset['number']; //access to data-number attr
-        choice.innerText = currentQuestion['choice' + number]; //out of current question we want to get the choice property and assign a number the the choices
-      });
+        let number = choice.dataset["number"]; //access to data-number attr
+        choice.innerText = currentQuestion["choice" + number]; //out of current question we want to get the choice property and assign a number the the choices
+      })
 
-      availableQuestions.splice(questionIndex, 1); //get rid of the used question
-      acceptingQuestions = true; //allow user to answer
-    };
+      availableQuestions.splice(questionIndex, 1); //get rid of the used question array to make room for new
+      
+      acceptingQuestions = true; //allows user to answer
+    } // End getNewQuestion
+
+    //Populate New Once User Selects Answer
     choices.forEach(choice => {
-      choice.addEventListener('click', e => {
-         //console.log(e.target); 
-         if(!acceptingAnswers) return; //if we're not accepting answers, user cannot answer
-         acceptingAnswers = false;
-         let selectedChoice = e.target;
-         let selectedAnswer = selectedChoice.dataset["number"];
+      choice.addEventListener("click", Event => {
+          //console.log(e.target); 
+          if(!acceptingAnswers) return; //if we're not accepting answers, user cannot answer
 
-         getNewQuestion()
+          acceptingAnswers = false;
+
+          let selectedChoice = Event.target;
+          let selectedAnswer = selectedChoice.dataset["number"];
+
+          getNewQuestion(); //Call to Populate New Question
       })
     })
-  //(FINAL) Calling the Functions
+    
+  //Calling the Functions
   startQuiz()
-}
-generateQuiz();
+});
+//generateQuiz();
   //adds question and answers to the empty form
   //function showQuestions(question, quizContainer) {
     //store output and the answer choices

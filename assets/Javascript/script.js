@@ -42,23 +42,23 @@ let myQuizQuestions = [
   }
 ];
 //DOM + How to Begin Timer + Quiz
-let startBtn = document.querySelector("#begin");
+let startBtn = document.querySelector("button#begin");
 
 startBtn.addEventListener("click", generateQuiz());
 
 //Quiz Generated on Click
 function generateQuiz() {
-  startTimer()
-  showQuestions()
-}
+  showQuestions();
+  //startTimer();
+};
 //Timer Function
-function startTimer() {
+//function startTimer() {
   //Grabs Timer and Counts Down
-  let timeEl = document.querySelector("#timer");
+  //let timeEl = document.querySelector("#timer");
   // 90 seconds
-  let secondsLeft = 90; 
+  //let secondsLeft = 90; 
 
-  let timerInterval = setInterval(function () {
+  //let timerInterval = setInterval(function () {
     secondsLeft--;
     timeEl.innerHTML = "Time Left: " + secondsLeft + " seconds";
 
@@ -74,8 +74,8 @@ function startTimer() {
       //Quiz Over Function
       quizOver();
     }
-  }, 1000)
-}
+  //}, 1000)
+//}
 
 //Questions Function
 function showQuestions() {

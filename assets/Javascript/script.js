@@ -93,7 +93,6 @@ startBtn.addEventListener("click", function generateQuiz() {
 
     //Populate Quiz
     function getNewQuestion() {
-      debugger
       //if we're through quiz, then user can save initials and score into the localStorage
       if(availableQuestions.length === 0) {
         //input initials and save score
@@ -117,25 +116,40 @@ startBtn.addEventListener("click", function generateQuiz() {
       availableQuestions.splice(questionIndex, 1); //get rid of the used question array to make room for new
       
       acceptingQuestions = true; //allows user to answer
-    } // End getNewQuestion
-
-    //Populate New Once User Selects Answer
+    } // End getNewQuestion Function
+    //Populate New Question/Answer Once User Selects Answer
     choices.forEach(choice => {
-      choice.addEventListener("click", Event => {
-          //console.log(e.target); 
-          if(!acceptingAnswers) return; //if we're not accepting answers, user cannot answer
+      choice.addEventListener("click", e => {
+        //console.log(e.target); 
+        if(!acceptingAnswers) return; //if we're not accepting answers, user cannot answer
+        acceptingAnswers = false;
+        let selectedChoice = e.target;
+        let selectedAnswer = selectedChoice.dataset["number"];
 
-          acceptingAnswers = false;
+        //Create Class for Incorrect and Correct
+        let classToApply = "incorrect" ; //default incorrect
+          if (selectedAnswer == currentQuestion.answer) {
+            classToApply == "correct";
+          }
+        //Display if Answer was Incorrect or Correct
+        selectedChoice.parentElement.classList.add("classToApply");
+        if classToApply == "incorrect"
+          document.getElementsByClassName(".incorrect").innerHTML = "Incorrect answer!"
+        } else (classToApply == "correct") {
+          document.getElementsByClassName(".correct").innerHTML = "Correct answer!"
+        }
+        //Clear the classes before new question populated
+        function setTimeout(){
+          selectedChoice.parentElement.classList.remove(classToApply);
+          getNewQuestion();
+        }, 1000;
 
-          let selectedChoice = Event.target;
-          let selectedAnswer = selectedChoice.dataset["number"];
-
+          //console.log(selectedAnswer == currentQuestion.answer);
           getNewQuestion(); //Call to Populate New Question
-      })
-    })
-    
+      });
+    });
   //Calling the Functions
-  startQuiz()
+  startQuiz();
 });
 //generateQuiz();
   //adds question and answers to the empty form

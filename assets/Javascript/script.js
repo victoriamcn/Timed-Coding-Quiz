@@ -59,21 +59,21 @@ function generateQuiz() {
   //let secondsLeft = 90; 
 
   //let timerInterval = setInterval(function () {
-    secondsLeft--;
-    timeEl.innerHTML = "Time Left: " + secondsLeft + " seconds";
+   // secondsLeft--;
+ //   timeEl.innerHTML = "Time Left: " + secondsLeft + " seconds";
 
     //30 secs or less on timer, background turns red
-    if (secondsLeft <= 30) {
-      document.querySelector("#timer").style.backgroundColor = "#F47174";
-    }
+   // if (secondsLeft <= 30) {
+  //    document.querySelector("#timer").style.backgroundColor = "#F47174";
+  //  }
 
     //Time's Up or All Questions Answered
-    if (secondsLeft === 0) {
-      // Stops execution of action at set interval
-      clearInterval(timerInterval);
+ //   if (secondsLeft === 0) {
+  //    // Stops execution of action at set interval
+  //    clearInterval(timerInterval);
       //Quiz Over Function
-      quizOver();
-    }
+ //     quizOver();
+  //  }
   //}, 1000)
 //}
 
@@ -166,7 +166,6 @@ function quizOver() {
   //Functions to Display and Save Score
   displayScore();
   saveScore();
-
 
   let quizContainer = document.getElementById("quiz")
 

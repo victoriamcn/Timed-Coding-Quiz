@@ -27,8 +27,7 @@ let score = 0;
 
 //Event Listener to Show Saved Scores is in HTML onClick="viewHighScores(e)"
 
-//Start Quiz on Click
-beginButtonEl.addEventListener("click", showQuestions(), startTimer());
+
 
 // Array for questions/answers
 let myQuizQuestions = [
@@ -59,6 +58,8 @@ let myQuizQuestions = [
   }
 ];
 
+//Start Quiz on Click
+beginButtonEl.addEventListener("click", showQuestions(), removeQuestion(), startTimer());
 
 //Show Questions Function
 function showQuestions() {
@@ -70,20 +71,21 @@ function showQuestions() {
     buttonChoiceEl.textContent = myQuizQuestions[questionIndex].choices[i];
     //Append Button Element to Empty div.choicesEl
     choicesEl.appendChild(buttonChoiceEl);
+    //once choice created and clicked, go to next question
+    buttonChoiceEl.addEventListener("click", quizLoop);
   }
-  //once choice created and clicked, go to next question
-  buttonChoiceEl.addEventListener("click", quizLoop(Event));
+  
 }
 
 //Function to loop through all available questions
 function quizLoop(Event) {
-  if (Event.target.textContent === myQuizQuestions[questionIndex].answer) {
+  if (Event.target.innerHTML === myQuizQuestions[questionIndex].answer) {
     console.log("Correct!");
     ifCorrectEl.innerHTML = "Awesome job; that was correct!"
 
     score += 100;
-
     questionIndex++;
+
     removeQuestion();
     showQuestions();
   } else {
@@ -91,11 +93,12 @@ function quizLoop(Event) {
     ifCorrectEl.innerHTML = "That was incorrect!"
 
     timerEl -= 10;
-
     questionIndex++;
+
     removeQuestion();
     showQuestions();
-  }
+  } 
+  
   if (questionIndex === 5) {
     clearInterval(timerInterval)
     localStorage.setItem("userscore", score)
@@ -107,6 +110,7 @@ function quizLoop(Event) {
 function removeQuestion() {
   document.getElementById("remove")
 }
+
 
 function startTimer() {
   let secondsLeft = 90; // 90 seconds

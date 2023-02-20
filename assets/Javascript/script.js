@@ -1,6 +1,6 @@
 //DOM Start Elements
 let beginPageEl = document.querySelector('#beginpage')
-let beginButtonEl = document.querySelector('#begin')
+let beginButtonEl = document.getElementById('begin')
 
 //DOM Quiz Elements
 let quizEl = document.getElementById("quizcontainer")
@@ -27,6 +27,9 @@ let score = 0;
 
 //Event Listener to Show Saved Scores is in HTML onClick="viewHighScores(e)"
 
+//Start Quiz on Click
+beginButtonEl.addEventListener("click", showQuestions(), startTimer());
+
 // Array for questions/answers
 let myQuizQuestions = [
   {
@@ -35,8 +38,8 @@ let myQuizQuestions = [
     answer: "<main></main>"
   },
   {
-    question: "The <a> tag defines a hyperlink What does the href attribute do?",
-    choices: ["Specifies alternate text for an image", "Styles an element", "Specifies the URL of the page the link goes to", "Embeds an image"],
+    question: "The 'a' tag defines a hyperlink; What does the href attribute do?",
+    choices: ["Specifies alternate text for an image", "Styles an element", "Specifies the URL for the hyperlink", "Embeds an image"],
     answer: "Specifies the URL for the hyperlink"
   },
   {
@@ -56,80 +59,87 @@ let myQuizQuestions = [
   }
 ];
 
-//Start Quiz on Click
-beginButtonEl.addEventListener("click", function generateQuiz() {
-  //Show Questions Function
-  function showQuestions() {
-    questionEl.innerHTML = myQuizQuestions[questionIndex].question
-    //Loop Answers
-    for (let i = 0; i < myQuizQuestions[questionIndex].choices.length; i++) {
-      let buttonChoiceEl = document.createElement('button');
-      buttonChoiceEl.textContent = myQuizQuestions[questionIndex].choices[i];
-      //Append Button Element to Empty div.choicesEl
-      choicesEl.appendChild(buttonChoiceEl);
-      //once choice clicked, go to next question
-      //loop through all available questions
-      buttonChoiceEl.addEventListener("click", function (event) {
-        if (event.target.textContent === myQuizQuestions[questionIndex].answer) {
-          console.log("Correct!");
-          ifCorrectEl.innerHTML = "Awesome job; that was correct!"
 
-          score += 100;
+//Show Questions Function
+function showQuestions() {
+  questionEl.innerHTML = myQuizQuestions[questionIndex].question
+  //Loop Answers
+  for (let i = 0; i < myQuizQuestions[questionIndex].choices.length; i++) {
+    let buttonChoiceEl = document.createElement('button');
+    buttonChoiceEl.setAttribute = ("id", "replace")
+    buttonChoiceEl.textContent = myQuizQuestions[questionIndex].choices[i];
+    //Append Button Element to Empty div.choicesEl
+    choicesEl.appendChild(buttonChoiceEl);
+  }
+  //once choice created and clicked, go to next question
+  buttonChoiceEl.addEventListener("click", quizLoop(Event));
+}
 
-          questionIndex++;
-          showQuestions();
-        } else {
-          console.log("Incorrect.")
-          ifCorrectEl.innerHTML = "That was incorrect!"
+//Function to loop through all available questions
+function quizLoop(Event) {
+  if (Event.target.textContent === myQuizQuestions[questionIndex].answer) {
+    console.log("Correct!");
+    ifCorrectEl.innerHTML = "Awesome job; that was correct!"
 
-          timerEl -= 10;
+    score += 100;
 
-          questionIndex++;
-          showQuestions();
-        }
-        if (questionIndex === 5) {
-          clearInterval(timerInterval)
-          localStorage.setItem("userscored", score)
-          quizOver();
-        }
-      });
+    questionIndex++;
+    removeQuestion();
+    showQuestions();
+  } else {
+    console.log("Incorrect.")
+    ifCorrectEl.innerHTML = "That was incorrect!"
+
+    timerEl -= 10;
+
+    questionIndex++;
+    removeQuestion();
+    showQuestions();
+  }
+  if (questionIndex === 5) {
+    clearInterval(timerInterval)
+    localStorage.setItem("userscore", score)
+    quizOver();
+  }
+}
+
+//Function to remove content to replace with new question
+function removeQuestion() {
+  document.getElementById("remove")
+}
+
+function startTimer() {
+  let secondsLeft = 90; // 90 seconds
+
+  let timerInterval = setInterval(function () {
+    secondsLeft--;
+    timerEl.innerHTML = "Time Left: " + secondsLeft + " seconds";
+
+    //30 secs or less on timer, background turns red
+    if (secondsLeft <= 30) {
+      document.querySelector("#timer").style.backgroundColor = "#F47174";
     }
-  }
 
-  function startTimer() {
-    let secondsLeft = 90; // 90 seconds
-
-    let timerInterval = setInterval(function () {
-      secondsLeft--;
-      timerEl.innerHTML = "Time Left: " + secondsLeft + " seconds";
-
-      //30 secs or less on timer, background turns red
-      if (secondsLeft <= 30) {
-        document.querySelector("#timer").style.backgroundColor = "#F47174";
-      }
-
-      //Time's Up or All Questions Answered
-      if (secondsLeft === 0) {
-        // Stops execution of action at set interval
-        clearInterval(timerInterval);
-        document.querySelector("#timer").innerHTML = "Time's up!"
-        document.querySelector("#timer").style.backgroundColor = "#E3856B";
-        document.querySelector("#timer").style.fontColor = "#F4F7F7";
-        //Quiz Over Function
-        quizOver();
-      }
-    }, 1000)
-  }
-  showQuestions()
-  startTimer()
-}); //End addEvent Listener click to generate the quiz
+    //Time's Up or All Questions Answered
+    if (secondsLeft === 0) {
+      // Stops execution of action at set interval
+      clearInterval(timerInterval);
+      document.querySelector("#timer").innerHTML = "Time's up!"
+      document.querySelector("#timer").style.backgroundColor = "#E3856B";
+      document.querySelector("#timer").style.fontColor = "#F4F7F7";
+      //Quiz Over Function
+      quizOver();
+    }
+  }, 1000)
+}
 
 
 //Quiz Over Function
 function quizOver() {
   //Functions to Display and Save Score
   displayUserScore();
-  saveUserScore();
+  savedScore();
+  savedInitials();
 }
 
 // Show Final Score Function (after All Questions Answered)

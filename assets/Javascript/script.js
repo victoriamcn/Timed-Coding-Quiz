@@ -1,6 +1,6 @@
 //DOM Start Elements
 let beginPageEl = document.querySelector('#beginpage')
-let beginButtonEl = document.getElementById('begin')
+let beginButtonEl = document.querySelector("button#begin")
 
 //DOM Quiz Elements
 let quizEl = document.getElementById("quizcontainer")
@@ -34,47 +34,54 @@ let myQuizQuestions = [
   {
     question: "What does NOT belong in the 'head' HTML element?",
     choices: ["<meta></meta>", "<title></title>", "<main></main>", "<link></link>"],
-    answer: "<main></main>"
+    answer: "<main></main>",
   },
   {
     question: "The 'a' tag defines a hyperlink; What does the href attribute do?",
     choices: ["Specifies alternate text for an image", "Styles an element", "Specifies the URL for the hyperlink", "Embeds an image"],
-    answer: "Specifies the URL for the hyperlink"
+    answer: "Specifies the URL for the hyperlink",
   },
   {
     question: "Which of the following is true about CSS?",
     choices: ["Adds functionality to the website", "Provides the structure for the web page", "It's a JavaScript library", "Defines all styles for the web page"],
-    answer: "Defines all styles for the web page"
+    answer: "Defines all styles for the web page",
   },
   {
     question: "What is the output for this function?: let x = myFunct(4,3); function myFunct(a,b) { return a + b;}",
     choices: ["7", "18", "49", "12"],
-    answer: "7"
+    answer: "7",
   },
   {
     question: "Which is NOT true about JSON's (JavaScript Object Notation) syntax?",
     choices: ["Data is in name/value pairs", "Angled brackets < > hold objects", "Data is separated by commas", "Square brackets [ ] hold arrays"],
-    answer: "Angled brackets < > hold objects"
+    answer: "Angled brackets < > hold objects",
   }
 ];
 
 //Start Quiz on Click
-beginButtonEl.addEventListener("click", showQuestions(), removeQuestion(), startTimer());
+beginButtonEl.addEventListener("click", showQuestions(), startTimer());
 
 //Show Questions Function
 function showQuestions() {
-  questionEl.innerHTML = myQuizQuestions[questionIndex].question
-  //Loop Answers
+  questionEl.innerHTML = myQuizQuestions[questionIndex].question;
+  //Loop Q/A
   for (let i = 0; i < myQuizQuestions[questionIndex].choices.length; i++) {
     let buttonChoiceEl = document.createElement('button');
     buttonChoiceEl.setAttribute = ("id", "replace")
     buttonChoiceEl.textContent = myQuizQuestions[questionIndex].choices[i];
     //Append Button Element to Empty div.choicesEl
     choicesEl.appendChild(buttonChoiceEl);
-    //once choice created and clicked, go to next question
-    buttonChoiceEl.addEventListener("click", quizLoop);
+
+    //once user choice clicked, add up score or subtract from timer,then go to next question
+    buttonChoiceEl.addEventListener("click", quizLoop, removeQuestion());
   }
-  
+  //Once User goes through all questions, clear the timer and show final score. Then save initials and score to localStorage to then be displayed as high scores
+  if (questionIndex === 5) {
+    clearInterval(timerInterval)
+    localStorage.setItem("userscore", score)
+    quizOver();
+  }
+
 }
 
 //Function to loop through all available questions
@@ -99,11 +106,7 @@ function quizLoop(Event) {
     showQuestions();
   } 
   
-  if (questionIndex === 5) {
-    clearInterval(timerInterval)
-    localStorage.setItem("userscore", score)
-    quizOver();
-  }
+  
 }
 
 //Function to remove content to replace with new question
@@ -149,7 +152,7 @@ function quizOver() {
 // Show Final Score Function (after All Questions Answered)
 function displayUserScore() {
   quizEl.replaceWith(userScorePageEl);
-  scoreAreaEl.innerText = "Final Score:" + addScore;
+  scoreAreaEl.innerText = "Final Score:" + score;
   //Input Element for Initials Created
   initialsInput = document.createElement("input");
   initialsInput.setAttribute("id", "initialsinput");

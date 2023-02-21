@@ -3,38 +3,35 @@ Simple overview of use/purpose.
 
 ## Description
 
-This application is a timed coding quiz with multiple-choice questions.
-This app will runs in the browser, and features dynamically updated HTML and CSS powered by JavaScript code with a clean, polished, and responsive user interface.
+This application is a timed coding quiz about front-end coding with multiple-choice questions. There are five questions about HTML, CSS and JavaScript.
+It runs in the browser, and features dynamically updated HTML and CSS powered by JavaScript code with a polished and responsive user interface.
 
 ## Table of Contents
 
 - [Preview](#preview)
 - [Usage](#usage)
 - [Features](#features)
-- [Help](#help)
+
 - [License](#license)
 - [Acknowledgments](#acknowledgments)
 - [Acceptance Criteria](#acceptance-criteria)
 
 ## Preview
-![screenshot of a webpage for a coding quiz](/Timed-Coding-Quiz/assets/images/Coding%20Quiz%20Preview.png)
+![screenshot of the start window for a coding quiz](Timed-Coding-Quiz/assets/images/Timed-Quiz-Preview.png)
 
 [Deployed Site]()
 
 ## Usage
 
-How to use
+You may use this quiz application to test your front-end coding knowledge. 
 
 ## Features
 
-If your project has a lot of features, list them here.
-
-## Help
-
-Any advise for common problems or issues.
-```
-command to run if program contains helper info
-```
+1. Click the "Click to Begin" button to start the timer and loop the quiz questions.
+2. Click the "See High Scores" Button to view any scores from local storage.
+3. Each correct answer adds 100 points to the score.
+4. Each incorrect answer subtracts 10 seconds from the timer.
+5. When the quiz is complete, the user can save their score by adding their initials.
 
 ## License
 

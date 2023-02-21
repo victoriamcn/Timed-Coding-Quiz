@@ -147,8 +147,7 @@ function startTimer() {
 
 //Quiz Over Function
 function quizOver() {
-  //Calling Function to Display Score
-  displayUserScore();
+  
 
   // Show Final Score Function (after All Questions Answered)
 function displayUserScore() {
@@ -156,10 +155,10 @@ function displayUserScore() {
   scoreAreaEl.innerHTML = "Final Score: " + score;
   //Input Element for Initials Created
   initialsInput = document.createElement("input");
-  initialsInput.setAttribute("id", "initialsinput");
+  initialsInput.setAttribute("id", "initials");
   initialsInput.setAttribute("type", "text");
   initialsInput.setAttribute("name", "initials");
-  initialsInput.setAttribute("placeholder", "Please write your initials here...");
+  initialsInput.setAttribute("placeholder", "Type initials here.");
   //Append Input Element
   scoreAreaEl.appendChild(initialsInput);
 
@@ -171,13 +170,13 @@ function displayUserScore() {
   saveButtonEl.innerHTML = "Click to Submit Score";
 
   scoreAreaEl.appendChild(saveButtonEl);
-
-  //User Saves initials, they view all High Scores
-  saveButtonEl.addEventListener("submit", viewHighScores);
 }
-  savedScore();
-  savedInitials();
 
+//User Saves initials, they view all High Scores
+saveButtonEl.addEventListener("submit", viewHighScores);
+
+//Calling Function to Display Score
+displayUserScore();
   //Set Score and Username to Local Storage
 let savedScore = function () {
   localStorage.setItem("score", JSON.stringify("score"))
@@ -185,6 +184,8 @@ let savedScore = function () {
 let savedInitials = function (userName) {
   localStorage.setItem("initials", JSON.stringify(userName))
 }
+savedScore();
+savedInitials();
 }
 
 //Show High Scores on Click
@@ -206,8 +207,10 @@ function loadSavedScores() {
 
   savedScore = JSON.parse(savedScore);
   savedInitials = JSON.parse(savedInitials);
-
-  document.getElementById("highScores").innerHTML = savedInitials + " - " + savedScore;
+  //script.js:211 Uncaught TypeError: Cannot set properties of null (setting 'innerHTML')
+  // at loadSavedScores (script.js:211:51)
+  // at script.js:192:39
+  document.getElementById("highScores").textContent = savedInitials + " - " + savedScore;
 }
 
   //Event Listener to Show Saved Scores is in HTML onClick="viewHighScores(e)"

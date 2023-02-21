@@ -68,10 +68,7 @@ function showQuestions() {
   //Once User goes through all questions, clear the timer and show final score. Then save initials and score to localStorage to then be displayed as high scores
   if (questionIndex === 5) {
     // clearInterval(timerInterval)
-
     localStorage.setItem("userquizscore", score)
-
-
     quizOver();
   } else {
     questionEl.innerHTML = myQuizQuestions[questionIndex].question;
@@ -179,37 +176,31 @@ function quizOver() {
   }
   displayUserScore()
   //add event listener to submit score/init
-  saveButtonEl.addEventListener("click",);
+  //Clicks Submit, Show High Score Window
+
+  saveButtonEl.addEventListener("click", viewHighScores);
 
 //then relationship bt score and init: object
-let scoreIntObj {
+let scoreIntObj = {
     initials: ["initialsInput"],
     score: ["score"]
   }
   //save to local storage as an array of objects 
-  localStorage.setItem("userscore", JSON.stringify(scoreIntObj))
+  localStorage.setItem("userscore", scoreIntObj)
 }
-
-
-//Clicks Submit, Show High Score Window
-saveButtonEl.addEventListener("click", viewHighScores);
 
 //BUTTON: Show High Scores on Click
 highScoreBtn.addEventListener("click", viewHighScores);
 
+//Pulls All Scores and Initials from Local Storage
 function viewHighScores(e) {
   e.preventDefault();
+
   userScorePageEl.replaceWith(highScoreEl)
   scoreList = document.createElement("li");
 
-  loadSavedScores();
+  scoreList.innerHTML = localStorage.getItem("userscore");
 
   highScoreEl.appendChild("scoreList")
 }
 
-//Pulls All Scores and Initials from Local Storage
-function loadSavedScores() {
-  localStorage.getItem("userscore");
-  savedScore = JSON.parse("userscore");
-  document.getElementById("highScores").innerHTML = savedInitials + " - " + savedScore;
-}

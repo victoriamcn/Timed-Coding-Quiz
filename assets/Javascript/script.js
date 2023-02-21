@@ -112,6 +112,7 @@ function quizLoop(Event) {
 //Function to remove content to replace with new question
 function removeQuestion() {
   document.getElementById("remove")
+  
 }
 
 

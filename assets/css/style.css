@@ -127,7 +127,7 @@ button:hover {
 
 /* QUIZ CONTENT*/
 
-.quizcontainer {
+.quizcontainer, .userscore {
     display: flex;
     flex-direction: column;
     align-items: center;

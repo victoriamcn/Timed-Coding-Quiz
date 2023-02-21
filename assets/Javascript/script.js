@@ -198,9 +198,9 @@ function viewHighScores(e) {
 
   userScorePageEl.replaceWith(highScoreEl)
   scoreList = document.createElement("li");
-
-  scoreList.innerHTML = localStorage.getItem("userscore");
+  scoreList.setAttribute("id", "scorelist");
+  localStorage.getItem("userscore");
+  document.getElementById("scorelist").innerHTML = "userscore"
 
   highScoreEl.appendChild("scoreList")
 }
-

@@ -125,7 +125,7 @@ button:hover {
 }
 
 
-/* QUIZ CONTENT*/
+/* QUIZ CONTENT + SCORES */
 
 .quizcontainer, .userscore {
     display: flex;
@@ -139,7 +139,10 @@ button:hover {
     font-size: 80%;
 }
 
-
+.userscore {
+    font-size: 100%;
+    font-weight: bolder;
+}
 
 .choice-container {
     display: flex;

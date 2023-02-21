@@ -63,8 +63,17 @@ beginButtonEl.addEventListener("click", showQuestions(), startTimer());
 
 //Show Questions Function
 function showQuestions() {
+  //Once User goes through all questions, clear the timer and show final score. Then save initials and score to localStorage to then be displayed as high scores
+  if (questionIndex === 5) {
+    // clearInterval(timerInterval)
+
+    localStorage.setItem("userquizscore", score)
+
+    quizOver();
+  }
   questionEl.innerHTML = myQuizQuestions[questionIndex].question;
   //Loop Q/A
+  choicesEl.innerHTML = "";
   for (let i = 0; i < myQuizQuestions[questionIndex].choices.length; i++) {
     let buttonChoiceEl = document.createElement('button');
     buttonChoiceEl.setAttribute = ("id", "replace")
@@ -73,27 +82,20 @@ function showQuestions() {
     choicesEl.appendChild(buttonChoiceEl);
 
     //once user choice clicked, add up score or subtract from timer,then go to next question
-    buttonChoiceEl.addEventListener("click", quizLoop, removeQuestion());
+    buttonChoiceEl.addEventListener("click", quizLoop);
   }
-  //Once User goes through all questions, clear the timer and show final score. Then save initials and score to localStorage to then be displayed as high scores
-  if (questionIndex === 5) {
-    clearInterval(timerInterval)
-    localStorage.setItem("userscore", score)
-    quizOver();
-  }
-
 }
 
 //Function to loop through all available questions
 function quizLoop(Event) {
-  if (Event.target.innerHTML === myQuizQuestions[questionIndex].answer) {
+  if (Event.target.innerHTML == myQuizQuestions[questionIndex].answer) {
     console.log("Correct!");
     ifCorrectEl.innerHTML = "Awesome job; that was correct!"
 
     score += 100;
     questionIndex++;
 
-    removeQuestion();
+    // removeQuestion();
     showQuestions();
   } else {
     console.log("Incorrect.")
@@ -102,18 +104,18 @@ function quizLoop(Event) {
     timerEl -= 10;
     questionIndex++;
 
-    removeQuestion();
+    // removeQuestion();
     showQuestions();
-  } 
-  
-  
+  }
+
+
 }
 
 //Function to remove content to replace with new question
-function removeQuestion() {
-  document.getElementById("remove")
-  
-}
+// function removeQuestion() {
+//   document.getElementById("remove")
+
+// }
 
 
 function startTimer() {
@@ -144,16 +146,13 @@ function startTimer() {
 
 //Quiz Over Function
 function quizOver() {
-  //Functions to Display and Save Score
+  //Calling Function to Display Score
   displayUserScore();
-  savedScore();
-  savedInitials();
-}
 
-// Show Final Score Function (after All Questions Answered)
+  // Show Final Score Function (after All Questions Answered)
 function displayUserScore() {
   quizEl.replaceWith(userScorePageEl);
-  scoreAreaEl.innerText = "Final Score:" + score;
+  scoreAreaEl.innerHTML = "Final Score: " + score;
   //Input Element for Initials Created
   initialsInput = document.createElement("input");
   initialsInput.setAttribute("id", "initialsinput");
@@ -161,19 +160,32 @@ function displayUserScore() {
   initialsInput.setAttribute("name", "initials");
   initialsInput.setAttribute("placeholder", "Please write your initials here...");
   //Append Input Element
-  saveIntEl.appendChild(initials);
+  scoreAreaEl.appendChild(initials);
 
   //Save Button Element Created
   saveButtonEl = document.createElement("button");
   saveButtonEl.setAttribute("id", "save-btn");
   saveButtonEl.setAttribute("class", "btn");
   saveButtonEl.setAttribute("type", "submit");
-  saveButtonEl.textContent = "Click to Submit Score";
+  saveButtonEl.innerHTML = "Click to Submit Score";
 
-  saveIntEl.appendChild(saveButtonEl);
+  scoreAreaEl.appendChild(saveButtonEl);
 
   saveIntEl.addEventListener("submit", viewHighScores);
 }
+  savedScore();
+  savedInitials();
+
+  //Set Score and Username to Local Storage
+let savedScore = function () {
+  localStorage.setItem("score", JSON.stringify("score"))
+}
+let savedInitials = function (userName) {
+  localStorage.setItem("initials", JSON.stringify(userName))
+}
+}
+
+
 
 function viewHighScores(e) {
   e.preventDefault();
@@ -182,14 +194,6 @@ function viewHighScores(e) {
 
   userScorePageEl.replaceWith(highScoreEl)
   loadSavedScores();
-}
-
-//Set Score and Username to Local Storage
-let savedScore = function () {
-  localStorage.setItem("score", JSON.stringify("score"))
-}
-let savedInitials = function (userName) {
-  localStorage.setItem("initials", JSON.stringify(userName))
 }
 
 //Get Score and Username from Local Storage

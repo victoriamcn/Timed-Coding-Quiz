@@ -121,7 +121,7 @@ function quizLoop(Event) {
 function startTimer() {
   let secondsLeft = 90; // 90 seconds
 
-  let timerInterval = setInterval(function () {
+  let timerInterval = setInterval(function() {
     secondsLeft--;
     timerEl.innerHTML = "Time Left: " + secondsLeft + " seconds";
 
@@ -134,13 +134,14 @@ function startTimer() {
     if (secondsLeft === 0) {
       // Stops execution of action at set interval
       clearInterval(timerInterval);
+      //Styles and Adds Text to Timer Div
       document.querySelector("#timer").innerHTML = "Time's up!"
       document.querySelector("#timer").style.backgroundColor = "#E3856B";
       document.querySelector("#timer").style.fontColor = "#F4F7F7";
       //Quiz Over Function
       quizOver();
     }
-  }, 1000)
+  }, 1000);
 }
 
 
@@ -160,7 +161,7 @@ function displayUserScore() {
   initialsInput.setAttribute("name", "initials");
   initialsInput.setAttribute("placeholder", "Please write your initials here...");
   //Append Input Element
-  scoreAreaEl.appendChild(initials);
+  scoreAreaEl.appendChild(initialsInput);
 
   //Save Button Element Created
   saveButtonEl = document.createElement("button");
@@ -171,7 +172,8 @@ function displayUserScore() {
 
   scoreAreaEl.appendChild(saveButtonEl);
 
-  saveIntEl.addEventListener("submit", viewHighScores);
+  //User Saves initials, they view all High Scores
+  saveButtonEl.addEventListener("submit", viewHighScores);
 }
   savedScore();
   savedInitials();
@@ -185,7 +187,8 @@ let savedInitials = function (userName) {
 }
 }
 
-
+//Show High Scores on Click
+highScoreEl.addEventListener("click", loadSavedScores());
 
 function viewHighScores(e) {
   e.preventDefault();

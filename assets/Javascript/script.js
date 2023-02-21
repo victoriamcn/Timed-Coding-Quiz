@@ -18,7 +18,9 @@ let saveIntEl = document.querySelector('#initials');
 let saveButtonEl = document.querySelector('#savebtn');
 
 //DOM High Score Element
+let highScoreBtn = document.getElementById("seehighscores")
 let highScoreEl = document.getElementById("highscores");
+let scoreList = document.getElementById("startlist")
 
 //Variables
 let questionIndex = 0;
@@ -174,36 +176,37 @@ function quizOver() {
   }
   displayUserScore()
 }
-//Set Score and Username to Local Storage
-let savedScore = function () {
+//Variable to Set Score and Username to Local Storage
+let submitScore = function () {
   localStorage.setItem("score", JSON.stringify("score"))
 }
-let savedInitials = function () {
+let submitInitials = function () {
   localStorage.setItem("initials", JSON.stringify("initials"))
 }
 
 //Clicks Submit, 
-saveButtonEl.addEventListener("click", savedScore, savedInitials, viewHighScores);
-//Show High Scores on Click
-highScoreEl.addEventListener("click", viewHighScores);
+saveButtonEl.addEventListener("click", submitScore, submitInitials, viewHighScores);
+//BUTTON: Show High Scores on Click
+highScoreBtn.addEventListener("click", viewHighScores);
 
 function viewHighScores(e) {
   e.preventDefault();
-  let userName = document.querySelector("#initialsinput").value;
-  savedInitials(userName);
-
   userScorePageEl.replaceWith(highScoreEl)
+  scoreList = document.createElement("li");
+
+  let username = document.querySelector("#initialsinput").value;
+  savedInitials(username);
+
   loadSavedScores();
-
-  //Pulls Alls Scores and Initials from Local Storage
-  function loadSavedScores() {
-    var savedScore = localStorage.getItem("score");
-    var savedInitials = localStorage.getItem("initials");
-
-    savedScore = JSON.parse(savedScore);
-    savedInitials = JSON.parse(savedInitials);
-  }
-  document.getElementById("highScores").textContent = savedInitials + " - " + savedScore;
+  
 }
 
-  //Event Listener to Show Saved Scores is in HTML onClick="viewHighScores(e)"
+ //Pulls All Scores and Initials from Local Storage
+ function loadSavedScores() {
+  var savedScore = localStorage.getItem("score");
+  var savedInitials = localStorage.getItem("initials");
+
+  savedScore = JSON.parse(savedScore);
+  savedInitials = JSON.parse(savedInitials);
+  document.getElementById("highScores").textContent = savedInitials + " - " + savedScore;
+}

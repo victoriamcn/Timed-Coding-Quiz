@@ -121,7 +121,7 @@ function quizLoop(Event) {
 function startTimer() {
   let secondsLeft = 90; // 90 seconds
 
-  let timerInterval = setInterval(function() {
+  let timerInterval = setInterval(function () {
     secondsLeft--;
     timerEl.innerHTML = "Time Left: " + secondsLeft + " seconds";
 
@@ -147,43 +147,43 @@ function startTimer() {
 
 //Quiz Over Function
 function quizOver() {
-  
 
   // Show Final Score Function (after All Questions Answered)
-function displayUserScore() {
-  quizEl.replaceWith(userScorePageEl);
-  scoreAreaEl.innerHTML = "Final Score: " + score;
-  //Input Element for Initials Created
-  initialsInput = document.createElement("input");
-  initialsInput.setAttribute("id", "initials");
-  initialsInput.setAttribute("type", "text");
-  initialsInput.setAttribute("name", "initials");
-  initialsInput.setAttribute("placeholder", "Type initials here.");
-  //Append Input Element
-  scoreAreaEl.appendChild(initialsInput);
+  function displayUserScore() {
+    quizEl.replaceWith(userScorePageEl);
+    scoreAreaEl.innerHTML = "Final Score: " + score;
+    //Input Element for Initials Created
+    initialsInput = document.createElement("input");
+    initialsInput.setAttribute("id", "initials");
+    initialsInput.setAttribute("type", "text");
+    initialsInput.setAttribute("name", "initials");
+    initialsInput.setAttribute("placeholder", "Type initials here.");
+    //Append Input Element
+    scoreAreaEl.appendChild(initialsInput);
 
-  //Save Button Element Created
-  saveButtonEl = document.createElement("button");
-  saveButtonEl.setAttribute("id", "save-btn");
-  saveButtonEl.setAttribute("class", "btn");
-  saveButtonEl.setAttribute("type", "submit");
-  saveButtonEl.innerHTML = "Submit Score";
+    //Save Button Element Created
+    saveButtonEl = document.createElement("button");
+    saveButtonEl.setAttribute("id", "save-btn");
+    saveButtonEl.setAttribute("class", "btn");
+    saveButtonEl.setAttribute("type", "submit");
+    saveButtonEl.innerHTML = "Submit Score";
 
-  scoreAreaEl.appendChild(saveButtonEl);
+    scoreAreaEl.appendChild(saveButtonEl);
 
-    //Set Score and Username to Local Storage
+
+  }
+  displayUserScore()
+}
+//Set Score and Username to Local Storage
 let savedScore = function () {
   localStorage.setItem("score", JSON.stringify("score"))
 }
-let savedInitials = function (userName) {
-  localStorage.setItem("initials", JSON.stringify(userName))
-}
-}
-
-//User Saves initials, they view all High Scores
-saveButtonEl.addEventListener("submit", loadSavedScores(), viewHighScores);
+let savedInitials = function () {
+  localStorage.setItem("initials", JSON.stringify("initials"))
 }
 
+//Clicks Submit, 
+saveButtonEl.addEventListener("click", savedScore, savedInitials, viewHighScores);
 //Show High Scores on Click
 highScoreEl.addEventListener("click", viewHighScores);
 
@@ -194,21 +194,15 @@ function viewHighScores(e) {
 
   userScorePageEl.replaceWith(highScoreEl)
   loadSavedScores();
-}
 
+  //Pulls Alls Scores and Initials from Local Storage
+  function loadSavedScores() {
+    var savedScore = localStorage.getItem("score");
+    var savedInitials = localStorage.getItem("initials");
 
-
-
-//Get Score and Username from Local Storage
-function loadSavedScores() {
-  var savedScore = localStorage.getItem("score");
-  var savedInitials = localStorage.getItem("userName");
-
-  savedScore = JSON.parse(savedScore);
-  savedInitials = JSON.parse(savedInitials);
-  //script.js:211 Uncaught TypeError: Cannot set properties of null (setting 'innerHTML')
-  // at loadSavedScores (script.js:211:51)
-  // at script.js:192:39
+    savedScore = JSON.parse(savedScore);
+    savedInitials = JSON.parse(savedInitials);
+  }
   document.getElementById("highScores").textContent = savedInitials + " - " + savedScore;
 }
 

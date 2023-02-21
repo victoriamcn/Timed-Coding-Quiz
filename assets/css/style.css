@@ -107,6 +107,7 @@ button:hover {
 .stats {
     padding: 5px;
     font-size: 75%;
+    width: 75%;
     color: var(--dark);
     background-color: var(--light);
     border: 2px solid var(--dark);
@@ -115,6 +116,8 @@ button:hover {
 }
 
 .timer {
+    display: flex;
+    justify-content: center;
     border: 1px solid var(--dark);
     border-radius: 5px;
     background-color: var(--button);

@@ -68,7 +68,7 @@ function showQuestions() {
   for (let i = 0; i < myQuizQuestions[questionIndex].choices.length; i++) {
     let buttonChoiceEl = document.createElement('button');
     buttonChoiceEl.setAttribute = ("id", "replace")
-    buttonChoiceEl.textContent = myQuizQuestions[questionIndex].choices[i];
+    buttonChoiceEl.innerText = myQuizQuestions[questionIndex].choices[i];
     //Append Button Element to Empty div.choicesEl
     choicesEl.appendChild(buttonChoiceEl);
 

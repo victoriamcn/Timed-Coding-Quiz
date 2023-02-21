@@ -167,29 +167,25 @@ function displayUserScore() {
   saveButtonEl.setAttribute("id", "save-btn");
   saveButtonEl.setAttribute("class", "btn");
   saveButtonEl.setAttribute("type", "submit");
-  saveButtonEl.innerHTML = "Click to Submit Score";
+  saveButtonEl.innerHTML = "Submit Score";
 
   scoreAreaEl.appendChild(saveButtonEl);
-}
 
-//User Saves initials, they view all High Scores
-saveButtonEl.addEventListener("submit", viewHighScores);
-
-//Calling Function to Display Score
-displayUserScore();
-  //Set Score and Username to Local Storage
+    //Set Score and Username to Local Storage
 let savedScore = function () {
   localStorage.setItem("score", JSON.stringify("score"))
 }
 let savedInitials = function (userName) {
   localStorage.setItem("initials", JSON.stringify(userName))
 }
-savedScore();
-savedInitials();
+}
+
+//User Saves initials, they view all High Scores
+saveButtonEl.addEventListener("submit", loadSavedScores(), viewHighScores);
 }
 
 //Show High Scores on Click
-highScoreEl.addEventListener("click", loadSavedScores());
+highScoreEl.addEventListener("click", viewHighScores);
 
 function viewHighScores(e) {
   e.preventDefault();
@@ -199,6 +195,9 @@ function viewHighScores(e) {
   userScorePageEl.replaceWith(highScoreEl)
   loadSavedScores();
 }
+
+
+
 
 //Get Score and Username from Local Storage
 function loadSavedScores() {

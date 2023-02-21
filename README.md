@@ -47,6 +47,7 @@ All icon used in this project are from Google Fonts.
 [Simple Steps Code: How to Make a Simple JavaScript Quiz](https://simplestepscode.com/javascript-quiz-tutorial/)
 [W3 Schools: HTML DOM Document createElement()](https://www.w3schools.com/jsref/met_document_createelement.asp)
 [W3 Schools: JSON Array Literals](https://www.w3schools.com/js/js_json_arrays.asp)
+[W3 Schools: JavaScript Objects](https://www.w3schools.com/js/js_object_definition.asp)
 
 **Stack Overflow**
 [JavaScript: How Do I save the Score and Initials once the page is refreshed and add more score and initials to the existing ones.?](https://stackoverflow.com/questions/66488667/javascript-how-do-i-save-the-score-and-initials-once-the-page-is-refreshed-and)

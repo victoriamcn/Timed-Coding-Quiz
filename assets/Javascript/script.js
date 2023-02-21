@@ -71,21 +71,24 @@ function showQuestions() {
 
     localStorage.setItem("userquizscore", score)
 
-    quizOver();
-  }
-  questionEl.innerHTML = myQuizQuestions[questionIndex].question;
-  //Loop Q/A
-  choicesEl.innerHTML = "";
-  for (let i = 0; i < myQuizQuestions[questionIndex].choices.length; i++) {
-    let buttonChoiceEl = document.createElement('button');
-    buttonChoiceEl.setAttribute = ("id", "replace")
-    buttonChoiceEl.innerText = myQuizQuestions[questionIndex].choices[i];
-    //Append Button Element to Empty div.choicesEl
-    choicesEl.appendChild(buttonChoiceEl);
 
-    //once user choice clicked, add up score or subtract from timer,then go to next question
-    buttonChoiceEl.addEventListener("click", quizLoop);
+    quizOver();
+  } else {
+    questionEl.innerHTML = myQuizQuestions[questionIndex].question;
+    //Loop Q/A
+    choicesEl.innerHTML = "";
+    for (let i = 0; i < myQuizQuestions[questionIndex].choices.length; i++) {
+      let buttonChoiceEl = document.createElement('button');
+      buttonChoiceEl.setAttribute = ("id", "replace")
+      buttonChoiceEl.innerText = myQuizQuestions[questionIndex].choices[i];
+      //Append Button Element to Empty div.choicesEl
+      choicesEl.appendChild(buttonChoiceEl);
+
+      //once user choice clicked, add up score or subtract from timer,then go to next question
+      buttonChoiceEl.addEventListener("click", quizLoop);
+    }
   }
+
 }
 
 //Function to loop through all available questions
@@ -175,17 +178,22 @@ function quizOver() {
 
   }
   displayUserScore()
-}
-//Variable to Set Score and Username to Local Storage
-let submitScore = function () {
-  localStorage.setItem("score", JSON.stringify("score"))
-}
-let submitInitials = function () {
-  localStorage.setItem("initials", JSON.stringify("initials"))
+  //add event listener to submit score/init
+  saveButtonEl.addEventListener("click",);
+
+//then relationship bt score and init: object
+let scoreIntObj {
+    initials: ["initialsInput"],
+    score: ["score"]
+  }
+  //save to local storage as an array of objects 
+  localStorage.setItem("userscore", JSON.stringify(scoreIntObj))
 }
 
-//Clicks Submit, 
-saveButtonEl.addEventListener("click", submitScore, submitInitials, viewHighScores);
+
+//Clicks Submit, Show High Score Window
+saveButtonEl.addEventListener("click", viewHighScores);
+
 //BUTTON: Show High Scores on Click
 highScoreBtn.addEventListener("click", viewHighScores);
 
@@ -194,19 +202,14 @@ function viewHighScores(e) {
   userScorePageEl.replaceWith(highScoreEl)
   scoreList = document.createElement("li");
 
-  let username = document.querySelector("#initialsinput").value;
-  savedInitials(username);
-
   loadSavedScores();
-  
+
+  highScoreEl.appendChild("scoreList")
 }
 
- //Pulls All Scores and Initials from Local Storage
- function loadSavedScores() {
-  var savedScore = localStorage.getItem("score");
-  var savedInitials = localStorage.getItem("initials");
-
-  savedScore = JSON.parse(savedScore);
-  savedInitials = JSON.parse(savedInitials);
-  document.getElementById("highScores").textContent = savedInitials + " - " + savedScore;
+//Pulls All Scores and Initials from Local Storage
+function loadSavedScores() {
+  localStorage.getItem("userscore");
+  savedScore = JSON.parse("userscore");
+  document.getElementById("highScores").innerHTML = savedInitials + " - " + savedScore;
 }

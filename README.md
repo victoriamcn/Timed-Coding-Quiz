@@ -19,7 +19,7 @@ It runs in the browser, and features dynamically updated HTML and CSS powered by
 ## Preview
 ![screenshot of the start window for a coding quiz](Timed-Coding-Quiz/assets/images/Timed-Quiz-Preview.png)
 
-[Deployed Site]()
+[Deployed Site](https://victoriamcn.github.io/Timed-Coding-Quiz/)
 
 ## Usage
 

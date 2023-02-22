@@ -190,25 +190,32 @@ function quizOver() {
   localStorage.setItem("finalscore", JSON.stringify(scoreIntObj));
 }
 
-//BUTTON: Show High Scores on Click
-highScoreBtn.addEventListener("click", viewHighScores);
-
 //Displays All Scores and Initials from Local Storage
 function viewHighScores() {
+  //Show List of Scores Element
   userScorePageEl.replaceWith(highScoreEl)
-  listEl = document.createElement("ul");
-  listEl.setAttribute("id", "list");
-  
-  let getAllScores = JSON.parse(localStorage.getItem("finalscore"));
+
+  //Unordered List
+  listScoreEl = document.createElement("ul");
+  listScoreEl.setAttribute("id", "list");
+
+  highScoreEl.appendChild("listScoreEl")
 
   function createScore() {
+    //create <li> to display scores
   let scoreList = document.createElement("li");
   scoreList.setAttribute("id", "scorelist");
+  let getAllScores = JSON.parse(localStorage.getItem("finalscore"));
   scoreList.innerHTML = getAllScores;
-  listEl.appendChild(scoreList)
+
+  highScoreEl.appendChild(scoreList)
   }
 
-  Array.document.querySelector("ul#list").forEach(createScore()) //startListEl.forEach() //.innerHTML = getAllScores
-
-  highScoreEl.appendChild("listEl")
+  //Display Parsed "finalscore" from localStorage
+  var allScoresArr = Array.from(document.querySelectorAll("li#scorelist"))
+  allScoresArr.forEach(createScore()) 
+  // allScoresArr.forEach(listScoreEl, createScore()) 
 }
+
+//BUTTON: Show High Scores on Click
+highScoreBtn.addEventListener("click", viewHighScores);

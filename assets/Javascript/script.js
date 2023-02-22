@@ -15,7 +15,7 @@ let timerEl = document.getElementById("timer");
 let userScorePageEl = document.getElementById("userscore");
 let scoreAreaEl = document.querySelector('#scorearea');
 let saveIntEl = document.querySelector('#inputinitials');
-let input = document.querySelector('#initials');
+let input = "";
 let saveButtonEl = document.querySelector('#savebtn');
 
 //DOM High Score Element
@@ -150,74 +150,67 @@ function startTimer() {
 
 //Quiz Over Function
 function quizOver() {
-
   // Show Final Score Function (after All Questions Answered)
   function displayUserScore() {
     quizEl.replaceWith(userScorePageEl);
-    scoreAreaEl.innerHTML = "Final Score: " + score;
+    scoreAreaEl.innerHTML = 'Final Score: ' + score;
     //Input Element for Initials Created
-    initialsInput = document.createElement("input");
-    initialsInput.setAttribute("id", "inputinitials");
-    initialsInput.setAttribute("type", "text");
-    initialsInput.setAttribute("name", "initials");
-    initialsInput.setAttribute("placeholder", "Type initials here.");
+    initialsInput = document.createElement('input');
+    initialsInput.setAttribute('id', 'initials');
+    initialsInput.setAttribute('type', 'text');
+    initialsInput.setAttribute('name', 'initials');
+    initialsInput.setAttribute('placeholder', 'Type initials here.');
     //Append Input Element
     scoreAreaEl.appendChild(initialsInput);
 
     //Save Button Element Created
-    saveButtonEl = document.createElement("button");
-    saveButtonEl.setAttribute("id", "save-btn");
-    saveButtonEl.setAttribute("class", "btn");
-    saveButtonEl.setAttribute("type", "submit");
-    saveButtonEl.innerHTML = "Submit Score";
+    saveButtonEl = document.createElement('button');
+    saveButtonEl.setAttribute('id', 'save-btn');
+    saveButtonEl.setAttribute('class', 'btn');
+    saveButtonEl.setAttribute('type', 'submit');
+    saveButtonEl.innerHTML = 'Submit Score';
 
     scoreAreaEl.appendChild(saveButtonEl);
   }
-  localStorage.setItem("userInitials", saveIntEl)
-  displayUserScore()
-  //add event listener to submit score/init
-  //Clicks Submit, Save Initials and Show High Score Window
-  saveButtonEl.addEventListener("click", viewHighScores);
 
-  //then relationship bt score and init created with an object..already have user quizscore in storage, need initials
-  let scoreInitialsObj = {
-    name: "userInitials",
-    thescore: "userquizscore"
-  }
-  let allScores = [];
-  allScores.push(scoreInitialsObj)
-  //save to local storage as an array of objects 
-  localStorage.setItem("finalscore", JSON.stringify(scoreInitialsObj));
+  displayUserScore();
+  //add event listener to submit score/init
+  //Clicks Submit, Show High Score Window
+  saveButtonEl.addEventListener('click', viewHighScores);
 }
 
 //Displays All Scores and Initials from Local Storage
 function viewHighScores() {
   //Show List of Scores Element
-  userScorePageEl.replaceWith(highScoreEl)
+  let allScores = JSON.parse(localStorage.getItem('finalscore')) || [];
+  if (document.querySelector('#initials')) {
+    var inputEl = document.querySelector('#initials')
 
-  //Unordered List
-  listScoreEl = document.createElement("ul");
-  listScoreEl.setAttribute("id", "list");
+    //then relationship bt score and init created with an object..already have user quizscore in storage, need initials
+    let scoreInitialsObj = {
+      initials: inputEl.value,
+      score: localStorage.getItem('userquizscore'),
+    }
 
-  highScoreEl.appendChild(listScoreEl)
-  
-
-  function createScore() {
-    //create <li> to display scores
-  let scoreList = document.createElement("li");
-  scoreList.setAttribute("id", "scorelist");
-  let getAllScores = JSON.parse(localStorage.getItem("finalscore"));
-  console.log(scoreList)
-  scoreList.innerHTML = getAllScores;
-
-  highScoreEl.appendChild(scoreList)
-  
+    allScores.push(scoreInitialsObj);
+    //save to local storage as an array of objects
+    localStorage.setItem('finalscore', JSON.stringify(allScores));
   }
 
-  //Display Parsed "finalscore" from localStorage
-  var allScoresArr = document.querySelectorAll("li#scorelist")
-  allScoresArr.forEach(createScore()) 
-  // allScoresArr.forEach(listScoreEl, createScore()) 
+  userScorePageEl.replaceWith(highScoreEl);
+
+  //Unordered List
+  listScoreEl = document.createElement('ul');
+  listScoreEl.setAttribute('id', 'list');
+
+  highScoreEl.appendChild(listScoreEl);
+
+  for (let i = 0; i < allScores.length; i++) {
+    let scoreList = document.createElement('li');
+    scoreList.setAttribute('id', 'scorelist');
+    scoreList.innerHTML = allScores[i].initials + ' - ' + allScores[i].score;
+    listScoreEl.appendChild(scoreList);
+  }
 }
 
 //BUTTON: Show High Scores on Click

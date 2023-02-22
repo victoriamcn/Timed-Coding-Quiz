@@ -52,17 +52,14 @@ h3 {
 
 /* HOME CONTAINER + FLEX FOR CHILDREN */
 .container {
-    width: 100%;
+    width: 80%;
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     max-width: 80rem;
     margin: 0 auto;
-}
-
-.container>* {
-    width: 90%;
+    font-size: 100%;
 }
 
 .flex-col {
@@ -75,10 +72,6 @@ h3 {
     align-items: center;
 }
 
-.text-center {
-    text-align: center;
-}
-
 /* BUTTONS */
 button {
     display: flex;
@@ -86,7 +79,6 @@ button {
     padding: 5px;
     margin: 20px;
     color: var(--dark);
-    font-size: 75%;
     font-weight: bold;
     border: 2px solid var(--dark);
     border-radius: 10px;
@@ -106,8 +98,7 @@ button:hover {
 /*STATS: TIMER, QUESTION COUNTER, SCORE*/
 .stats {
     padding: 5px;
-    font-size: 75%;
-    width: 75%;
+    width: 30%;
     color: var(--dark);
     background-color: var(--light);
     border: 2px solid var(--dark);

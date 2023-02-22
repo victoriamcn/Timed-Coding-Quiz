@@ -185,22 +185,28 @@ let scoreIntObj = {
     initials: ["initialsInput"],
     score: ["score"]
   }
+  let allScores[];
+  allScores.push(scoreIntObj)
   //save to local storage as an array of objects 
-  localStorage.setItem("userscore", scoreIntObj)
+  localStorage.setItem("finalscore", JSON.stringify(scoreIntObj));
 }
 
 //BUTTON: Show High Scores on Click
 highScoreBtn.addEventListener("click", viewHighScores);
 
-//Pulls All Scores and Initials from Local Storage
+//Displays All Scores and Initials from Local Storage
 function viewHighScores(e) {
-  e.preventDefault();
+  userScorePageEl.replaceWith(userScorePageEl)
+  userScorePageEl.innerHTML = "Final Scores: " + score;
 
-  userScorePageEl.replaceWith(highScoreEl)
   scoreList = document.createElement("li");
   scoreList.setAttribute("id", "scorelist");
-  localStorage.getItem("userscore");
-  document.getElementById("scorelist").innerHTML = "userscore"
 
-  highScoreEl.appendChild("scoreList")
+  userScorePageEl.appendChild("scoreList")
+  
+  let getAllScores = JSON.parse(localStorage.getItem("finalscore"));
+
+  document.querySelector("li#scorelist").innerHTML = getAllScores
+
+  
 }

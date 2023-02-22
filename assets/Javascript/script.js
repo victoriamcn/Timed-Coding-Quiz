@@ -176,16 +176,15 @@ function quizOver() {
   displayUserScore()
   //add event listener to submit score/init
   //Clicks Submit, Show High Score Window
-
+ if ()
   saveButtonEl.addEventListener("click", viewHighScores);
 
-  //then relationship bt score and init created with an object
-  let scoreIntObj = {
-    initials: ["initialsInput"],
-    score: ["score"]
+  //then relationship bt score and init created with an object..already have user quizscore in storage, need initials
+  let scoreInitialsObj = {
+    initials: [input.value],
   }
   let allScores = [];
-  allScores.push(scoreIntObj)
+  allScores.push(scoreInitialsObj)
   //save to local storage as an array of objects 
   localStorage.setItem("finalscore", JSON.stringify(scoreIntObj));
 }
@@ -199,16 +198,19 @@ function viewHighScores() {
   listScoreEl = document.createElement("ul");
   listScoreEl.setAttribute("id", "list");
 
-  highScoreEl.appendChild("listScoreEl")
+  highScoreEl.appendChild(listScoreEl)
+  
 
   function createScore() {
     //create <li> to display scores
   let scoreList = document.createElement("li");
   scoreList.setAttribute("id", "scorelist");
   let getAllScores = JSON.parse(localStorage.getItem("finalscore"));
+  console.log(scoreList)
   scoreList.innerHTML = getAllScores;
 
   highScoreEl.appendChild(scoreList)
+  
   }
 
   //Display Parsed "finalscore" from localStorage

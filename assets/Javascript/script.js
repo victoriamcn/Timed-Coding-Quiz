@@ -14,7 +14,8 @@ let timerEl = document.getElementById("timer");
 //DOM User Save Initials and Score Elements
 let userScorePageEl = document.getElementById("userscore");
 let scoreAreaEl = document.querySelector('#scorearea');
-let saveIntEl = document.querySelector('#initials');
+let saveIntEl = document.querySelector('#inputinitials');
+let input = document.querySelector('#initials');
 let saveButtonEl = document.querySelector('#savebtn');
 
 //DOM High Score Element
@@ -156,7 +157,7 @@ function quizOver() {
     scoreAreaEl.innerHTML = "Final Score: " + score;
     //Input Element for Initials Created
     initialsInput = document.createElement("input");
-    initialsInput.setAttribute("id", "initials");
+    initialsInput.setAttribute("id", "inputinitials");
     initialsInput.setAttribute("type", "text");
     initialsInput.setAttribute("name", "initials");
     initialsInput.setAttribute("placeholder", "Type initials here.");
@@ -172,21 +173,21 @@ function quizOver() {
 
     scoreAreaEl.appendChild(saveButtonEl);
   }
-
+  localStorage.setItem("userInitials", saveIntEl)
   displayUserScore()
   //add event listener to submit score/init
-  //Clicks Submit, Show High Score Window
- if ()
+  //Clicks Submit, Save Initials and Show High Score Window
   saveButtonEl.addEventListener("click", viewHighScores);
 
   //then relationship bt score and init created with an object..already have user quizscore in storage, need initials
   let scoreInitialsObj = {
-    initials: [input.value],
+    name: "userInitials",
+    thescore: "userquizscore"
   }
   let allScores = [];
   allScores.push(scoreInitialsObj)
   //save to local storage as an array of objects 
-  localStorage.setItem("finalscore", JSON.stringify(scoreIntObj));
+  localStorage.setItem("finalscore", JSON.stringify(scoreInitialsObj));
 }
 
 //Displays All Scores and Initials from Local Storage
@@ -214,7 +215,7 @@ function viewHighScores() {
   }
 
   //Display Parsed "finalscore" from localStorage
-  var allScoresArr = Array.from(document.querySelectorAll("li#scorelist"))
+  var allScoresArr = document.querySelectorAll("li#scorelist")
   allScoresArr.forEach(createScore()) 
   // allScoresArr.forEach(listScoreEl, createScore()) 
 }

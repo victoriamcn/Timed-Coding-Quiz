@@ -19,8 +19,8 @@ let saveButtonEl = document.querySelector('#savebtn');
 
 //DOM High Score Element
 let highScoreBtn = document.getElementById("seehighscores")
-let highScoreEl = document.getElementById("highscores");
-let scoreList = document.getElementById("startlist")
+let highScoreEl = document.getElementById("highscorelist");
+//let startListEl = document.getElementById("startlist")
 
 //Variables
 let questionIndex = 0;
@@ -179,8 +179,8 @@ function quizOver() {
 
   saveButtonEl.addEventListener("click", viewHighScores);
 
-//then relationship bt score and init: object
-let scoreIntObj = {
+  //then relationship bt score and init created with an object
+  let scoreIntObj = {
     initials: ["initialsInput"],
     score: ["score"]
   }
@@ -195,16 +195,18 @@ highScoreBtn.addEventListener("click", viewHighScores);
 
 //Displays All Scores and Initials from Local Storage
 function viewHighScores() {
-  userScorePageEl.replaceWith(userScorePageEl)
-  userScorePageEl.innerHTML = "Final Scores: " + score;
+  userScorePageEl.replaceWith(highScoreEl)
+  listEl = document.createElement("ul");
+  listEl.setAttribute("id", "list");
 
-  scoreList = document.createElement("li");
-  scoreList.setAttribute("id", "scorelist");
-
-  userScorePageEl.appendChild(scoreList)
-  
   let getAllScores = JSON.parse(localStorage.getItem("finalscore"));
 
-  document.querySelector("li#scorelist").innerHTML = getAllScores
+  function createScore() {
+  let scoreList = document.createElement("li");
+  scoreList.setAttribute("id", "scorelist");
+  scoreList.innerHTML = getAllScores;
+  listEl.appendChild(scoreList)
+  }
+
+  Array.document.querySelector("ul#list").forEach(createScore()) //startListEl.forEach() //.innerHTML = getAllScores
 }
-viewHighScores()

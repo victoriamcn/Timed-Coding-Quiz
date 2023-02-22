@@ -198,7 +198,7 @@ function viewHighScores() {
   userScorePageEl.replaceWith(highScoreEl)
   listEl = document.createElement("ul");
   listEl.setAttribute("id", "list");
-
+  
   let getAllScores = JSON.parse(localStorage.getItem("finalscore"));
 
   function createScore() {
@@ -209,4 +209,6 @@ function viewHighScores() {
   }
 
   Array.document.querySelector("ul#list").forEach(createScore()) //startListEl.forEach() //.innerHTML = getAllScores
+
+  highScoreEl.appendChild("listEl")
 }

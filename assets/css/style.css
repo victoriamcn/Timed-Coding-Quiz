@@ -135,7 +135,12 @@ button:hover {
     border: 3px solid var(--border);
     border-radius: 10px;
     box-shadow: 10px 10px var(--border);
-    font-size: 80%;
+    font-size: 100%;
+}
+
+.question {
+    font-weight: bolder;
+    margin-top: 10px;
 }
 
 /*SAVE INITIALS AND SCORE FORM*/

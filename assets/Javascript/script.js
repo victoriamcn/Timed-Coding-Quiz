@@ -171,9 +171,8 @@ function quizOver() {
     saveButtonEl.innerHTML = "Submit Score";
 
     scoreAreaEl.appendChild(saveButtonEl);
-
-
   }
+
   displayUserScore()
   //add event listener to submit score/init
   //Clicks Submit, Show High Score Window
@@ -195,16 +194,17 @@ let scoreIntObj = {
 highScoreBtn.addEventListener("click", viewHighScores);
 
 //Displays All Scores and Initials from Local Storage
-function viewHighScores(e) {
+function viewHighScores() {
   userScorePageEl.replaceWith(userScorePageEl)
   userScorePageEl.innerHTML = "Final Scores: " + score;
 
   scoreList = document.createElement("li");
   scoreList.setAttribute("id", "scorelist");
 
-  userScorePageEl.appendChild("scoreList")
+  userScorePageEl.appendChild(scoreList)
   
   let getAllScores = JSON.parse(localStorage.getItem("finalscore"));
 
   document.querySelector("li#scorelist").innerHTML = getAllScores
 }
+viewHighScores()

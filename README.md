@@ -1,5 +1,4 @@
 # Timed Coding Quiz
-Simple overview of use/purpose.
 
 ## Description
 

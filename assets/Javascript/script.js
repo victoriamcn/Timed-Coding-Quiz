@@ -185,7 +185,7 @@ let scoreIntObj = {
     initials: ["initialsInput"],
     score: ["score"]
   }
-  let allScores[];
+  let allScores = [];
   allScores.push(scoreIntObj)
   //save to local storage as an array of objects 
   localStorage.setItem("finalscore", JSON.stringify(scoreIntObj));
@@ -207,6 +207,4 @@ function viewHighScores(e) {
   let getAllScores = JSON.parse(localStorage.getItem("finalscore"));
 
   document.querySelector("li#scorelist").innerHTML = getAllScores
-
-  
 }

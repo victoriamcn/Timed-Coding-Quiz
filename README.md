@@ -16,7 +16,7 @@ It runs in the browser, and features dynamically updated HTML and CSS powered by
 - [Acceptance Criteria](#acceptance-criteria)
 
 ## Preview
-![screenshot of the start window for a coding quiz](Timed-Coding-Quiz/assets/images/Timed-Quiz-Preview.png)
+![screenshot of the start window for a coding quiz](./assets/images/Timed-Quiz-Preview.png)
 
 [Deployed Site](https://victoriamcn.github.io/Timed-Coding-Quiz/)
 

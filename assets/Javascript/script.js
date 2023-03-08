@@ -70,7 +70,6 @@ function showQuestions() {
   startTimer()
   //Once User goes through all questions, clear the timer and show final score. Then save initials and score to localStorage to then be displayed as high scores
   if (questionIndex === 5) {
-    // clearInterval(timerInterval)
     localStorage.setItem("userquizscore", score)
     quizOver();
   } else {
@@ -110,9 +109,9 @@ function quizLoop(Event) {
 
 // }
 
-
+let timerInterval; 
 function startTimer() {
-  let timerInterval = setInterval(function () {
+    timerInterval = setInterval(function () {
     secondsLeft--;
     timerEl.innerHTML = "Time Left: " + secondsLeft + " seconds";
 
@@ -122,7 +121,7 @@ function startTimer() {
     }
 
     //Time's Up or All Questions Answered
-    if (secondsLeft === 0) {
+    if (secondsLeft === 0 || questionIndex === myQuizQuestions.length) {
       // Stops execution of action at set interval
       clearInterval(timerInterval);
       //Styles and Adds Text to Timer Div

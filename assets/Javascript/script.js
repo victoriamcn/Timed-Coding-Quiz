@@ -8,8 +8,9 @@ let questionEl = document.getElementById("question");
 let choicesEl = document.getElementById("choices");
 let ifCorrectEl = document.getElementById("prompt");
 
-//DOM Timer Elements
+//DOM Timer Variables
 let timerEl = document.getElementById("timer");
+let secondsLeft = 90; // 90 seconds
 
 //DOM User Save Initials and Score Elements
 let userScorePageEl = document.getElementById("userscore");
@@ -74,16 +75,12 @@ function showQuestions() {
     quizOver();
   } else {
     questionEl.innerHTML = myQuizQuestions[questionIndex].question;
-    //Loop Q/A
     choicesEl.innerHTML = "";
     for (let i = 0; i < myQuizQuestions[questionIndex].choices.length; i++) {
       let buttonChoiceEl = document.createElement('button');
-      buttonChoiceEl.setAttribute("id", "replace")
+      buttonChoiceEl.setAttribute("id", "replace");
       buttonChoiceEl.innerText = myQuizQuestions[questionIndex].choices[i];
-      //Append Button Element to Empty div.choicesEl
       choicesEl.appendChild(buttonChoiceEl);
-
-      //once user choice clicked, add up score or subtract from timer,then go to next question
       buttonChoiceEl.addEventListener("click", quizLoop);
     }
     
@@ -124,8 +121,6 @@ function quizLoop(Event) {
 
 
 function startTimer() {
-  let secondsLeft = 90; // 90 seconds
-
   let timerInterval = setInterval(function () {
     secondsLeft--;
     timerEl.innerHTML = "Time Left: " + secondsLeft + " seconds";
@@ -154,7 +149,7 @@ function startTimer() {
 function quizOver() {
   // Show Final Score Function (after All Questions Answered)
   function displayUserScore() {
-    qquizEl.removeChild(questionEl);
+    quizEl.removeChild(questionEl);
     quizEl.removeChild(choicesEl);
     quizEl.appendChild(userScorePageEl);
     scoreAreaEl.innerHTML = 'Final Score: ' + score;

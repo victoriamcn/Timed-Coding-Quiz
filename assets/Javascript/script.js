@@ -62,10 +62,11 @@ let myQuizQuestions = [
 ];
 
 //Start Quiz on Click
-beginButtonEl.addEventListener("click", showQuestions(), startTimer());
+beginButtonEl.addEventListener("click", showQuestions);
 
 //Show Questions Function
 function showQuestions() {
+  startTimer()
   //Once User goes through all questions, clear the timer and show final score. Then save initials and score to localStorage to then be displayed as high scores
   if (questionIndex === 5) {
     // clearInterval(timerInterval)
@@ -77,7 +78,7 @@ function showQuestions() {
     choicesEl.innerHTML = "";
     for (let i = 0; i < myQuizQuestions[questionIndex].choices.length; i++) {
       let buttonChoiceEl = document.createElement('button');
-      buttonChoiceEl.setAttribute = ("id", "replace")
+      buttonChoiceEl.setAttribute("id", "replace")
       buttonChoiceEl.innerText = myQuizQuestions[questionIndex].choices[i];
       //Append Button Element to Empty div.choicesEl
       choicesEl.appendChild(buttonChoiceEl);
@@ -85,6 +86,7 @@ function showQuestions() {
       //once user choice clicked, add up score or subtract from timer,then go to next question
       buttonChoiceEl.addEventListener("click", quizLoop);
     }
+    
   }
 
 }
@@ -104,7 +106,7 @@ function quizLoop(Event) {
     console.log("Incorrect.")
     ifCorrectEl.innerHTML = "That was incorrect!"
 
-    timerEl -= 10;
+    secondsLeft -= 10;
     questionIndex++;
 
     // removeQuestion();
@@ -152,7 +154,9 @@ function startTimer() {
 function quizOver() {
   // Show Final Score Function (after All Questions Answered)
   function displayUserScore() {
-    quizEl.replaceWith(userScorePageEl);
+    qquizEl.removeChild(questionEl);
+    quizEl.removeChild(choicesEl);
+    quizEl.appendChild(userScorePageEl);
     scoreAreaEl.innerHTML = 'Final Score: ' + score;
     //Input Element for Initials Created
     initialsInput = document.createElement('input');

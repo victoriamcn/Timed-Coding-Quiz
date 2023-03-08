@@ -81,11 +81,12 @@ function showQuestions() {
       buttonChoiceEl.setAttribute("id", "replace");
       buttonChoiceEl.innerText = myQuizQuestions[questionIndex].choices[i];
       choicesEl.appendChild(buttonChoiceEl);
-      buttonChoiceEl.addEventListener("click", quizLoop);
     }
-    
+    //Remove prev event listener
+    choicesEl.removeEventListener("click", quizLoop);
+    //Add new event listener
+    choicesEl.addEventListener("click", quizLoop);
   }
-
 }
 
 //Function to loop through all available questions
@@ -93,24 +94,14 @@ function quizLoop(Event) {
   if (Event.target.innerHTML == myQuizQuestions[questionIndex].answer) {
     console.log("Correct!");
     ifCorrectEl.innerHTML = "Awesome job; that was correct!"
-
     score += 100;
-    questionIndex++;
-
-    // removeQuestion();
-    showQuestions();
   } else {
     console.log("Incorrect.")
     ifCorrectEl.innerHTML = "That was incorrect!"
-
     secondsLeft -= 10;
-    questionIndex++;
-
-    // removeQuestion();
-    showQuestions();
   }
-
-
+  questionIndex++;
+  showQuestions();
 }
 
 //Function to remove content to replace with new question

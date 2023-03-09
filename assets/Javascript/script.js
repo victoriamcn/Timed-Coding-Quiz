@@ -123,7 +123,7 @@ function startTimer() {
     timerInterval = setInterval(function () {
      //using Date.now() to have a consistent timer not reliant on the browser
     let currentTime = Date.now();
-    let elaspedTime - currentTime - timerStart;
+    let elaspedTime = currentTime - timerStart;
     let remainingTime = secondsLeft - Math.floor(elapsedTime/1000);
     
     timerEl.innerHTML = "Time Left: " + remainingTime + " seconds";

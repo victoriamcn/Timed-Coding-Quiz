@@ -72,11 +72,16 @@ function showQuestions() {
   //loop prep
   let question = myQuizQuestions[questionIndex];
   let {question: questionText, choices } = question;
+  
+  console.log(questionText);
   questionEl.textContent = questionText;
+  
+   //loop through all available questions
   choicesEl.innerHTML = ' ';
 
-  //loop through all available questions
-  choices.forEach((choice) => {
+
+  for (let i = 0; i < choices.length; i++) {
+    let choice = choices[i];
     let button = document.createElement('button');
     button.setAttribute("id", "replace");
     button.textContent = choice;

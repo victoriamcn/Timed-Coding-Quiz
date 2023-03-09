@@ -67,48 +67,50 @@ beginButtonEl.addEventListener("click", showQuestions);
 
 //Show Questions Function
 function showQuestions() {
-  startTimer()
-  //Once User goes through all questions, clear the timer and show final score. Then save initials and score to localStorage to then be displayed as high scores
-  if (questionIndex === 5) {
-    localStorage.setItem("userquizscore", score)
-    quizOver();
-  } else {
-    questionEl.innerHTML = myQuizQuestions[questionIndex].question;
-    choicesEl.innerHTML = "";
-    for (let i = 0; i < myQuizQuestions[questionIndex].choices.length; i++) {
-      let buttonChoiceEl = document.createElement('button');
-      buttonChoiceEl.setAttribute("id", "replace");
-      buttonChoiceEl.innerText = myQuizQuestions[questionIndex].choices[i];
-      choicesEl.appendChild(buttonChoiceEl);
+  startTimer();
+  
+  //loop prep
+  let question = myQuizQuestions[questionIndex];
+  let {question: questionText, choices } = question;
+  questionEl.textConent = questionText;
+  choicesEl.innerHTML = ' ';
+
+  //loop through all available questions
+  choices.forEach((choice) => {
+    let button = document.createElement('button');
+    button.setAttribute("id", "replace");
+    button.textContent = choice;
+    choicesEl.appendChild(button);
+    });
+
+   //Add new event listener
+  choicesEl.addEventListener("click", handleChoiceClick);
+}
+
+function handleChoiceClick(event) {
+  if (event.target.tagName === 'BUTTON') {
+    let choice = event.target.textContent;
+    let question = myQuizQuestions[questionIndex];
+    if (choice === question.answer) {
+      console.log('Correct!');
+      ifCorrectEl.textContent = 'Awesome job; that was correct!';
+      score += 100;
+    } else {
+      console.log('Incorrect!');
+      ifCorrectEl.textContent = 'That was incorrect!';
+      secondsLeft -= 10;
     }
-    //Remove prev event listener
-    choicesEl.removeEventListener("click", quizLoop);
-    //Add new event listener
-    choicesEl.addEventListener("click", quizLoop);
+    questionIndex++;
+    //when questions looped through, quizOver()
+    if (questionIndex < myQuizQuestions.length){
+      showQuestions();
+    } else { 
+      quizOver();
+    }
   }
 }
 
-//Function to loop through all available questions
-function quizLoop(Event) {
-  if (Event.target.innerHTML == myQuizQuestions[questionIndex].answer) {
-    console.log("Correct!");
-    ifCorrectEl.innerHTML = "Awesome job; that was correct!"
-    score += 100;
-  } else {
-    console.log("Incorrect.")
-    ifCorrectEl.innerHTML = "That was incorrect!"
-    secondsLeft -= 10;
-  }
-  questionIndex++;
-  showQuestions();
-}
-
-//Function to remove content to replace with new question
-// function removeQuestion() {
-//   document.getElementById("remove")
-
-// }
-
+//TIMER
 let timerInterval; 
 function startTimer() {
     timerInterval = setInterval(function () {

@@ -8,21 +8,17 @@ It runs in the browser, and features dynamically updated HTML and CSS powered by
 ## Table of Contents
 
 - [Preview](#preview)
-- [Usage](#usage)
+- [Deployed Application](#deployed-application)
 - [Features](#features)
-
-- [License](#license)
 - [Acknowledgments](#acknowledgments)
 - [Acceptance Criteria](#acceptance-criteria)
+- [License](#license)
 
 ## Preview
 ![screenshot of the start window for a coding quiz](./assets/images/Timed-Quiz-Preview.png)
 
-[Deployed Site](https://victoriamcn.github.io/Timed-Coding-Quiz/)
-
-## Usage
-
-You may use this quiz application to test your front-end coding knowledge. 
+## Deployed Application
+[https://victoriamcn.github.io/Timed-Coding-Quiz/](https://victoriamcn.github.io/Timed-Coding-Quiz/)
 
 ## Features
 
@@ -32,37 +28,25 @@ You may use this quiz application to test your front-end coding knowledge.
 4. Each incorrect answer subtracts 10 seconds from the timer.
 5. When the quiz is complete, the user can save their score by adding their initials.
 
-## License
-
-This project is licensed under the MIT License - see the LICENSE.md file for details.
-
-All icon used in this project are from Google Fonts. 
-- [Apache License Version 2.0.](https://www.apache.org/licenses/LICENSE-2.0.txt)
-
 ## Acknowledgments
 
-**Tutorials**
+### Tutorials
 [How To - JavaScript Countdown Timer](https://codepen.io/yaphi1/pen/KpbRZL?editors=0010)
 [Simple Steps Code: How to Make a Simple JavaScript Quiz](https://simplestepscode.com/javascript-quiz-tutorial/)
 [W3 Schools: HTML DOM Document createElement()](https://www.w3schools.com/jsref/met_document_createelement.asp)
 [W3 Schools: JSON Array Literals](https://www.w3schools.com/js/js_json_arrays.asp)
 [W3 Schools: JavaScript Objects](https://www.w3schools.com/js/js_object_definition.asp)
 
-**Stack Overflow**
-[JavaScript: How Do I save the Score and Initials once the page is refreshed and add more score and initials to the existing ones.?](https://stackoverflow.com/questions/66488667/javascript-how-do-i-save-the-score-and-initials-once-the-page-is-refreshed-and)
+### Stack Overflow
+- **StackOverflow:** [JavaScript: How Do I save the Score and Initials once the page is refreshed and add more score and initials to the existing ones.?](https://stackoverflow.com/questions/66488667/javascript-how-do-i-save-the-score-and-initials-once-the-page-is-refreshed-and)
 
-**Inspiration**
-[Dynamic JS Quiz by Gary Carino](https://codepen.io/gcarino/pen/AaJBOo)
+### Inspiration
+**CodePen:** [Dynamic JS Quiz by Gary Carino](https://codepen.io/gcarino/pen/AaJBOo)
 - Though Gary used jQuery, it helped me think through what needed to happen.
-[Build a Quiz App Playlist by James Q Quick](https://www.youtube.com/watch?v=u98ROZjBWy8)
+**YouTube:** [Build a Quiz App Playlist by James Q Quick](https://www.youtube.com/watch?v=u98ROZjBWy8)
 - James had different approaches, but the concept was similar enough to help me write my code.
 
-**Reference for Questions and Answers**
-[SimpliLearn Top 75+ Frontend Developer Interview Questions and Answers](tutorials)
-[]()
-[]()
-
-**CSS**
+### Color Palette
 [50 Color Combination You Need yo Use in 2023](https://looka.com/blog/color-combinations/)
 
 
@@ -79,3 +63,10 @@ GIVEN I am taking a code quiz
 - THEN the game is over
 - WHEN the game is over
 - THEN I can save my initials and my score
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE.md file for details.
+
+All icon used in this project are from Google Fonts. 
+- [Apache License Version 2.0.](https://www.apache.org/licenses/LICENSE-2.0.txt)

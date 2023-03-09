@@ -10,7 +10,7 @@ let ifCorrectEl = document.getElementById("prompt");
 
 //DOM Timer Variables
 let timerEl = document.getElementById("timer");
-let timerBegins = Date.now();
+let timerStart = Date.now();
 let secondsLeft = 90; // 90 seconds
 
 //DOM User Save Initials and Score Elements

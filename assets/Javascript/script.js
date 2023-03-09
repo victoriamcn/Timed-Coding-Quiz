@@ -154,6 +154,7 @@ function quizOver() {
   function displayUserScore() {
     quizEl.removeChild(questionEl);
     quizEl.removeChild(choicesEl);
+    quizEl.removeChild(ifCorrectEl);
     quizEl.appendChild(userScorePageEl);
     scoreAreaEl.innerHTML = 'Final Score: ' + score;
     //Input Element for Initials Created
@@ -202,9 +203,13 @@ function viewHighScores() {
   userScorePageEl.replaceWith(highScoreEl);
 
   //Unordered List
+  scoreHeader = document.createElement('h2');
+  scoreHeader.setAttribute('id', 'seescore');
+  scoreHeader.textConent("See scores below:");
   listScoreEl = document.createElement('ul');
   listScoreEl.setAttribute('id', 'list');
 
+  highScoreEl.appendChild(scoreHeader);
   highScoreEl.appendChild(listScoreEl);
 
   for (let i = 0; i < allScores.length; i++) {

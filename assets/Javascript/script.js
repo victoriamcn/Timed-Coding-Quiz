@@ -96,7 +96,8 @@ function handleChoiceClick(event) {
   if (event.target.tagName === 'BUTTON') {
     let choice = event.target.textContent;
     let question = myQuizQuestions[questionIndex];
-    if (choice === question.answer) {
+    let correctIndex = question.choices.indexOf(question.answer);
+    if (choice === question.choices[correctIndex]) {
       console.log('Correct!');
       ifCorrectEl.textContent = 'Awesome job; that was correct!';
       score += 100;

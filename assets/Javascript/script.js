@@ -72,7 +72,7 @@ function showQuestions() {
   //loop prep
   let question = myQuizQuestions[questionIndex];
   let {question: questionText, choices } = question;
-  questionEl.textConent = questionText;
+  questionEl.textContent = questionText;
   choicesEl.innerHTML = ' ';
 
   //loop through all available questions

@@ -87,7 +87,7 @@ function showQuestions() {
     button.setAttribute("id", "replace");
     button.textContent = choice;
     choicesEl.appendChild(button);
-    });
+    };
 
    //Add new event listener
   choicesEl.addEventListener("click", handleChoiceClick);

@@ -10,6 +10,7 @@ let ifCorrectEl = document.getElementById("prompt");
 
 //DOM Timer Variables
 let timerEl = document.getElementById("timer");
+let timerBegins = Date.now();
 let secondsLeft = 90; // 90 seconds
 
 //DOM User Save Initials and Score Elements
@@ -120,15 +121,19 @@ function handleChoiceClick(event) {
 let timerInterval; 
 function startTimer() {
     timerInterval = setInterval(function () {
-    secondsLeft--;
-    timerEl.innerHTML = "Time Left: " + secondsLeft + " seconds";
+     //using Date.now() to have a consistent timer not reliant on the browser
+    let currentTime = Date.now();
+    let elaspedTime - currentTime - timerStart;
+    let remainingTime = secondsLeft - Math.floor(elapsedTime/1000);
+    
+    timerEl.innerHTML = "Time Left: " + remainingTime + " seconds";
 
     //30 secs or less on timer, background turns red
     if (secondsLeft <= 30) {
       document.querySelector("#timer").style.backgroundColor = "#F47174";
     }
 
-    //Time's Up or All Questions Answered
+    //Time's Up or All Questions Answered Clear the Interval
     if (secondsLeft === 0 || questionIndex === myQuizQuestions.length) {
       // Stops execution of action at set interval
       clearInterval(timerInterval);

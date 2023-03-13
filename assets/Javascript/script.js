@@ -32,8 +32,6 @@ let score = 0;
 
 //Event Listener to Show Saved Scores is in HTML onClick="viewHighScores(e)"
 
-
-
 // Array for questions/answers
 let myQuizQuestions = [
   {
@@ -80,7 +78,6 @@ function showQuestions() {
    //loop through all available questions
   choicesEl.innerHTML = ' ';
 
-
   for (let i = 0; i < choices.length; i++) {
     let choice = choices[i];
     let button = document.createElement('button');
@@ -92,7 +89,8 @@ function showQuestions() {
   //event listener for choices
   choicesEl.addEventListener("click", handleChoiceClick);
 }
-
+// Score Function for Correct/Incorrect Answers
+let correctAnswers = [];
 function handleChoiceClick(event) {
   if (event.target.tagName === 'BUTTON') {
     let choice = event.target.textContent;
@@ -102,6 +100,7 @@ function handleChoiceClick(event) {
       console.log('Correct!');
       ifCorrectEl.textContent = 'Awesome job; that was correct!';
       score += 100;
+      correctAnswers.push(correctIndex);
     } else {
       console.log('Incorrect!');
       ifCorrectEl.textContent = 'That was incorrect!';
@@ -115,6 +114,9 @@ function handleChoiceClick(event) {
       quizOver();
     }
   }
+  //save score and correct answers to local storage
+  localStorage. setItem('score', score);
+  localStorage.setItem('correctAnswers', JSON.stringify(correctAnswers));
 }
 
 //TIMER
@@ -150,6 +152,10 @@ function startTimer() {
 
 //Quiz Over Function
 function quizOver() {
+  // retrieve score and correct answers from local storage
+  let savedScore = localStorage.getItem('score');
+  let savedCorrectAnswers = JSON.parse(localStorage.getItem('correctAnswers'));
+  
   // Show Final Score Function (after All Questions Answered)
   function displayUserScore() {
     quizEl.removeChild(questionEl);
@@ -157,12 +163,14 @@ function quizOver() {
     quizEl.removeChild(ifCorrectEl);
     quizEl.appendChild(userScorePageEl);
     scoreAreaEl.innerHTML = 'Final Score: ' + score;
+    
     //Input Element for Initials Created
     initialsInput = document.createElement('input');
     initialsInput.setAttribute('id', 'initials');
     initialsInput.setAttribute('type', 'text');
     initialsInput.setAttribute('name', 'initials');
     initialsInput.setAttribute('placeholder', 'Type initials here.');
+
     //Append Input Element
     scoreAreaEl.appendChild(initialsInput);
 
@@ -172,52 +180,63 @@ function quizOver() {
     saveButtonEl.setAttribute('class', 'btn');
     saveButtonEl.setAttribute('type', 'submit');
     saveButtonEl.innerHTML = 'Submit Score';
-
+    
+    //Append Save Button Element
     scoreAreaEl.appendChild(saveButtonEl);
+    
+    //add event listener to submit score/initials
+     saveButtonEl.addEventListener('click', saveScoreWithInitials);
   }
 
+  //call it
   displayUserScore();
-  //add event listener to submit score/init
-  //Clicks Submit, Show High Score Window
-  saveButtonEl.addEventListener('click', viewHighScores);
-}
 
-//Displays All Scores and Initials from Local Storage
-function viewHighScores() {
-  //Show List of Scores Element
-  let allScores = JSON.parse(localStorage.getItem('finalscore')) || [];
-  if (document.querySelector('#initials')) {
-    var inputEl = document.querySelector('#initials')
+  //Save user score with initials to local storage and display all scores
+  function saveScoreWithInitials(event) {
+    event.preventDefault();
+    //remove input and save btn element
+    initialsInput.remove();
+    saveButtonEl.remove();
+    
+    //Get user intials and score and save as an object
+    let userInitials = document.querySelector('#initials').value;
+    let userScore = localStorage.getItem('score');
+    let scoreObj= {initials: userInitials, score: userScore};
+    //get all saved scores from local storage
+    let allScores = JSON.parse(localStorage.getItem('scores')) || [];
+    
+    //push scoreObj to array and save it
+    allScores.push(scoreObj);
+    localStorage.setItem('scores', JSON.stringify(allScores));
+    
+    //call viewHighScores();
+    viewAllScores();
+  }
 
-    //then relationship bt score and init created with an object..already have user quizscore in storage, need initials
-    let scoreInitialsObj = {
-      initials: inputEl.value,
-      score: localStorage.getItem('userquizscore'),
+  //Displays All Scores and Initials from Local Storage
+  function viewAllScores() {
+    //replace userscoreEL with HighscoreEL
+    userScorePageEl.replaceWith(highScoreEl);
+
+    //Create and Append List for All Scores
+    scoreHeader = document.createElement('h2');
+    scoreHeader.setAttribute('id', 'seescore');
+    scoreHeader.textContent("See scores below:");
+    listScoreEl = document.createElement('ul');
+    listScoreEl.setAttribute('id', 'list');
+
+    highScoreEl.appendChild(scoreHeader);
+    highScoreEl.appendChild(listScoreEl);
+
+    //Show List of Scores Element
+    let allScores = JSON.parse(localStorage.getItem('scores')) || [];
+
+    for (let i = 0; i < allScores.length; i++) {
+      let scoreList = document.createElement('li');
+      scoreList.setAttribute('id', 'scorelist');
+      scoreList.innerHTML = allScores[i].initials + ' - ' + allScores[i].score;
+      listScoreEl.appendChild(scoreList);
     }
-
-    allScores.push(scoreInitialsObj);
-    //save to local storage as an array of objects
-    localStorage.setItem('finalscore', JSON.stringify(allScores));
-  }
-
-  userScorePageEl.replaceWith(highScoreEl);
-
-  //Unordered List
-  scoreHeader = document.createElement('h2');
-  scoreHeader.setAttribute('id', 'seescore');
-  scoreHeader.textConent("See scores below:");
-  listScoreEl = document.createElement('ul');
-  listScoreEl.setAttribute('id', 'list');
-
-  highScoreEl.appendChild(scoreHeader);
-  highScoreEl.appendChild(listScoreEl);
-
-  for (let i = 0; i < allScores.length; i++) {
-    let scoreList = document.createElement('li');
-    scoreList.setAttribute('id', 'scorelist');
-    scoreList.innerHTML = allScores[i].initials + ' - ' + allScores[i].score;
-    listScoreEl.appendChild(scoreList);
-  }
 }
 
 //BUTTON: Show High Scores on Click

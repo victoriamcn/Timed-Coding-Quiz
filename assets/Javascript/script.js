@@ -16,9 +16,9 @@ let secondsLeft = 90; // 90 seconds
 //DOM User Save Initials and Score Elements
 let userScorePageEl = document.getElementById("userscore");
 let scoreAreaEl = document.querySelector('#scorearea');
-let saveIntEl = document.querySelector('#inputinitials');
+let saveIntDiv = document.querySelector('#saveintEl');
 let input = "";
-let saveButtonEl = document.querySelector('#savebtn');
+let saveButtonDiv = document.querySelector('#savebtnEl');
 
 //DOM High Score Element
 let highScoreBtn = document.getElementById("seehighscores")
@@ -123,7 +123,7 @@ function startTimer() {
     timerInterval = setInterval(function () {
      //using Date.now() to have a consistent timer not reliant on the browser
     let currentTime = Date.now();
-    let elaspedTime = currentTime - timerStart;
+    let elapsedTime = currentTime - timerStart;
     let remainingTime = secondsLeft - Math.floor(elapsedTime/1000);
     
     timerEl.innerHTML = "Time Left: " + remainingTime + " seconds";
@@ -152,28 +152,34 @@ function startTimer() {
 function quizOver() {
   // Show Final Score Function (after All Questions Answered)
   function displayUserScore() {
-    quizEl.removeChild(questionEl);
-    quizEl.removeChild(choicesEl);
-    quizEl.removeChild(ifCorrectEl);
-    quizEl.appendChild(userScorePageEl);
+    // quizEl.removeChild(questionEl);
+    // quizEl.removeChild(choicesEl);
+    // quizEl.removeChild(ifCorrectEl);
+    //Getting error on .removeChild, trying display none.
+    questionEl.style.display = 'none';
+    choicesEl.style.display = 'none'
+    ifCorrectEl.style.display = 'none'
+
+    quizEl.replaceWith(userScorePageEl);
+
     scoreAreaEl.innerHTML = 'Final Score: ' + score;
     //Input Element for Initials Created
-    initialsInput = document.createElement('input');
-    initialsInput.setAttribute('id', 'initials');
-    initialsInput.setAttribute('type', 'text');
-    initialsInput.setAttribute('name', 'initials');
-    initialsInput.setAttribute('placeholder', 'Type initials here.');
+    let saveIntEl = document.createElement('input');
+    saveIntEl.setAttribute('type', 'text');
+    saveIntEl.setAttribute('name', 'initials');
+    saveIntEl.setAttribute('placeholder', 'Type initials here...');
+    input = saveIntEl;
     //Append Input Element
-    scoreAreaEl.appendChild(initialsInput);
+    scoreAreaEl.appendChild(saveIntEl);
 
     //Save Button Element Created
-    saveButtonEl = document.createElement('button');
-    saveButtonEl.setAttribute('id', 'save-btn');
-    saveButtonEl.setAttribute('class', 'btn');
-    saveButtonEl.setAttribute('type', 'submit');
-    saveButtonEl.innerHTML = 'Submit Score';
-
-    scoreAreaEl.appendChild(saveButtonEl);
+    let clickBtnToSave = document.createElement('button');
+    clickBtnToSave.setAttribute('id', 'save-btn');
+    clickBtnToSave.setAttribute('class', 'btn');
+    clickBtnToSave.setAttribute('type', 'submit');
+    clickBtnToSave.innerHTML = 'Submit Score';
+    //Append Save Button Element
+    scoreAreaEl.appendChild(clickBtnToSave);
   }
 
   displayUserScore();
@@ -203,9 +209,11 @@ function viewHighScores() {
   userScorePageEl.replaceWith(highScoreEl);
 
   //Unordered List
+  //H2
   scoreHeader = document.createElement('h2');
   scoreHeader.setAttribute('id', 'seescore');
-  scoreHeader.textConent("See scores below:");
+  scoreHeader.innerText('See all scores below:');
+  //ul
   listScoreEl = document.createElement('ul');
   listScoreEl.setAttribute('id', 'list');
 
@@ -221,4 +229,4 @@ function viewHighScores() {
 }
 
 //BUTTON: Show High Scores on Click
-highScoreBtn.addEventListener("click", viewHighScores);
+//highScoreBtn.addEventListener("click", viewHighScores);

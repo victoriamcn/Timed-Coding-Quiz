@@ -67,15 +67,15 @@ beginButtonEl.addEventListener("click", showQuestions);
 //Show Questions Function
 function showQuestions() {
   startTimer();
-  
+
   //loop prep
   let question = myQuizQuestions[questionIndex];
-  let {question: questionText, choices } = question;
-  
+  let { question: questionText, choices } = question;
+
   console.log(questionText);
   questionEl.textContent = questionText;
-  
-   //loop through all available questions
+
+  //loop through all available questions
   choicesEl.innerHTML = ' ';
 
   for (let i = 0; i < choices.length; i++) {
@@ -84,7 +84,7 @@ function showQuestions() {
     button.setAttribute("id", "replace");
     button.textContent = choice;
     choicesEl.appendChild(button);
-    }
+  }
 
   //event listener for choices
   choicesEl.addEventListener("click", handleChoiceClick);
@@ -108,26 +108,26 @@ function handleChoiceClick(event) {
     }
     questionIndex++;
     //when questions looped through, quizOver()
-    if (questionIndex < myQuizQuestions.length){
+    if (questionIndex < myQuizQuestions.length) {
       showQuestions();
-    } else { 
+    } else {
       quizOver();
     }
   }
   //save score and correct answers to local storage
-  localStorage. setItem('score', score);
+  localStorage.setItem('score', score);
   localStorage.setItem('correctAnswers', JSON.stringify(correctAnswers));
 }
 
 //TIMER
-let timerInterval; 
+let timerInterval;
 function startTimer() {
-    timerInterval = setInterval(function () {
-     //using Date.now() to have a consistent timer not reliant on the browser
+  timerInterval = setInterval(function () {
+    //using Date.now() to have a consistent timer not reliant on the browser
     let currentTime = Date.now();
     let elapsedTime = currentTime - timerStart;
-    let remainingTime = secondsLeft - Math.floor(elapsedTime/1000);
-    
+    let remainingTime = secondsLeft - Math.floor(elapsedTime / 1000);
+
     timerEl.innerHTML = "Time Left: " + remainingTime + " seconds";
 
     //30 secs or less on timer, background turns red
@@ -155,7 +155,7 @@ function quizOver() {
   // retrieve score and correct answers from local storage
   let savedScore = localStorage.getItem('score');
   let savedCorrectAnswers = JSON.parse(localStorage.getItem('correctAnswers'));
-  
+
   // Show Final Score Function (after All Questions Answered)
   function displayUserScore() {
     // quizEl.removeChild(questionEl);
@@ -169,7 +169,7 @@ function quizOver() {
     quizEl.replaceWith(userScorePageEl);
 
     scoreAreaEl.innerHTML = 'Final Score: ' + score;
-    
+
     //Input Element for Initials Created
     let saveIntEl = document.createElement('input');
     saveIntEl.setAttribute('type', 'text');
@@ -190,6 +190,7 @@ function quizOver() {
   }
 
   //call it
+  saveScoreWithInitials();
   displayUserScore();
 
   //Save user score with initials to local storage and display all scores
@@ -198,18 +199,20 @@ function quizOver() {
     //remove input and save btn element
     initialsInput.remove();
     saveButtonEl.remove();
-    
-    //Get user intials and score and save as an object
+
+    //Get user initials and score and save as an object
     let userInitials = document.querySelector('#initials').value;
     let userScore = localStorage.getItem('score');
-    let scoreObj= {initials: userInitials, score: userScore};
+    let scoreObj = { 
+      initials: userInitials,
+      score: userScore };
     //get all saved scores from local storage
     let allScores = JSON.parse(localStorage.getItem('scores')) || [];
-    
+
     //push scoreObj to array and save it
     allScores.push(scoreObj);
     localStorage.setItem('scores', JSON.stringify(allScores));
-    
+
     //call viewHighScores();
     viewAllScores();
   }
@@ -219,14 +222,14 @@ function quizOver() {
     //replace userscoreEL with HighscoreEL
     userScorePageEl.replaceWith(highScoreEl);
 
-  //Unordered List
-  //H2
-  scoreHeader = document.createElement('h2');
-  scoreHeader.setAttribute('id', 'seescore');
-  scoreHeader.innerText('See all scores below:');
-  //ul
-  listScoreEl = document.createElement('ul');
-  listScoreEl.setAttribute('id', 'list');
+    //Unordered List
+    //H2
+    scoreHeader = document.createElement('h2');
+    scoreHeader.setAttribute('id', 'seescore');
+    scoreHeader.innerText('See all scores below:');
+    //ul
+    listScoreEl = document.createElement('ul');
+    listScoreEl.setAttribute('id', 'list');
 
     highScoreEl.appendChild(scoreHeader);
     highScoreEl.appendChild(listScoreEl);
@@ -237,10 +240,8 @@ function quizOver() {
     for (let i = 0; i < allScores.length; i++) {
       let scoreList = document.createElement('li');
       scoreList.setAttribute('id', 'scorelist');
-      scoreList.innerHTML = allScores[i].initials + ' - ' + allScores[i].score;
+      scoreList.textContent = allScores[i].initials + ' - ' + allScores[i].score;
       listScoreEl.appendChild(scoreList);
     }
+  }
 }
-
-//BUTTON: Show High Scores on Click
-//highScoreBtn.addEventListener("click", viewHighScores);

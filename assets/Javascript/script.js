@@ -162,22 +162,20 @@ function quizOver() {
     // quizEl.removeChild(choicesEl);
     // quizEl.removeChild(ifCorrectEl);
     //Getting error on .removeChild, trying display none.
-    questionEl.style.display = 'none';
-    choicesEl.style.display = 'none'
-    ifCorrectEl.style.display = 'none'
-
-    quizEl.replaceWith(userScorePageEl);
-
+    quizEl.style.display = 'none';
+    
+    //save initials element
+    userScorePageEl.style.display = "block";
+    
+    //Display User Score
     scoreAreaEl.innerHTML = 'Final Score: ' + score;
-
-    //Input Element for Initials Created
-    let saveIntEl = document.createElement('input');
-    saveIntEl.setAttribute('type', 'text');
-    saveIntEl.setAttribute('name', 'initials');
-    saveIntEl.setAttribute('placeholder', 'Type initials here...');
-    input = saveIntEl;
-    //Append Input Element
-    scoreAreaEl.appendChild(saveIntEl);
+    
+    //Input Element Created
+    saveIntDiv.innerHTML = `<input type="text" id="initialsInput" placeholder="Type initials here..."><button id="saveScore">Save</button>`;
+    let inputEl = document.getElementById("initialsInput");
+    inputEl.addEventListener("input", function () {
+      input = inputEl.value;
+    });
 
     //Save Button Element Created
     let clickBtnToSave = document.createElement('button');
@@ -187,11 +185,10 @@ function quizOver() {
     clickBtnToSave.innerHTML = 'Submit Score';
     //Append Save Button Element
     scoreAreaEl.appendChild(clickBtnToSave);
+    
+    //Event Listener for Save Score Button
+    clickBtnToSave.addEventListener ("click", saveScoreWithInitials)
   }
-
-  //call it
-  saveScoreWithInitials();
-  displayUserScore();
 
   //Save user score with initials to local storage and display all scores
   function saveScoreWithInitials(event) {

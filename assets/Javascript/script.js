@@ -185,14 +185,12 @@ function quizOver() {
     clickBtnToSave.innerHTML = 'Submit Score';
     //Append Save Button Element
     scoreAreaEl.appendChild(clickBtnToSave);
-    
-    //Event Listener for Save Score Button
-    clickBtnToSave.addEventListener ("click", saveScoreWithInitials)
   }
 
   //Save user score with initials to local storage and display all scores
   function saveScoreWithInitials(event) {
     event.preventDefault();
+    
     //remove input and save btn element
     initialsInput.remove();
     saveButtonEl.remove();
@@ -242,3 +240,6 @@ function quizOver() {
     }
   }
 }
+
+//Event Listener for Save Score Button
+saveButtonDiv.addEventListener ("click", saveScoreWithInitials)

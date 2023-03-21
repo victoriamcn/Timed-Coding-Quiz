@@ -239,7 +239,9 @@ function quizOver() {
       listScoreEl.appendChild(scoreList);
     }
   }
-}
-
+  
 //Event Listener for Save Score Button
 saveButtonDiv.addEventListener ("click", saveScoreWithInitials)
+}
+
+

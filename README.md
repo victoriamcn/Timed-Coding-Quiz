@@ -44,8 +44,8 @@ The code utilizes the Document Object Model (DOM) API to interact with the HTML 
 
 ## Acknowledgments
 
-### Georgia Tech Staff
-- 
+### Special Thanks
+- My instructor at Georgia Tech Coding Bootcamp, [Saurav Khatiwada](https://github.com/khatiwadasaurav)
 
 ### Tutorials
 - CodePen: [How To - JavaScript Countdown Timer](https://codepen.io/yaphi1/pen/KpbRZL?editors=0010)

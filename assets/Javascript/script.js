@@ -1,34 +1,24 @@
-//DOM Start Elements
-let beginPageEl = document.querySelector('#beginpage')
-let beginButtonEl = document.querySelector("button#begin")
+// DOM Elements
+const startPageElement = document.querySelector('#beginpage');
+const beginButtonElement = document.querySelector("button#begin");
+const quizContainerElement = document.getElementById("quizcontainer");
+const questionElement = document.getElementById("question");
+const choicesElement = document.getElementById("choices");
+const feedbackElement = document.getElementById("prompt");
+const timerElement = document.getElementById("timer");
+const userScorePageElement = document.getElementById("userscore");
+const scoreAreaElement = document.querySelector('#scorearea');
+const saveIntDiv = document.querySelector('#saveintEl');
+const saveButtonDiv = document.querySelector('#savebtnEl');
+const highScoreButtonElement = document.getElementById("seehighscores");
+const highScoreElement = document.getElementById("highscorelist");
 
-//DOM Quiz Elements
-let quizEl = document.getElementById("quizcontainer")
-let questionEl = document.getElementById("question");
-let choicesEl = document.getElementById("choices");
-let ifCorrectEl = document.getElementById("prompt");
-
-//DOM Timer Variables
-let timerEl = document.getElementById("timer");
-let timerStart = Date.now();
-let secondsLeft = 90; // 90 seconds
-
-//DOM User Save Initials and Score Elements
-let userScorePageEl = document.getElementById("userscore");
-let scoreAreaEl = document.querySelector('#scorearea');
-let saveIntDiv = document.querySelector('#saveintEl');
-let input = "";
-let saveButtonDiv = document.querySelector('#savebtnEl');
-
-//DOM High Score Element
-let highScoreBtn = document.getElementById("seehighscores")
-let highScoreEl = document.getElementById("highscorelist");
-//let startListEl = document.getElementById("startlist")
-
-//Variables
+// Variables
 let questionIndex = 0;
-let currentQuestion = 0;
 let score = 0;
+let timerInterval;
+let secondsLeft = 90;
+let input = "";
 
 //Event Listener to Show Saved Scores is in HTML onClick="viewHighScores(e)"
 
@@ -62,54 +52,57 @@ let myQuizQuestions = [
 ];
 
 //Start Quiz on Click
-beginButtonEl.addEventListener("click", showQuestions);
+beginButtonElement.addEventListener("click", startQuiz);
 
 //Show Questions Function
-function showQuestions() {
+function startQuiz() {
   startTimer();
+  showQuestions();
+}
 
-  //loop prep
-  let question = myQuizQuestions[questionIndex];
-  let { question: questionText, choices } = question;
+// Show Questions Function
+function showQuestions() {
+  const question = myQuizQuestions[questionIndex];
+  const { question: questionText, choices } = question;
 
-  console.log(questionText);
-  questionEl.textContent = questionText;
-
-  //loop through all available questions
-  choicesEl.innerHTML = ' ';
+  questionElement.textContent = questionText;
+  choicesElement.innerHTML = '';
 
   for (let i = 0; i < choices.length; i++) {
-    let choice = choices[i];
-    let button = document.createElement('button');
-    button.setAttribute("id", "replace");
+    const choice = choices[i];
+    const button = document.createElement('button');
     button.textContent = choice;
-    choicesEl.appendChild(button);
+    choicesElement.appendChild(button);
   }
 
-  //event listener for choices
-  choicesEl.addEventListener("click", handleChoiceClick);
+  choicesElement.addEventListener("click", handleChoiceClick);
 }
+
 // Score Function for Correct/Incorrect Answers
 let correctAnswers = [];
+
+// Handle Choice Click Function
 function handleChoiceClick(event) {
   if (event.target.tagName === 'BUTTON') {
-    let choice = event.target.textContent;
-    let question = myQuizQuestions[questionIndex];
-    let correctIndex = question.choices.indexOf(question.answer);
+    const choice = event.target.textContent;
+    const question = myQuizQuestions[questionIndex];
+    const correctIndex = question.choices.indexOf(question.answer);
+
     if (choice === question.choices[correctIndex]) {
       console.log('Correct!');
-      ifCorrectEl.textContent = 'Awesome job; that was correct!';
+      feedbackElement.textContent = 'Awesome job; that was correct!';
       score += 100;
-      correctAnswers.push(correctIndex);
+      questionIndex++;
     } else {
       console.log('Incorrect!');
-      ifCorrectEl.textContent = 'That was incorrect!';
+      feedbackElement.textContent = 'That was incorrect!';
       secondsLeft -= 10;
+      questionIndex++;
     }
-    questionIndex++;
-    //when questions looped through, quizOver()
+
     if (questionIndex < myQuizQuestions.length) {
-      showQuestions();
+      // delay the next question
+      setTimeout(showQuestions, 1000);
     } else {
       quizOver();
     }
@@ -120,128 +113,90 @@ function handleChoiceClick(event) {
 }
 
 //TIMER
-let timerInterval;
+// Timer Functions
 function startTimer() {
-  timerInterval = setInterval(function () {
-    //using Date.now() to have a consistent timer not reliant on the browser
-    let currentTime = Date.now();
-    let elapsedTime = currentTime - timerStart;
-    let remainingTime = secondsLeft - Math.floor(elapsedTime / 1000);
+  const timerStart = Date.now();
 
-    timerEl.innerHTML = "Time Left: " + remainingTime + " seconds";
+  timerInterval = setInterval(() => {
+    const currentTime = Date.now();
+    const elapsedTime = currentTime - timerStart;
+    const remainingTime = secondsLeft - Math.floor(elapsedTime / 1000);
 
-    //30 secs or less on timer, background turns red
+    timerElement.textContent = `Time Left: ${remainingTime} seconds`;
+
     if (secondsLeft <= 30) {
-      document.querySelector("#timer").style.backgroundColor = "#F47174";
+      timerElement.style.backgroundColor = "#F47174";
     }
 
-    //Time's Up or All Questions Answered Clear the Interval
-    if (secondsLeft === 0 || questionIndex === myQuizQuestions.length) {
-      // Stops execution of action at set interval
+    if (remainingTime <= 0 || questionIndex === myQuizQuestions.length) {
       clearInterval(timerInterval);
-      //Styles and Adds Text to Timer Div
-      document.querySelector("#timer").innerHTML = "Time's up!"
-      document.querySelector("#timer").style.backgroundColor = "#E3856B";
-      document.querySelector("#timer").style.fontColor = "#F4F7F7";
-      //Quiz Over Function
+      timerElement.innerHTML = "Time's up!";
+      timerElement.style.backgroundColor = "#E3856B";
       quizOver();
     }
   }, 1000);
 }
 
 
-//Quiz Over Function
+// Quiz Over Function
 function quizOver() {
-  // retrieve score and correct answers from local storage
-  let savedScore = localStorage.getItem('score');
-  let savedCorrectAnswers = JSON.parse(localStorage.getItem('correctAnswers'));
+  clearInterval(timerInterval);
+  quizContainerElement.style.display = 'none';
+  userScorePageElement.style.display = "block";
+  scoreAreaElement.innerHTML = `Final Score: ${score}`;
 
-  // Show Final Score Function (after All Questions Answered)
-  function displayUserScore() {
-    // quizEl.removeChild(questionEl);
-    // quizEl.removeChild(choicesEl);
-    // quizEl.removeChild(ifCorrectEl);
-    //Getting error on .removeChild, trying display none.
-    quizEl.style.display = 'none';
-    
-    //save initials element
-    userScorePageEl.style.display = "block";
-    
-    //Display User Score
-    scoreAreaEl.innerHTML = 'Final Score: ' + score;
-    
-    //Input Element Created
-    saveIntDiv.innerHTML = `<input type="text" id="initialsInput" placeholder="Type initials here..."><button id="saveScore">Save</button>`;
-    let inputEl = document.getElementById("initialsInput");
-    inputEl.addEventListener("input", function () {
-      input = inputEl.value;
-    });
+  saveIntDiv.innerHTML = `
+    <input type="text" id="initialsInput" placeholder="Type initials here...">
+    <button id="saveScore">Save</button>
+  `;
 
-    //Save Button Element Created
-    let clickBtnToSave = document.createElement('button');
-    clickBtnToSave.setAttribute('id', 'save-btn');
-    clickBtnToSave.setAttribute('class', 'btn');
-    clickBtnToSave.setAttribute('type', 'submit');
-    clickBtnToSave.innerHTML = 'Submit Score';
-    //Append Save Button Element
-    scoreAreaEl.appendChild(clickBtnToSave);
-  }
+  const initialsInput = document.getElementById("initialsInput");
+  initialsInput.addEventListener("input", function () {
+    input = initialsInput.value;
+  });
 
-  //Save user score with initials to local storage and display all scores
-  function saveScoreWithInitials(event) {
-    event.preventDefault();
-    
-    //remove input and save btn element
-    initialsInput.remove();
-    saveButtonEl.remove();
-
-    //Get user initials and score and save as an object
-    let userInitials = document.querySelector('#initials').value;
-    let userScore = localStorage.getItem('score');
-    let scoreObj = { 
-      initials: userInitials,
-      score: userScore };
-    //get all saved scores from local storage
-    let allScores = JSON.parse(localStorage.getItem('scores')) || [];
-
-    //push scoreObj to array and save it
-    allScores.push(scoreObj);
-    localStorage.setItem('scores', JSON.stringify(allScores));
-
-    //call viewHighScores();
-    viewAllScores();
-  }
-
-  //Displays All Scores and Initials from Local Storage
-  function viewAllScores() {
-    //replace userscoreEL with HighscoreEL
-    userScorePageEl.replaceWith(highScoreEl);
-
-    //Unordered List
-    //H2
-    scoreHeader = document.createElement('h2');
-    scoreHeader.setAttribute('id', 'seescore');
-    scoreHeader.innerText('See all scores below:');
-    //ul
-    listScoreEl = document.createElement('ul');
-    listScoreEl.setAttribute('id', 'list');
-
-    highScoreEl.appendChild(scoreHeader);
-    highScoreEl.appendChild(listScoreEl);
-
-    //Show List of Scores Element
-    let allScores = JSON.parse(localStorage.getItem('scores')) || [];
-
-    for (let i = 0; i < allScores.length; i++) {
-      let scoreList = document.createElement('li');
-      scoreList.setAttribute('id', 'scorelist');
-      scoreList.textContent = allScores[i].initials + ' - ' + allScores[i].score;
-      listScoreEl.appendChild(scoreList);
-    }
-  }
-  
-//Event Listener for Save Score Button
-saveButtonDiv.addEventListener ("click", saveScoreWithInitials)
+  const saveButton = document.getElementById("saveScore");
+  saveButton.addEventListener("click", saveScoreWithInitials);
 }
 
+// Save Score with Initials Function
+function saveScoreWithInitials(event) {
+  event.preventDefault();
 
+  const initialsInput = document.getElementById("initialsInput");
+  const userInitials = initialsInput.value;
+  const userScore = score;
+  const scoreObj = {
+    initials: userInitials,
+    score: userScore
+  };
+
+  let allScores = JSON.parse(localStorage.getItem('scores')) || [];
+  allScores.push(scoreObj);
+  localStorage.setItem('scores', JSON.stringify(allScores));
+
+  viewAllScores();
+}
+
+// View All Scores Function
+function viewAllScores() {
+  userScorePageElement.replaceWith(highScoreElement);
+
+  const scoreHeader = document.createElement('h2');
+  scoreHeader.innerText = 'See all scores below:';
+  const listScoreElement = document.createElement('ul');
+
+  highScoreElement.appendChild(scoreHeader);
+  highScoreElement.appendChild(listScoreElement);
+
+  const allScores = JSON.parse(localStorage.getItem('scores')) || [];
+
+  for (let i = 0; i < allScores.length; i++) {
+    const scoreListItem = document.createElement('li');
+    scoreListItem.textContent = `${allScores[i].initials} - ${allScores[i].score}`;
+    listScoreElement.appendChild(scoreListItem);
+  }
+}
+
+// Event Listener for High Score Button
+highScoreButtonElement.addEventListener("click", viewAllScores);

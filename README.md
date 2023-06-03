@@ -31,7 +31,9 @@ The code utilizes the Document Object Model (DOM) API to interact with the HTML 
 ## User Story
 
 ```
-
+AS A coding boot camp student
+I WANT to take a timed quiz on coding fundamentals that stores high scores
+SO THAT I can gauge my progress compared to my peers
 ```
 
 ## Features

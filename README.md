@@ -68,7 +68,7 @@ The code utilizes the Document Object Model (DOM) API to interact with the HTML 
 
 
 ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
-![GoogleFonts](https://img.shields.io/badge/google-4285F4?style=for-the-badge&logo=google&logoColor=white)
+![GoogleFonts](https://img.shields.io/badge/googlefonts-4285F4?style=for-the-badge&logo=googlefonts&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
 ![macOS](https://img.shields.io/badge/mac%20os-000000?style=for-the-badge&logo=macos&logoColor=F0F0F0)
 ![Visual Studio Code](https://img.shields.io/badge/Visual%20Studio%20Code-0078d7.svg?style=for-the-badge&logo=visual-studio-code&logoColor=white)

@@ -2,23 +2,37 @@
 
 ## Description
 
-This application is a timed coding quiz about front-end coding with multiple-choice questions. There are five questions about HTML, CSS and JavaScript.
-It runs in the browser, and features dynamically updated HTML and CSS powered by JavaScript code with a polished and responsive user interface.
+The quiz application is developed using HTML, CSS, and JavaScript, making it a web-based application that can be accessed and run in a web browser. The HTML is responsible for structuring the layout of the application, while CSS is used for styling and enhancing the visual presentation.
+
+The JavaScript code is the core of the application's functionality. It handles the dynamic behavior of the quiz, including displaying questions, processing user answers, managing the timer, calculating scores, and saving scores to local storage.
+
+The quiz questions and their corresponding choices are stored in an array of objects within the JavaScript code. The code also incorporates local storage functionality to save and retrieve scores. After completing the quiz, the user's score and initials are stored in the browser's local storage using the localStorage API. This allows the user to view their score later and compare it with other players' scores.
+
+The code utilizes the Document Object Model (DOM) API to interact with the HTML elements on the page. It uses DOM manipulation methods and properties to access and modify elements, update text content, and handle events such as button clicks.
+
 
 ## Table of Contents
 
 - [Preview](#preview)
 - [Deployed Application](#deployed-application)
+- [User Story](#user-story)
 - [Features](#features)
 - [Acknowledgments](#acknowledgments)
-- [Acceptance Criteria](#acceptance-criteria)
 - [License](#license)
+- [Badges](#badges)
 
 ## Preview
 ![screenshot of the start window for a coding quiz](./assets/images/Timed-Quiz-Preview.png)
 
 ## Deployed Application
-[https://victoriamcn.github.io/Timed-Coding-Quiz/](https://victoriamcn.github.io/Timed-Coding-Quiz/)
+
+[Timed Coding Quiz Link](https://victoriamcn.github.io/Timed-Coding-Quiz/)
+
+## User Story
+
+```
+
+```
 
 ## Features
 
@@ -30,43 +44,31 @@ It runs in the browser, and features dynamically updated HTML and CSS powered by
 
 ## Acknowledgments
 
+### Georgia Tech Staff
+- 
+
 ### Tutorials
-[How To - JavaScript Countdown Timer](https://codepen.io/yaphi1/pen/KpbRZL?editors=0010)
-[Simple Steps Code: How to Make a Simple JavaScript Quiz](https://simplestepscode.com/javascript-quiz-tutorial/)
-[W3 Schools: HTML DOM Document createElement()](https://www.w3schools.com/jsref/met_document_createelement.asp)
-[W3 Schools: JSON Array Literals](https://www.w3schools.com/js/js_json_arrays.asp)
-[W3 Schools: JavaScript Objects](https://www.w3schools.com/js/js_object_definition.asp)
+- CodePen: [How To - JavaScript Countdown Timer](https://codepen.io/yaphi1/pen/KpbRZL?editors=0010)
+- Simple Steps Code: [How to Make a Simple JavaScript Quiz](https://simplestepscode.com/javascript-quiz-tutorial/)
+- StackOverflow:[JavaScript: How Do I save the Score and Initials once the page is refreshed and add more score and initials to the existing ones.?](https://stackoverflow.com/questions/66488667/javascript-how-do-i-save-the-score-and-initials-once-the-page-is-refreshed-and)
+- W3 Schools: [HTML DOM Document createElement()](https://www.w3schools.com/jsref/met_document_createelement.asp)
+- W3 Schools: [JSON Array Literals](https://www.w3schools.com/js/js_json_arrays.asp)
+- W3 Schools: [JavaScript Objects](https://www.w3schools.com/js/js_object_definition.asp)
+- Looka: [50 Color Combination You Need to Use in 2023](https://looka.com/blog/color-combinations/)
 
-### Stack Overflow
-- **StackOverflow:** [JavaScript: How Do I save the Score and Initials once the page is refreshed and add more score and initials to the existing ones.?](https://stackoverflow.com/questions/66488667/javascript-how-do-i-save-the-score-and-initials-once-the-page-is-refreshed-and)
-
-### Inspiration
-1. **CodePen:** [Dynamic JS Quiz by Gary Carino](https://codepen.io/gcarino/pen/AaJBOo)
-- Though Gary used jQuery, it helped me think through what needed to happen.
-2. **YouTube:** [Build a Quiz App Playlist by James Q Quick](https://www.youtube.com/watch?v=u98ROZjBWy8)
-- James had different approaches, but the concept was similar enough to help me write my code.
-
-### Color Palette
-[50 Color Combination You Need yo Use in 2023](https://looka.com/blog/color-combinations/)
-
-## Acceptance Criteria
-```
-GIVEN I am taking a code quiz
-WHEN I click the start button
-THEN a timer starts and I am presented with a question
-WHEN I answer a question
-THEN I am presented with another question
-WHEN I answer a question incorrectly
-THEN time is subtracted from the clock
-WHEN all questions are answered or the timer reaches 0
-THEN the game is over
-WHEN the game is over
-THEN I can save my initials and my score
-```
+### Code Examples
+-  CodePen:[Dynamic JS Quiz by Gary Carino](https://codepen.io/gcarino/pen/AaJBOo). Though Gary used jQuery, it helped me think through what needed to happen.
+- YouTube: [Build a Quiz App Playlist by James Q Quick](https://www.youtube.com/watch?v=u98ROZjBWy8). James had different approaches, but the concept was similar enough to help me write my code.
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE.md file for details.
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) This project is licensed under the MIT License - see the LICENSE.md file for details.
 
-All icon used in this project are from Google Fonts. 
-- [Apache License Version 2.0.](https://www.apache.org/licenses/LICENSE-2.0.txt)
+## Badges
+
+
+![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
+![GoogleFonts](https://img.shields.io/badge/google-4285F4?style=for-the-badge&logo=google&logoColor=white)
+![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
+![macOS](https://img.shields.io/badge/mac%20os-000000?style=for-the-badge&logo=macos&logoColor=F0F0F0)
+![Visual Studio Code](https://img.shields.io/badge/Visual%20Studio%20Code-0078d7.svg?style=for-the-badge&logo=visual-studio-code&logoColor=white)

@@ -2,14 +2,7 @@
 
 ## Description
 
-The quiz application is developed using HTML, CSS, and JavaScript, making it a web-based application that can be accessed and run in a web browser. The HTML is responsible for structuring the layout of the application, while CSS is used for styling and enhancing the visual presentation.
-
-The JavaScript code is the core of the application's functionality. It handles the dynamic behavior of the quiz, including displaying questions, processing user answers, managing the timer, calculating scores, and saving scores to local storage.
-
-The quiz questions and their corresponding choices are stored in an array of objects within the JavaScript code. The code also incorporates local storage functionality to save and retrieve scores. After completing the quiz, the user's score and initials are stored in the browser's local storage using the localStorage API. This allows the user to view their score later and compare it with other players' scores.
-
-The code utilizes the Document Object Model (DOM) API to interact with the HTML elements on the page. It uses DOM manipulation methods and properties to access and modify elements, update text content, and handle events such as button clicks.
-
+The quiz application is  a web-based application that can be accessed and run in a web browser. JavaScript handles the dynamic behavior of the quiz, including displaying questions, processing user answers, managing the timer, calculating scores, and saving scores to local storage. After completing the quiz, the user's score and initials are stored in the browser's local storage using the localStorage API. This allows the user to view their score later and compare it with other players' scores.
 
 ## Table of Contents
 

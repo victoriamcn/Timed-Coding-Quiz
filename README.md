@@ -2,7 +2,7 @@
 
 ## Description
 
-The quiz application is  a web-based application that can be accessed and run in a web browser. JavaScript handles the dynamic behavior of the quiz, including displaying questions, processing user answers, managing the timer, calculating scores, and saving scores to local storage. After completing the quiz, the user's score and initials are stored in the browser's local storage using the localStorage API. This allows the user to view their score later and compare it with other players' scores.
+The quiz app displays questions, processes user answers, manages the timer, calculates scores, and saves scores to local storage. After completing the quiz, the user may save their score and initials to view r and compare it with other players' scores within that browser session.
 
 ## Table of Contents
 
